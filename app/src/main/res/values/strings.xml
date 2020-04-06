@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Market Guards</string>
+
+    <string-array name="StoreSubTabs">
+        <item>Store</item>
+        <item>Products</item>
+    </string-array>
 </resources>
