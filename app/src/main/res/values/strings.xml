@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Market Guards</string>
+    <string name="shop">Shop</string>
+    <string name="library">Library</string>
+    <string name="map">Map</string>
+    <string name="story">Story</string>
+    <string name="dashboard">Dashboard</string>
 
     <string-array name="StoreSubTabs">
         <item>Store</item>

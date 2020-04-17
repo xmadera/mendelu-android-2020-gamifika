@@ -7,8 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.mojetodo.sharedpreferences.SharedPreferencesManager
 import com.gamification.marketguards.ui.main.MainActivity
 import com.gamification.marketguards.R
+import com.gamification.marketguards.ui.BaseActivity
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
