@@ -8,6 +8,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.gamification.marketguards.constants.IntentConstants
 import com.gamification.marketguards.R
+import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_store.*
 
 class StoreFragment : Fragment() {
 

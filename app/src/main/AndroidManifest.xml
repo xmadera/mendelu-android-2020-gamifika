@@ -14,9 +14,6 @@
             android:name=".ui.profile.ProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.store.StoreActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ui.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

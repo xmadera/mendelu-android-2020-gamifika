@@ -6,11 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.gamification.marketguards.R
 import com.gamification.marketguards.ui.BaseActivity
-import com.gamification.marketguards.ui.store.StoreActivity
-import com.gamification.marketguards.ui.store.StoreAdapter
-import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.activity_store.*
-import kotlinx.android.synthetic.main.content_store.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class ProfileActivity: BaseActivity() {
     companion object {
