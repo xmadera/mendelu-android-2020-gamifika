@@ -31,10 +31,6 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private lateinit var storePages: Array<String>
-    private lateinit var adapter: StoreAdapter
-    private var firstInit: Boolean = true
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -43,8 +39,6 @@ class MainActivity : BaseActivity() {
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setOnNavigationItemSelectedListener(listener)
-
-        storePages = resources.getStringArray(R.array.StoreSubTabs)
 
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, DashboardFragment()).commit()
     }
@@ -56,30 +50,21 @@ class MainActivity : BaseActivity() {
             R.id.nav_story -> {
                 selectedFragment = StoryFragment()
                 SharedPreferencesManager.saveLastMainFragment(this,R.id.nav_story)
-                hideStore()
             }
             R.id.nav_map -> {
                 selectedFragment = MapFragment()
                 SharedPreferencesManager.saveLastMainFragment(this,R.id.nav_map)
-                hideStore()
             }
             R.id.nav_library -> {
                 selectedFragment = LibraryFragment()
                 SharedPreferencesManager.saveLastMainFragment(this,R.id.nav_library)
-                hideStore()
             }
             R.id.nav_store -> {
-                if (firstInit) {
-                    setupViewPager()
-                    setupTabLayout()
-                }
-                showStore()
-                firstInit = false
+                selectedFragment = StoreFragment()
+                SharedPreferencesManager.saveLastMainFragment(this,R.id.nav_library)
             }
             else -> {
                 selectedFragment = DashboardFragment()
-                tabLayout.visibility = View.GONE
-                store_fragment.visibility = View.GONE
             }
         }
             selectedFragment?.let {
@@ -102,37 +87,5 @@ class MainActivity : BaseActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    private fun showStore() {
-        if (tabLayout != null && store_fragment != null) {
-            tabLayout.visibility = View.VISIBLE
-            store_fragment.visibility = View.VISIBLE
-        }
-        fragment_container.visibility = View.GONE
-    }
-
-    private fun hideStore() {
-        if (tabLayout != null && store_fragment != null) {
-            tabLayout.visibility = View.GONE
-            store_fragment.visibility = View.GONE
-        }
-        fragment_container.visibility = View.VISIBLE
-    }
-
-    private fun setupViewPager() {
-        adapter = StoreAdapter(this)
-        for (position in storePages.indices){
-            val fragment: StoreFragment = StoreFragment().newInstance(storePages[position])
-            adapter.addFragment(fragment)
-        }
-        storeViewPager!!.adapter = adapter
-        storeViewPager.isUserInputEnabled = false
-    }
-
-    private fun setupTabLayout() {
-        TabLayoutMediator(tabLayout, storeViewPager) { tab, position ->
-                tab.text = storePages[position].substringBefore(' ')
-            }.attach()
     }
 }

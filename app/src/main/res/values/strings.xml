@@ -5,9 +5,10 @@
     <string name="map">Map</string>
     <string name="story">Story</string>
     <string name="dashboard">Dashboard</string>
+    <string name="store">Store</string>
 
     <string-array name="StoreSubTabs">
-        <item>Store</item>
+        <item>Shop</item>
         <item>Products</item>
     </string-array>
 </resources>

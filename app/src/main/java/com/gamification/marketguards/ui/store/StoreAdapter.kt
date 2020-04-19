@@ -5,9 +5,9 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class StoreAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
-  private val fragmentsList: MutableList<StoreFragment> = mutableListOf()
+  private val fragmentsList: MutableList<Fragment> = mutableListOf()
 
-  fun addFragment(fragment: StoreFragment) {
+  fun addFragment(fragment: Fragment) {
     fragmentsList.add(fragment)
   }
 
