@@ -35,7 +35,6 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        supportActionBar?.title = "Market Guards"
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setOnNavigationItemSelectedListener(listener)
@@ -44,33 +43,27 @@ class MainActivity : BaseActivity() {
     }
 
     private val listener = BottomNavigationView.OnNavigationItemSelectedListener {
-        var selectedFragment: Fragment? = null
+        var selectedFragment: Fragment
 
         when (it.itemId) {
             R.id.nav_story -> {
                 selectedFragment = StoryFragment()
-                SharedPreferencesManager.saveLastMainFragment(this,R.id.nav_story)
             }
             R.id.nav_map -> {
                 selectedFragment = MapFragment()
-                SharedPreferencesManager.saveLastMainFragment(this,R.id.nav_map)
             }
             R.id.nav_library -> {
                 selectedFragment = LibraryFragment()
-                SharedPreferencesManager.saveLastMainFragment(this,R.id.nav_library)
             }
             R.id.nav_store -> {
                 selectedFragment = StoreFragment()
-                SharedPreferencesManager.saveLastMainFragment(this,R.id.nav_library)
             }
             else -> {
                 selectedFragment = DashboardFragment()
             }
         }
-            selectedFragment?.let {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, selectedFragment).commit()
-            }
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, selectedFragment).commit()
         true
     }
 

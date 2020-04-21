@@ -8,7 +8,7 @@ import com.gamification.marketguards.R
 import com.gamification.marketguards.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class ProfileActivity: BaseActivity() {
+class ProfileActivity : BaseActivity() {
     companion object {
         fun createIntent(context: Context): Intent {
             return Intent(context, ProfileActivity::class.java)

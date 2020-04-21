@@ -11,21 +11,12 @@ class StoreAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fr
     fragmentsList.add(fragment)
   }
 
-  fun deleteFragments() {
-    fragmentsList.clear()
-    notifyDataSetChanged()
-  }
-
   override fun getItemCount(): Int {
     return fragmentsList.size
   }
 
   override fun createFragment(position: Int): Fragment {
     return fragmentsList.get(position)
-  }
-
-  override fun getItemId(position: Int): Long {
-    return super.getItemId(position)
   }
 
 }
