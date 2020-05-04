@@ -47,7 +47,7 @@ class QuestDetailActivity : BaseActivity() {
             finish()
         }
 
-        quest_title.text = "Quest Title"
-        quest_desc.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+        findViewById<TextView>(R.id.detail_quest_title).text = "Quest Title"
+        findViewById<TextView>(R.id.detail_quest_desc).text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
     }
 }

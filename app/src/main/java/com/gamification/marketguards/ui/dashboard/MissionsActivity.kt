@@ -1,6 +1,7 @@
 package com.gamification.marketguards.ui.dashboard
 
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,8 +12,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gamification.marketguards.R
+import com.gamification.marketguards.constants.IntentConstants
 import com.gamification.marketguards.model.Mission
 import com.gamification.marketguards.ui.BaseActivity
+import com.gamification.marketguards.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_mission_list.*
 
@@ -64,6 +67,12 @@ class MissionsActivity: BaseActivity() {
         override fun onBindViewHolder(holder: MissionViewHolder, position: Int) {
             val mission = missionsList[position]
             holder.missionTitle.text = mission.title
+            holder.itemView.setOnClickListener {
+                val resultIntent = Intent()
+                resultIntent.putExtra(IntentConstants.MISSION_ID, 1)
+                setResult(Activity.RESULT_OK, resultIntent)
+                finish()
+            }
         }
 
         override fun getItemCount() = missionsList.size

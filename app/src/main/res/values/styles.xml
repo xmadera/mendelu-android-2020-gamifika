@@ -1,15 +1,18 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
 
         <item name="android:windowBackground">@color/backgroundPrimary</item>
         <item name="android:navigationBarColor">@color/backgroundSecondary</item>
         <item name="android:statusBarColor">@color/backgroundPrimary</item>
         <item name="tabBackground">@color/backgroundSecondaryLight</item>
-    </style>
+        <item name="android:textColor">@color/light</item>
+         <item name="android:textColorHint">@color/backgroundSecondaryLight</item>
+
+         <item name="android:fontFamily">@font/chakrapetch_regular</item>
+         <item name="fontFamily">@font/chakrapetch_regular</item>
+     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
@@ -23,12 +26,28 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="primary_text" parent="TextAppearance.AppCompat.Subhead">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="text_primary" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textColor">@color/light</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="text_secondary" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/light</item>
+    </style>
+
+    <style name="headline4" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textColor">@color/light</item>
+    </style>
+
+    <style name="headline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/light</item>
+    </style>
+
+    <style name="subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textColor">@color/light</item>
+    </style>
+
+    <style name="button_primary" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/light</item>
     </style>
 
 </resources>

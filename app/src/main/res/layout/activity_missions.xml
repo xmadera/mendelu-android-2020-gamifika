@@ -26,8 +26,7 @@ tools:context=".ui.main.MainActivity"
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/barLayout"
-        android:background="?android:attr/windowBackground">
+        android:layout_below="@id/barLayout">
         <include layout="@layout/content_mission_list"/>
     </FrameLayout>
 

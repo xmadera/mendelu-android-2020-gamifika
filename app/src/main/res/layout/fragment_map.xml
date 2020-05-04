@@ -9,7 +9,6 @@
         android:text="map"
         android:layout_centerVertical="true"
         android:textAlignment="center"
-        android:textColor="@color/light"
         />
 
 </RelativeLayout>
