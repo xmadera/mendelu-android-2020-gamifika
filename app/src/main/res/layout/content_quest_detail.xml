@@ -26,7 +26,7 @@
         android:id="@+id/detail_quest_skills_sub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Skills"
+        android:text="@string/skills"
         android:layout_marginTop="@dimen/basic_indentation"
         app:layout_constraintTop_toBottomOf="@id/detail_quest_desc"
         style="@style/headline6"
@@ -42,7 +42,7 @@
         android:paddingBottom="4dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:text="skill"
+        android:text="@string/skill"
         android:background="@color/backgroundSecondaryLight"/>
 
     <TextView
@@ -55,7 +55,7 @@
         android:paddingBottom="4dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:text="skill"
+        android:text="@string/skill"
         android:background="@color/backgroundSecondaryLight"/>
 
     <TextView
@@ -68,14 +68,14 @@
         android:paddingBottom="4dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:text="skill"
+        android:text="@string/skill"
         android:background="@color/backgroundSecondaryLight"/>
 
     <TextView
         android:id="@+id/detail_quest_notes_sub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Notes"
+        android:text="@string/notes"
         android:layout_marginTop="@dimen/basic_indentation"
         app:layout_constraintTop_toBottomOf="@id/questSkills3"
         style="@style/headline6"
@@ -85,7 +85,7 @@
         app:layout_constraintTop_toBottomOf="@id/detail_quest_notes_sub"
         android:layout_width="match_parent"
         android:padding="@dimen/basic_indentation"
-        android:gravity="top|left"
+        android:gravity="top|start"
         style="@style/text_secondary"
         android:textColor="@color/colorPrimary"
         android:background="@color/backgroundSecondary"

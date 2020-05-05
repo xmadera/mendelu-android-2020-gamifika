@@ -13,11 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gamification.marketguards.R
 import com.gamification.marketguards.constants.IntentConstants
-import com.gamification.marketguards.model.Mission
 import com.gamification.marketguards.model.Quest
 import com.gamification.marketguards.ui.main.MainActivity
-import com.gamification.marketguards.ui.store.ShopFragment
-import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 
 class DashboardFragment: Fragment() {

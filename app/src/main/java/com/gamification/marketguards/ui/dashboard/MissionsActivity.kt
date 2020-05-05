@@ -15,7 +15,6 @@ import com.gamification.marketguards.R
 import com.gamification.marketguards.constants.IntentConstants
 import com.gamification.marketguards.model.Mission
 import com.gamification.marketguards.ui.BaseActivity
-import com.gamification.marketguards.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_mission_list.*
 
@@ -35,7 +34,7 @@ class MissionsActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_missions)
         setSupportActionBar(toolbar)
-        supportActionBar?.title = "Missions"
+        supportActionBar?.title = getString(R.string.missions)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         toolbar.setNavigationOnClickListener {

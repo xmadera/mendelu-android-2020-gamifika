@@ -6,9 +6,21 @@
     <string name="story">Story</string>
     <string name="dashboard">Dashboard</string>
     <string name="store">Store</string>
+    <string name="missions">Missions</string>
+    <string name="quest">Quest</string>
+    <string name="profile">Profile</string>
+    <string name="login_login_hint">Login</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_button_text">Log in</string>
+    <string name="market_guards_logo">Market guards logo</string>
+    <string name="skills">Skills</string>
+    <string name="skill">skill</string>
+    <string name="notes">Notes</string>
+    <string name="dashboard_button_text">Select Mission</string>
+    <string name="done">Done</string>
 
     <string-array name="StoreSubTabs">
         <item>Shop</item>
-        <item>Products</item>
+        <item>Inventory</item>
     </string-array>
 </resources>

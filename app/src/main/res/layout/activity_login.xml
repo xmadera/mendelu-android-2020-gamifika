@@ -23,7 +23,7 @@
         android:layout_marginTop="48dp"
         android:padding="@dimen/half_indentation"
         style="@style/text_secondary"
-        android:hint="Login"
+        android:hint="@string/login_login_hint"
         android:textColor="@color/colorPrimary"
         android:background="@color/backgroundSecondary"
         android:layout_height="50dp"/>
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/basic_indentation"
         android:padding="@dimen/half_indentation"
-        android:hint="Password"
+        android:hint="@string/login_password_hint"
         style="@style/text_secondary"
         android:textColor="@color/colorPrimary"
         android:background="@color/backgroundSecondary"
@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@id/login_password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Log in"
+        android:text="@string/login_button_text"
         android:layout_centerInParent="true"
         style="@style/button_primary"/>
 

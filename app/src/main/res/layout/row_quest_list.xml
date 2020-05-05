@@ -31,7 +31,6 @@
             android:ellipsize="end"
             style="@style/text_secondary"/>
 
-<!--        TODO-->
         <TextView
             android:id="@+id/questSkills"
             android:layout_width="wrap_content"
@@ -43,7 +42,7 @@
             android:paddingBottom="4dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:text="skill"
+            android:text="@string/skill"
             android:background="@color/backgroundSecondaryLight"/>
 
 
