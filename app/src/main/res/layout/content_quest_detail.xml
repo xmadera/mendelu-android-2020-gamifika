@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.dashboard.QuestDetailActivity"
+    tools:showIn="@layout/activity_quest_detail">
+
+    <TextView
+        android:id="@+id/detail_quest_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/headline4"/>
+    <TextView
+        android:id="@+id/detail_quest_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/half_indentation"
+        app:layout_constraintTop_toBottomOf="@id/detail_quest_title"
+        style="@style/text_primary"
+        />
+    <TextView
+        android:id="@+id/detail_quest_skills_sub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/skills"
+        android:layout_marginTop="@dimen/basic_indentation"
+        app:layout_constraintTop_toBottomOf="@id/detail_quest_desc"
+        style="@style/headline6"
+        />
+
+    <TextView
+        android:id="@+id/questSkills1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/detail_quest_skills_sub"
+        android:layout_marginTop="@dimen/half_indentation"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/skill"
+        android:background="@color/backgroundSecondaryLight"/>
+
+    <TextView
+        android:id="@+id/questSkills2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/questSkills1"
+        android:layout_marginTop="@dimen/half_indentation"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/skill"
+        android:background="@color/backgroundSecondaryLight"/>
+
+    <TextView
+        android:id="@+id/questSkills3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/questSkills2"
+        android:layout_marginTop="@dimen/half_indentation"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/skill"
+        android:background="@color/backgroundSecondaryLight"/>
+
+    <TextView
+        android:id="@+id/detail_quest_notes_sub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/notes"
+        android:layout_marginTop="@dimen/basic_indentation"
+        app:layout_constraintTop_toBottomOf="@id/questSkills3"
+        style="@style/headline6"
+        />
+
+    <com.google.android.material.textfield.TextInputEditText
+        app:layout_constraintTop_toBottomOf="@id/detail_quest_notes_sub"
+        android:layout_width="match_parent"
+        android:padding="@dimen/basic_indentation"
+        android:gravity="top|start"
+        style="@style/text_secondary"
+        android:textColor="@color/colorPrimary"
+        android:background="@color/backgroundSecondary"
+        android:layout_height="100dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

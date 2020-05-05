@@ -19,7 +19,7 @@ class ProfileActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         setSupportActionBar(toolbar)
-        supportActionBar?.title = "Profile"
+        supportActionBar?.title = getString(R.string.profile)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         toolbar.setNavigationOnClickListener {

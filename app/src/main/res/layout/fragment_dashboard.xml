@@ -1,15 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    >
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/basic_indentation"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Button
+        android:id="@+id/button_select_mission"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/dashboard_button_text"
+        style="@style/button_primary"/>
 
     <TextView
+        android:id="@+id/missionTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="dashboard"
-        android:layout_centerVertical="true"
-        android:textAlignment="center"
-        android:textColor="@color/light"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_select_mission"
+        style="@style/headline4"
+        android:layout_marginTop="@dimen/basic_indentation"/>
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/missionDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/missionTitle"
+        style="@style/text_primary"/>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/missionDesc"
+        android:layout_marginTop="@dimen/basic_indentation">
+    <include layout="@layout/content_quest_list"/>
+</FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

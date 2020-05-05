@@ -39,7 +39,7 @@ class MainActivity : BaseActivity() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setOnNavigationItemSelectedListener(listener)
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, DashboardFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, DashboardFragment().newInstance(null)).commit()
     }
 
     private val listener = BottomNavigationView.OnNavigationItemSelectedListener {
@@ -59,7 +59,7 @@ class MainActivity : BaseActivity() {
                 selectedFragment = StoreFragment()
             }
             else -> {
-                selectedFragment = DashboardFragment()
+                selectedFragment = DashboardFragment().newInstance(null)
             }
         }
         supportFragmentManager.beginTransaction()
