@@ -3,8 +3,8 @@ package com.gamification.marketguards.ui.login
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import com.gamification.arch.BaseActivity
 import com.gamification.marketguards.R
-import com.gamification.marketguards.ui.BaseActivity
 import com.gamification.marketguards.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -16,9 +16,11 @@ class LoginActivity : BaseActivity() {
         }
     }
 
+    override val layout: Int = R.layout.activity_login
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(layout)
 
         login_button.setOnClickListener {
             startActivity(MainActivity.createIntent(this))

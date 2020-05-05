@@ -87,7 +87,7 @@ class DashboardFragment: Fragment() {
         override fun onBindViewHolder(holder: MissionViewHolder, position: Int) {
             val quest = questsList[position]
             holder.questTitle.text = quest.title
-            holder.questDesc.text = quest.desc
+            holder.questDesc.text = quest.story
             holder.itemView.setOnClickListener {
                 startActivity(QuestDetailActivity.createIntent(activity!!))
             }

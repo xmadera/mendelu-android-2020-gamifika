@@ -1,6 +1,5 @@
 package com.gamification.marketguards.ui.dashboard
 
-
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -9,16 +8,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.gamification.arch.BaseMVVMActivity
 import com.gamification.marketguards.R
 import com.gamification.marketguards.constants.IntentConstants
 import com.gamification.marketguards.model.Mission
-import com.gamification.marketguards.ui.BaseActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.gamification.marketguards.ui.viewmodels.DashBoardViewModel
+import kotlinx.android.synthetic.main.activity_missions.*
 import kotlinx.android.synthetic.main.content_mission_list.*
 
-class MissionsActivity: BaseActivity() {
+class MissionsActivity: BaseMVVMActivity<DashBoardViewModel>(DashBoardViewModel::class.java) {
 
     companion object {
         fun createIntent(context: Context): Intent {
@@ -26,13 +28,15 @@ class MissionsActivity: BaseActivity() {
         }
     }
 
+    override val layout: Int = R.layout.activity_missions
+
     private var missionsList: MutableList<Mission> = mutableListOf()
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var missionsAdapter: MissionsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_missions)
+        setContentView(layout)
         setSupportActionBar(toolbar)
         supportActionBar?.title = getString(R.string.missions)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -41,16 +45,36 @@ class MissionsActivity: BaseActivity() {
             finish()
         }
 
-        val mission1 = Mission("Mission 1", "Description 1")
-        val mission2 = Mission("Mission 2", "Description 2")
-        missionsList.add(mission1)
-        missionsList.add(mission2)
-        //
-
         missionsAdapter = MissionsAdapter()
         layoutManager = LinearLayoutManager(this)
         missionsRecyclerView.layoutManager = layoutManager
         missionsRecyclerView.adapter = missionsAdapter
+
+        viewModel.getAll().observe(this, object : Observer<MutableList<Mission>> {
+            override fun onChanged(t: MutableList<Mission>?) {
+                t?.let {
+                    val diffUtil = DiffUtil.calculateDiff(object : DiffUtil.Callback(){
+
+                        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                            return missionsList[oldItemPosition].id == t[newItemPosition].id
+                        }
+
+                        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                            return missionsList[oldItemPosition] == t[newItemPosition]
+                        }
+
+                        override fun getOldListSize() = missionsList.size
+
+                        override fun getNewListSize() = t.size
+
+                    })
+                    diffUtil.dispatchUpdatesTo(missionsAdapter)
+                    missionsList.clear()
+                    missionsList.addAll(t)
+
+                }
+            }
+        })
 
     }
 

@@ -1,2 +1,3 @@
 rootProject.name='Market Guards'
 include ':app'
+include ':arch'
