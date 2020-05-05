@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.gamification.marketguards.communication.MissionRESTApiRepositoryImpl
-import com.gamification.marketguards.database.repository.MissionLocalRepositoryImpl
 import com.gamification.marketguards.model.Mission
 import com.gamification.marketguards.ui.viewmodels.base.BaseMissionViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -21,15 +20,19 @@ class DashBoardViewModel(private val app: Application) : BaseMissionViewModel(ap
             t?.let {
                 for (mission in it) {
                     launch { missionRepository.insert(mission) }
-
                 }
             }
         }
     }
 
     fun getAll(): LiveData<MutableList<Mission>> {
-        remoteRepository.getAll().observeForever(remoteGetAllObserver)
-        return missionRepository.getAll()
+//        remoteRepository.getAll().observeForever(remoteGetAllObserver)
+//        return missionRepository.getAll()
+        return remoteRepository.getAll()
+    }
+
+    suspend fun findById(id: Long): Mission {
+        return remoteRepository.findById(id)
     }
 
     override fun onCleared() {

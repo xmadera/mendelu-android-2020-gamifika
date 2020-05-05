@@ -11,7 +11,7 @@ class RetrofitConnection {
         fun getRetrofit(): Retrofit {
             val builder: Retrofit.Builder = Retrofit.Builder()
             builder
-                .baseUrl("https://missions.free.beeceptor.com/")
+                .baseUrl("https://gamifika-missions.free.beeceptor.com")
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             return builder.build()
         }

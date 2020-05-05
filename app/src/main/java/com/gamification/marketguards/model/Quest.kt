@@ -14,15 +14,16 @@ import androidx.room.PrimaryKey
 
 class Quest(
     @ColumnInfo(name = "title")
-    var title: String? = null,
-    @ColumnInfo(name = "story")
-    var story: String = "") {
+    var title: String) {
 
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
     var id: Long? = null
 
-    @ColumnInfo(name = "taskId")
-    var taskId: Long? = null
+    @ColumnInfo(name = "story")
+    var story: String? = null
+
+    @ColumnInfo(name = "missionId")
+    var missionId: Long? = null
 
 }

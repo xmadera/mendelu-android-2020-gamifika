@@ -7,6 +7,7 @@ import com.gamification.marketguards.database.repository.IMissionRepository
 import com.gamification.marketguards.model.Mission
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 class MissionRESTApiRepositoryImpl(private val context: Context) : IMissionRepository, CoroutineScope by MainScope() {
@@ -15,10 +16,11 @@ class MissionRESTApiRepositoryImpl(private val context: Context) : IMissionRepos
         .create(MissionRESTApi::class.java);
 
     private val missionsLiveData = MutableLiveData<MutableList<Mission>>()
+    private lateinit var mission: Mission
 
     override fun getAll(): LiveData<MutableList<Mission>> {
         launch {
-            val response = missionsApi.getTasks()
+            val response = missionsApi.getMissions()
             if (response.isSuccessful) {
                 missionsLiveData.postValue(response.body())
             }
@@ -27,7 +29,15 @@ class MissionRESTApiRepositoryImpl(private val context: Context) : IMissionRepos
     }
 
     override suspend fun findById(id: Long): Mission {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        coroutineScope {
+            launch {
+                val response = missionsApi.getMission(id)
+                if (response.isSuccessful) {
+                    mission = response.body()!!
+                }
+            }
+        }
+            return mission
     }
 
     override suspend fun insert(mission: Mission): Long {

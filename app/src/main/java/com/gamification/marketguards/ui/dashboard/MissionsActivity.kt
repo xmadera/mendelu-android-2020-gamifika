@@ -19,6 +19,8 @@ import com.gamification.marketguards.model.Mission
 import com.gamification.marketguards.ui.viewmodels.DashBoardViewModel
 import kotlinx.android.synthetic.main.activity_missions.*
 import kotlinx.android.synthetic.main.content_mission_list.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MissionsActivity: BaseMVVMActivity<DashBoardViewModel>(DashBoardViewModel::class.java) {
 
@@ -92,7 +94,7 @@ class MissionsActivity: BaseMVVMActivity<DashBoardViewModel>(DashBoardViewModel:
             holder.missionTitle.text = mission.title
             holder.itemView.setOnClickListener {
                 val resultIntent = Intent()
-                resultIntent.putExtra(IntentConstants.MISSION_ID, 1)
+                resultIntent.putExtra(IntentConstants.MISSION_ID, missionsList[holder.adapterPosition].id)
                 setResult(Activity.RESULT_OK, resultIntent)
                 finish()
             }
