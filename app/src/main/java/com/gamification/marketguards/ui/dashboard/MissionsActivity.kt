@@ -14,13 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gamification.arch.BaseMVVMActivity
 import com.gamification.marketguards.R
-import com.gamification.marketguards.constants.IntentConstants
-import com.gamification.marketguards.model.Mission
-import com.gamification.marketguards.ui.viewmodels.DashBoardViewModel
+import com.gamification.marketguards.data.constants.IntentConstants
+import com.gamification.marketguards.data.model.Mission
+import com.gamification.marketguards.viewmodels.DashBoardViewModel
 import kotlinx.android.synthetic.main.activity_missions.*
 import kotlinx.android.synthetic.main.content_mission_list.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MissionsActivity: BaseMVVMActivity<DashBoardViewModel>(DashBoardViewModel::class.java) {
 

@@ -1,10 +1,10 @@
-package com.gamification.marketguards.communication
+package com.gamification.marketguards.data.network.communication
 
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.gamification.marketguards.database.repository.IMissionRepository
-import com.gamification.marketguards.model.Mission
+import com.gamification.marketguards.data.database.repository.IMissionRepository
+import com.gamification.marketguards.data.model.Mission
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.coroutineScope

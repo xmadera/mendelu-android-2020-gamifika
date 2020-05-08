@@ -1,7 +1,7 @@
-package com.gamification.marketguards.database.repository
+package com.gamification.marketguards.data.database.repository
 
 import androidx.lifecycle.LiveData
-import com.gamification.marketguards.model.Mission
+import com.gamification.marketguards.data.model.Mission
 
 interface IMissionRepository {
     fun getAll(): LiveData<MutableList<Mission>>

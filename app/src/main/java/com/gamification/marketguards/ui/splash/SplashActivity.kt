@@ -2,7 +2,7 @@ package com.gamification.marketguards.ui.splash
 
 import android.os.Bundle
 import android.os.Handler
-import com.example.mojetodo.sharedpreferences.SharedPreferencesManager
+import com.gamification.marketguards.data.sharedpreferences.SharedPreferencesManager
 import com.gamification.arch.BaseActivity
 import com.gamification.marketguards.ui.main.MainActivity
 import com.gamification.marketguards.R

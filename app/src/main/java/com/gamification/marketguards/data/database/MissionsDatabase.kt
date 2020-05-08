@@ -1,4 +1,4 @@
-package com.gamification.marketguards.database
+package com.gamification.marketguards.data.database
 
 import android.content.Context
 import androidx.room.Database
@@ -6,8 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.gamification.marketguards.database.dao.MissionsDao
-import com.gamification.marketguards.model.Mission
+import com.gamification.marketguards.data.database.dao.MissionsDao
+import com.gamification.marketguards.data.model.Mission
 
 @Database(entities = [Mission::class], version = 1, exportSchema = true)
 abstract class MissionsDatabase : RoomDatabase() {
@@ -26,8 +26,6 @@ abstract class MissionsDatabase : RoomDatabase() {
                             context.applicationContext,
                             MissionsDatabase::class.java, "missions_database"
                         ).addMigrations(MIGRATION_1_2)
-                            // fix pro to abych memusel migrovat databazi při přidání obrázků.
-                            // nemělo by být v produkční aplikaci.
                             .fallbackToDestructiveMigration()
                             .build()
                     }

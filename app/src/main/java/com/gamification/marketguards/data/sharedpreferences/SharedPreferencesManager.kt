@@ -1,9 +1,8 @@
-package com.example.mojetodo.sharedpreferences
+package com.gamification.marketguards.data.sharedpreferences
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.fragment.app.Fragment
 
 class SharedPreferencesManager {
 

@@ -1,10 +1,10 @@
-package com.gamification.marketguards.database.repository
+package com.gamification.marketguards.data.database.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import com.gamification.marketguards.database.MissionsDatabase
-import com.gamification.marketguards.database.dao.MissionsDao
-import com.gamification.marketguards.model.Mission
+import com.gamification.marketguards.data.database.MissionsDatabase
+import com.gamification.marketguards.data.database.dao.MissionsDao
+import com.gamification.marketguards.data.model.Mission
 
 class MissionLocalRepositoryImpl(private val context: Context) :
     IMissionRepository {

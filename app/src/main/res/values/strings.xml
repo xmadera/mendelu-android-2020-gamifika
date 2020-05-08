@@ -19,6 +19,23 @@
     <string name="dashboard_button_text">Select Mission</string>
     <string name="done">Done</string>
 
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="invalid_credentials">Invalid credentials</string>
+    <string name="login_failed">Login failed</string>
+    <string name="my_story">My story</string>
+    <string name="login">Log in</string>
+    <string name="location">Locaiton</string>
+    <string name="track_location_description">Track location to detect clients near me</string>
+    <string name="log_out">Log out</string>
+    <string name="warning">Warning</string>
+
     <string-array name="StoreSubTabs">
         <item>Shop</item>
         <item>Inventory</item>

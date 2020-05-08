@@ -1,4 +1,4 @@
-package com.gamification.marketguards.communication
+package com.gamification.marketguards.data.network.communication
 
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit

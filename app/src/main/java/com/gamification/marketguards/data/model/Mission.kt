@@ -1,4 +1,4 @@
-package com.gamification.marketguards.model
+package com.gamification.marketguards.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -1,6 +1,6 @@
-package com.gamification.marketguards.communication
+package com.gamification.marketguards.data.network.communication
 
-import com.gamification.marketguards.model.Mission
+import com.gamification.marketguards.data.model.Mission
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

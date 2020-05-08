@@ -1,8 +1,8 @@
-package com.gamification.marketguards.database.dao
+package com.gamification.marketguards.data.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.gamification.marketguards.model.Mission
+import com.gamification.marketguards.data.model.Mission
 
 @Dao
 interface MissionsDao {
