@@ -3,9 +3,9 @@ package com.gamification.marketguards.ui.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.gamification.marketguards.data.base.App
-import com.gamification.marketguards.data.database.repository.LoginRepository
-import com.gamification.marketguards.data.network.LoginDataSource
+import com.gamification.marketguards.data.network.communication.datasources.LoginDataSource
 import com.gamification.marketguards.data.network.SessionManager
+import com.gamification.marketguards.data.network.communication.LoginRESTApiRepositoryImpl
 import com.gamification.marketguards.viewmodels.LoginViewModel
 
 /**
@@ -18,7 +18,7 @@ class LoginViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
             return LoginViewModel(
-                loginRepository = LoginRepository(
+                loginRepository = LoginRESTApiRepositoryImpl(
                     App.appContext,
                     sessionManager = SessionManager(App.appContext),
                     dataSource = LoginDataSource(

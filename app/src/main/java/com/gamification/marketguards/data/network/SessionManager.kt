@@ -8,7 +8,6 @@ interface SessionManagerInterface {
     fun fetchAuthToken(): String?
     fun fetchRefreshToken(): String?
     fun deleteTokens()
-    fun getFirebaseToken(): String
 }
 
 class SessionManager(context: Context):
@@ -41,10 +40,4 @@ class SessionManager(context: Context):
         editor.remove(REFRESH_TOKEN)
         editor.apply()
     }
-
-    fun saveFirebaseToken(token: String) {
-        preferences.edit().putString("firebase_token", token).apply()
-    }
-
-    override fun getFirebaseToken() = preferences.getString("firebase_token", "") ?: ""
 }

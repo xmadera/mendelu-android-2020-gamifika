@@ -1,6 +1,5 @@
 package com.gamification.marketguards.data.exceptions
 
-import com.gamification.marketguards.R
 import java.io.IOException
 
 class NoConnectionException: IOException() {

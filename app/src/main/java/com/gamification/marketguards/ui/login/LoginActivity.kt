@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.gamification.arch.BaseActivity
 import com.gamification.marketguards.R
+import com.gamification.marketguards.data.base.BaseActivity
 import com.gamification.marketguards.ui.main.MainActivity
 import com.gamification.marketguards.viewmodels.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
@@ -30,6 +30,9 @@ class LoginActivity : BaseActivity() {
 
         viewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
+
+        login_login.setText("admin")
+        login_password.setText("gamifika-admin-123")
 
         viewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer

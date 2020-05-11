@@ -5,10 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.gamification.arch.BaseActivity
 import com.gamification.marketguards.R
+import com.gamification.marketguards.data.base.BaseActivity
 import com.gamification.marketguards.ui.dashboard.DashboardFragment
 import com.gamification.marketguards.ui.library.LibraryFragment
 import com.gamification.marketguards.ui.map.MapFragment

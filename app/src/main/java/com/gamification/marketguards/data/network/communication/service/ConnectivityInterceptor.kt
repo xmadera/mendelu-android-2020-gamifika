@@ -1,4 +1,4 @@
-package com.gamification.marketguards.data.network
+package com.gamification.marketguards.data.network.communication.service
 
 import android.content.Context
 import android.net.ConnectivityManager

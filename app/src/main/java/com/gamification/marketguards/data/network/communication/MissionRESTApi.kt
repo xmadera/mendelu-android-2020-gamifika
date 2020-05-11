@@ -1,17 +1,20 @@
 package com.gamification.marketguards.data.network.communication
 
-import com.gamification.marketguards.data.model.Mission
+import com.gamification.marketguards.data.model.missionsAndQuests.MissionDetail
+import com.gamification.marketguards.data.model.missionsAndQuests.MissionPreview
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 interface MissionRESTApi {
 
-    @GET("missions")
-    suspend fun getMissions(): Response<MutableList<Mission>>
+    @GET("missions/preview")
+    suspend fun getMissionsPreview(): Response<MutableList<MissionPreview>>
 
-    @GET("mission/{id}")
-    suspend fun getMission(@Path("id") id : Long): Response<Mission>
+    @PATCH("missions/detail")
+    suspend fun getMissionDetail(@Query("missionId") id : Int): MissionDetail
 
 }

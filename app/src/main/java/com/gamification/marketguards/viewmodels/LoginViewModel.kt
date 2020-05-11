@@ -5,11 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.gamification.marketguards.R
-import com.gamification.marketguards.data.auth.LoginResult
-import com.gamification.marketguards.data.database.repository.LoginRepositoryInterface
+import com.gamification.marketguards.data.model.auth.LoginResult
+import com.gamification.marketguards.data.database.repository.ILoginRepository
+import com.gamification.marketguards.data.network.communication.LoginRESTApiRepositoryImpl
 import com.gamification.marketguards.ui.login.LoginFormState
 
-class LoginViewModel(private val loginRepository: LoginRepositoryInterface) : ViewModel() {
+class LoginViewModel(private val loginRepository: LoginRESTApiRepositoryImpl) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
@@ -23,12 +24,12 @@ class LoginViewModel(private val loginRepository: LoginRepositoryInterface) : Vi
         }
     }
 
-    fun login(username: String, password: String) {
-        loginRepository.login(username, password)
+    fun login(login: String, password: String) {
+        loginRepository.login(login, password)
     }
 
-    fun loginDataChanged(username: String, password: String) {
-        if (!isUserNameValid(username)) {
+    fun loginDataChanged(login: String, password: String) {
+        if (!isUserNameValid(login)) {
             _loginForm.value = LoginFormState(usernameError = R.string.invalid_username)
         } else if (!isPasswordValid(password)) {
             _loginForm.value = LoginFormState(passwordError = R.string.invalid_password)
@@ -38,11 +39,11 @@ class LoginViewModel(private val loginRepository: LoginRepositoryInterface) : Vi
     }
 
     // A placeholder username validation check
-    private fun isUserNameValid(username: String): Boolean {
-        return if (username.contains('@')) {
-            Patterns.EMAIL_ADDRESS.matcher(username).matches()
+    private fun isUserNameValid(login: String): Boolean {
+        return if (login.contains('@')) {
+            Patterns.EMAIL_ADDRESS.matcher(login).matches()
         } else {
-            username.isNotBlank()
+            login.isNotBlank()
         }
     }
 

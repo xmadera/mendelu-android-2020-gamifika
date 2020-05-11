@@ -3,8 +3,6 @@ package com.gamification.marketguards.data.base
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import android.se.omapi.Session
-import com.gamification.marketguards.R
 import com.gamification.marketguards.data.network.SessionManager
 import com.gamification.marketguards.data.network.SessionManagerInterface
 

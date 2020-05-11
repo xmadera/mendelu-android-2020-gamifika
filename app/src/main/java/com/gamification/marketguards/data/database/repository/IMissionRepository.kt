@@ -1,12 +1,10 @@
 package com.gamification.marketguards.data.database.repository
 
 import androidx.lifecycle.LiveData
-import com.gamification.marketguards.data.model.Mission
+import com.gamification.marketguards.data.model.missionsAndQuests.MissionDetail
+import com.gamification.marketguards.data.model.missionsAndQuests.MissionPreview
 
 interface IMissionRepository {
-    fun getAll(): LiveData<MutableList<Mission>>
-    suspend fun findById(id : Long): Mission
-    suspend fun insert(mission: Mission): Long
-    suspend fun update(mission: Mission)
-    suspend fun delete(mission: Mission)
+    fun getAll(): LiveData<MutableList<MissionPreview>>
+    suspend fun findById(id : Int): MissionDetail
 }

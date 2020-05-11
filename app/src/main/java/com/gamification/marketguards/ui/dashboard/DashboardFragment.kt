@@ -3,6 +3,7 @@ package com.gamification.marketguards.ui.dashboard
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gamification.marketguards.R
 import com.gamification.marketguards.data.constants.IntentConstants
-import com.gamification.marketguards.data.model.Mission
-import com.gamification.marketguards.data.model.Quest
+import com.gamification.marketguards.data.model.missionsAndQuests.MissionDetail
+import com.gamification.marketguards.data.model.missionsAndQuests.QuestPreview
 import com.gamification.marketguards.ui.main.MainActivity
 import com.gamification.marketguards.viewmodels.DashBoardViewModel
 import kotlinx.android.synthetic.main.fragment_dashboard.*
@@ -32,21 +33,21 @@ class DashboardFragment: Fragment() {
     private val job = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
 
-    fun newInstance(missionId: Long?): DashboardFragment {
+    fun newInstance(missionId: Int?): DashboardFragment {
         val newFragment = DashboardFragment()
         missionId?.let {
             val dataBundle = Bundle()
-            dataBundle.putLong(IntentConstants.MISSION_ID, missionId)
+            dataBundle.putInt(IntentConstants.MISSION_ID, missionId)
             newFragment.arguments = dataBundle
         }
         return newFragment
     }
 
-    private var questsList: MutableList<Quest> = mutableListOf()
-    private lateinit var mission: Mission
+    private var questsList: MutableList<QuestPreview> = mutableListOf()
+    private lateinit var mission: MissionDetail
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var questsAdapter: QuestsAdapter
-    private var selectedMissionId: Long? = null
+    private var selectedMissionId: Int? = null
 
     private val REQUEST_SELECT_MISSION = 100
 
@@ -54,7 +55,9 @@ class DashboardFragment: Fragment() {
         val view: View? = inflater.inflate(R.layout.fragment_dashboard, container, false)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.dashboard)
 
-        viewModel = ViewModelProvider(this).get(DashBoardViewModel::class.java)
+
+        viewModel = ViewModelProvider(this, DashboardViewModelFactory())
+            .get(DashBoardViewModel::class.java)
 
         val selectMissionButton = view!!.findViewById<Button>(R.id.button_select_mission)
 
@@ -62,14 +65,18 @@ class DashboardFragment: Fragment() {
             startActivityForResult(MissionsActivity.createIntent(activity!!), REQUEST_SELECT_MISSION)
         }
 
-        selectedMissionId = arguments?.getLong(IntentConstants.MISSION_ID)
+        selectedMissionId = arguments?.getInt(IntentConstants.MISSION_ID)
 
         selectedMissionId?.let {
             uiScope.launch {
                 mission = viewModel.findById(selectedMissionId!!)
+
                 missionTitle.text = mission.title
-//                missionDesc.text = mission.
-                questsList = mission.quests
+                Log.d("missionTitle", selectedMissionId.toString())
+                Log.d("missionTitle", mission.toString())
+                missionDesc.text = mission.story
+
+                questsList = mission.preparedQuests
 
                 val recyclerView = view.findViewById<RecyclerView>(R.id.questsRecyclerView)
                 questsAdapter = QuestsAdapter()
@@ -78,6 +85,9 @@ class DashboardFragment: Fragment() {
                 recyclerView.adapter = questsAdapter
             }
         }
+//            ?: {
+//
+//        }
 
         return view
     }
@@ -89,7 +99,6 @@ class DashboardFragment: Fragment() {
                 .inflate(R.layout.row_quest_list, parent, false)
             return MissionViewHolder(view)
         }
-
 
         override fun onBindViewHolder(holder: MissionViewHolder, position: Int) {
             val quest = questsList[position]
@@ -111,7 +120,7 @@ class DashboardFragment: Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_SELECT_MISSION && resultCode == Activity.RESULT_OK){
-            selectedMissionId = data!!.getLongExtra(IntentConstants.MISSION_ID, -1)
+            selectedMissionId = data!!.getIntExtra(IntentConstants.MISSION_ID, -1)
 
             activity!!.supportFragmentManager.beginTransaction().replace(R.id.fragment_container, DashboardFragment().newInstance(selectedMissionId)).commit()
         }
