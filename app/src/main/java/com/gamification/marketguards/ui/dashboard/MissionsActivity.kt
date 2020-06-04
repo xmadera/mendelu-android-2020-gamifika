@@ -95,11 +95,21 @@ class MissionsActivity: BaseActivity() {
         override fun onBindViewHolder(holder: MissionViewHolder, position: Int) {
             val mission = missionsPreview[position]
             holder.missionTitle.text = mission.title
-            holder.itemView.setOnClickListener {
-                val resultIntent = Intent().putExtra(IntentConstants.MISSION_ID, missionsPreview[holder.adapterPosition].id)
-                setResult(Activity.RESULT_OK, resultIntent)
-                finish()
+            if (anyQuests(holder.adapterPosition)) {
+                holder.missionTitle.setTextColor(resources.getColor(R.color.colorPrimary))
+                holder.itemView.setOnClickListener {
+                    val resultIntent = Intent().putExtra(
+                        IntentConstants.MISSION_ID,
+                        missionsPreview[holder.adapterPosition].id
+                    )
+                    setResult(Activity.RESULT_OK, resultIntent)
+                    finish()
+                }
             }
+        }
+
+        private fun anyQuests(position: Int): Boolean {
+            return missionsPreview[position].totalQuests > 0
         }
 
         override fun getItemCount() = missionsPreview.size

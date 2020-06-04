@@ -56,7 +56,7 @@ class ServiceGenerator {
 
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl("http://37.46.208.113:8080/")
+            .baseUrl("http://10.0.2.2:8080/")
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .build()

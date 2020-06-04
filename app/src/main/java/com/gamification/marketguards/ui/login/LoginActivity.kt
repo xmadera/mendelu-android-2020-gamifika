@@ -31,8 +31,8 @@ class LoginActivity : BaseActivity() {
         viewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
 
-        login_login.setText("admin")
-        login_password.setText("gamifika-admin-123")
+        login_login.setText("tsmerda2@gmail.com")
+        login_password.setText("gamifika")
 
         viewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
