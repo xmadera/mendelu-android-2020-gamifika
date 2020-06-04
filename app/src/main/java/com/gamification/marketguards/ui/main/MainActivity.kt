@@ -5,23 +5,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.fragment.app.Fragment
-import com.example.mojetodo.sharedpreferences.SharedPreferencesManager
 import com.gamification.marketguards.R
-import com.gamification.marketguards.ui.BaseActivity
+import com.gamification.marketguards.data.base.BaseActivity
 import com.gamification.marketguards.ui.dashboard.DashboardFragment
 import com.gamification.marketguards.ui.library.LibraryFragment
 import com.gamification.marketguards.ui.map.MapFragment
 import com.gamification.marketguards.ui.profile.ProfileActivity
-import com.gamification.marketguards.ui.store.StoreAdapter
 import com.gamification.marketguards.ui.store.StoreFragment
 import com.gamification.marketguards.ui.story.StoryFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_store.*
-import kotlinx.android.synthetic.main.fragment_store.*
 
 class MainActivity : BaseActivity() {
 
@@ -31,9 +25,11 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    override val layout: Int = R.layout.activity_main
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(layout)
         setSupportActionBar(toolbar)
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)

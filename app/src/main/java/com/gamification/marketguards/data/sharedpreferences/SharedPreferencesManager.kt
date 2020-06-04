@@ -1,16 +1,14 @@
-package com.example.mojetodo.sharedpreferences
+package com.gamification.marketguards.data.sharedpreferences
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.fragment.app.Fragment
 
 class SharedPreferencesManager {
 
     companion object {
         private val fileName = "gamsp"
         private val firstRun = "first_run"
-        private val loggedIn = "logged_in"
 
         /**
          * Returns the object to access the shared preferences.
@@ -42,12 +40,6 @@ class SharedPreferencesManager {
             val sharedPreferences = getSharedPreferences(context)
             return sharedPreferences
                 .getBoolean(firstRun, true)
-        }
-
-        fun isLoggedIn(context: Context): Boolean {
-            val sharedPreferences = getSharedPreferences(context)
-            return sharedPreferences
-                .getBoolean(loggedIn, false)
         }
     }
 }

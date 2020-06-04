@@ -3,21 +3,35 @@ package com.gamification.marketguards.ui.dashboard
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gamification.marketguards.R
-import com.gamification.marketguards.constants.IntentConstants
-import com.gamification.marketguards.model.Quest
+import com.gamification.marketguards.data.constants.IntentConstants
+import com.gamification.marketguards.data.model.missionsAndQuests.MissionDetail
+import com.gamification.marketguards.data.model.missionsAndQuests.QuestPreview
 import com.gamification.marketguards.ui.main.MainActivity
+import com.gamification.marketguards.viewmodels.DashBoardViewModel
+import kotlinx.android.synthetic.main.fragment_dashboard.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 
 class DashboardFragment: Fragment() {
+
+    private lateinit var viewModel: DashBoardViewModel
+
+    private val job = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + job)
 
     fun newInstance(missionId: Int?): DashboardFragment {
         val newFragment = DashboardFragment()
@@ -29,7 +43,8 @@ class DashboardFragment: Fragment() {
         return newFragment
     }
 
-    private var questsList: MutableList<Quest> = mutableListOf()
+    private var questsList: MutableList<QuestPreview> = mutableListOf()
+    private lateinit var mission: MissionDetail
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var questsAdapter: QuestsAdapter
     private var selectedMissionId: Int? = null
@@ -40,6 +55,10 @@ class DashboardFragment: Fragment() {
         val view: View? = inflater.inflate(R.layout.fragment_dashboard, container, false)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.dashboard)
 
+
+        viewModel = ViewModelProvider(this, DashboardViewModelFactory())
+            .get(DashBoardViewModel::class.java)
+
         val selectMissionButton = view!!.findViewById<Button>(R.id.button_select_mission)
 
         selectMissionButton.setOnClickListener {
@@ -49,28 +68,26 @@ class DashboardFragment: Fragment() {
         selectedMissionId = arguments?.getInt(IntentConstants.MISSION_ID)
 
         selectedMissionId?.let {
-            //
-            val quest = Quest("Quest Title", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's...")
+            uiScope.launch {
+                mission = viewModel.findById(selectedMissionId!!)
 
-            questsList.add(quest)
-            questsList.add(quest)
-            questsList.add(quest)
-            questsList.add(quest)
-            questsList.add(quest)
-            questsList.add(quest)
-            questsList.add(quest)
+                missionTitle.text = mission.title
+                Log.d("missionTitle", selectedMissionId.toString())
+                Log.d("missionTitle", mission.toString())
+                missionDesc.text = mission.story
 
-            view.findViewById<TextView>(R.id.missionTitle).text = "Mission Title"
-            view.findViewById<TextView>(R.id.missionDesc).text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
-            //
+                questsList = mission.preparedQuests
+
+                val recyclerView = view.findViewById<RecyclerView>(R.id.questsRecyclerView)
+                questsAdapter = QuestsAdapter()
+                layoutManager = LinearLayoutManager(activity)
+                recyclerView.layoutManager = layoutManager
+                recyclerView.adapter = questsAdapter
+            }
         }
-
-        val recyclerView = view.findViewById<RecyclerView>(R.id.questsRecyclerView)
-        questsAdapter = QuestsAdapter()
-        layoutManager = LinearLayoutManager(activity)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = questsAdapter
-        recyclerView.isNestedScrollingEnabled = false;
+//            ?: {
+//
+//        }
 
         return view
     }
@@ -83,11 +100,10 @@ class DashboardFragment: Fragment() {
             return MissionViewHolder(view)
         }
 
-
         override fun onBindViewHolder(holder: MissionViewHolder, position: Int) {
             val quest = questsList[position]
             holder.questTitle.text = quest.title
-            holder.questDesc.text = quest.desc
+            holder.questDesc.text = quest.story
             holder.itemView.setOnClickListener {
                 startActivity(QuestDetailActivity.createIntent(activity!!))
             }

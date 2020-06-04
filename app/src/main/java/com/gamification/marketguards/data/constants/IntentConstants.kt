@@ -1,4 +1,4 @@
-package com.gamification.marketguards.constants
+package com.gamification.marketguards.data.constants
 
 object IntentConstants {
     const val SUB_TAB_NAME = "sub_tab_name"

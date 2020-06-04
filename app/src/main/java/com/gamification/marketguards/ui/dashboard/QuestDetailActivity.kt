@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.gamification.marketguards.R
-import com.gamification.marketguards.ui.BaseActivity
-import kotlinx.android.synthetic.main.activity_main.toolbar
+import kotlinx.android.synthetic.main.activity_quest_detail.*
 
-class QuestDetailActivity : BaseActivity() {
+class QuestDetailActivity : AppCompatActivity() {
 
     companion object {
         fun createIntent(context: Context): Intent {

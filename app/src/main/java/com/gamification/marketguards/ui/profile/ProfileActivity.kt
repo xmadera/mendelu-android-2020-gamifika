@@ -4,11 +4,11 @@ package com.gamification.marketguards.ui.profile
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.gamification.marketguards.R
-import com.gamification.marketguards.ui.BaseActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_profile.*
 
-class ProfileActivity : BaseActivity() {
+class ProfileActivity : AppCompatActivity() {
     companion object {
         fun createIntent(context: Context): Intent {
             return Intent(context, ProfileActivity::class.java)

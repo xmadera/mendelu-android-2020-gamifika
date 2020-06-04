@@ -2,43 +2,39 @@ package com.gamification.marketguards.ui.splash
 
 import android.os.Bundle
 import android.os.Handler
-import com.example.mojetodo.sharedpreferences.SharedPreferencesManager
+import com.gamification.marketguards.data.sharedpreferences.SharedPreferencesManager
 import com.gamification.marketguards.ui.main.MainActivity
 import com.gamification.marketguards.R
-import com.gamification.marketguards.ui.BaseActivity
+import com.gamification.marketguards.data.base.App
+import com.gamification.marketguards.data.base.BaseActivity
 import com.gamification.marketguards.ui.login.LoginActivity
 
 class SplashActivity : BaseActivity() {
 
+    override val layout: Int = R.layout.activity_splash
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        setContentView(layout)
 
         if (SharedPreferencesManager.isRunForFirstTime(this)) {
             Handler().postDelayed({
-                continueToLogin()
+                continueToApp()
             }, 3000)
         } else {
-            if (SharedPreferencesManager.isLoggedIn(this)) {
                 Handler().postDelayed({
                     continueToApp()
                 }, 500)
-            } else {
-                Handler().postDelayed({
-                    continueToLogin()
-                }, 500)
             }
         }
-    }
 
     private fun continueToApp() {
         SharedPreferencesManager.saveFirstRun(this)
-        startActivity(MainActivity.createIntent(this))
-        finish()
-    }
-
-    private fun continueToLogin() {
-        startActivity(LoginActivity.createIntent(this))
+        if (App.isLoggedIn()) {
+            startActivity(MainActivity.createIntent(this))
+        } else {
+            startActivity(LoginActivity.createIntent(this))
+        }
         finish()
     }
 }

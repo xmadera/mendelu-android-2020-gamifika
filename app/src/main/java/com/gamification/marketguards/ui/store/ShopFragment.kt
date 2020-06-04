@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.gamification.marketguards.R
-import com.gamification.marketguards.constants.IntentConstants
+import com.gamification.marketguards.data.constants.IntentConstants
 
 class ShopFragment: Fragment() {
 
