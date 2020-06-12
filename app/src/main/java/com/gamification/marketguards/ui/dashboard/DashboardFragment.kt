@@ -52,6 +52,7 @@ class DashboardFragment: Fragment() {
 
 
     private val REQUEST_SELECT_MISSION = 100
+    private val REQUEST_SELECT_QUEST = 200
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View? = inflater.inflate(R.layout.fragment_dashboard, container, false)
@@ -69,24 +70,28 @@ class DashboardFragment: Fragment() {
 
         selectedMissionId = arguments?.getInt(IntentConstants.MISSION_ID)
 
+        fillLayout()
+        return view
+    }
+
+    private fun fillLayout() {
         selectedMissionId?.let {
             uiScope.launch {
                 mission = viewModel.findById(selectedMissionId!!)
 
-                mission_title.text = mission.title
-                mission_desc.text = mission.story
+                mission_title?.text = mission.title
+                mission_desc?.text = mission.story
 
                 questsList = (mission.preparedQuests + mission.activeQuests + mission.finishedQuests).toMutableList()
 
                 layoutManager = LinearLayoutManager(context!!)
 
-                val questsRecyclerView = view.findViewById<RecyclerView>(R.id.questsRecyclerView)
+                val questsRecyclerView = view?.findViewById<RecyclerView>(R.id.questsRecyclerView)
                 questsAdapter = QuestsAdapter()
-                questsRecyclerView.layoutManager = layoutManager
-                questsRecyclerView.adapter = questsAdapter
+                questsRecyclerView?.layoutManager = layoutManager
+                questsRecyclerView?.adapter = questsAdapter
             }
         }
-        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -118,11 +123,11 @@ class DashboardFragment: Fragment() {
                 holder.questIcon.setImageResource(R.drawable.ic_baseline_play_arrow)
             }
             holder.itemView.setOnClickListener {
-                startActivity(
+                startActivityForResult(
                     QuestDetailActivity.createIntent(
                         context!!,
                         questsList[holder.adapterPosition].id.toLong()
-                    )
+                    ), REQUEST_SELECT_QUEST
                 )
             }
         }
@@ -142,6 +147,9 @@ class DashboardFragment: Fragment() {
             selectedMissionId = data!!.getIntExtra(IntentConstants.MISSION_ID, -1)
 
             activity!!.supportFragmentManager.beginTransaction().replace(R.id.fragment_container, DashboardFragment().newInstance(selectedMissionId)).commit()
+        }
+        if (requestCode == REQUEST_SELECT_QUEST && resultCode == Activity.RESULT_OK){
+            fillLayout()
         }
     }
 }

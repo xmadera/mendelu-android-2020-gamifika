@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,9 +19,13 @@ import com.gamification.marketguards.data.model.missionsAndQuests.QuestDetail
 import com.gamification.marketguards.data.model.missionsAndQuests.SkillPreview
 import com.gamification.marketguards.viewmodels.QuestDetailViewModel
 import com.google.android.material.card.MaterialCardView
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_quest_detail.*
 import kotlinx.android.synthetic.main.content_quest_detail.*
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.json.JSONObject
+import java.util.*
 
 class QuestDetailActivity : BaseActivity() {
 
@@ -55,6 +60,7 @@ class QuestDetailActivity : BaseActivity() {
         quest_id = intent.getLongExtra(IntentConstants.QUEST_ID, -1)
 
         toolbar.setNavigationOnClickListener {
+            setResult(Activity.RESULT_OK)
             finish()
         }
 
@@ -84,7 +90,7 @@ class QuestDetailActivity : BaseActivity() {
 
         override fun getItemCount() = skillsPreview.size
 
-        inner class SkillViewHolder(view: View) : RecyclerView.ViewHolder(view){
+        inner class SkillViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val skillTitle: TextView = view.findViewById(R.id.skill_title)
             val skillWrapper: MaterialCardView = view.findViewById(R.id.skill_wrapper)
         }
@@ -110,18 +116,41 @@ class QuestDetailActivity : BaseActivity() {
         detail_quest_title.text = quest.title
         detail_quest_desc.text = quest.story
 
-        if (quest.finished != null) {
-        } else if (quest.activated != null) {
-            detail_quest_button.visibility = View.VISIBLE
-            detail_quest_button.text = "Finish Quest"
+        if (quest.finished == null) {
+            if (quest.activated != null) {
+                detail_quest_button.visibility = View.VISIBLE
+                detail_quest_button.text = "Finish Quest"
+                detail_quest_button.setOnClickListener {
+                    launch {
+                        viewModel.finishQuest(quest.id)
+                    }.invokeOnCompletion {
+                        getQuest()
+                    }
+                }
+            } else {
+                detail_quest_button.visibility = View.VISIBLE
+                detail_quest_button.text = "Start Quest"
+                detail_quest_button.setOnClickListener {
+                    launch {
+                        viewModel.startQuest(quest.id)
+                    }.invokeOnCompletion {
+                        getQuest()
+                    }
+                }
+            }
         } else {
-            detail_quest_button.visibility = View.VISIBLE
-            detail_quest_button.text = "Start Quest"
-            detail_quest_button.setOnClickListener {
+            detail_quest_button.visibility = View.GONE
+            detail_quest_notes.visibility = View.VISIBLE
+            detail_quest_notes_sub.visibility = View.VISIBLE
+
+            detail_quest_notes.setText(quest.note)
+            detail_quest_notes.doAfterTextChanged {
                 launch {
-                    viewModel.startQuest(quest.id)
-                } .invokeOnCompletion {
-                    getQuest()
+                    delay(1000)
+                    val noteObject = JsonObject()
+                    noteObject.addProperty("note",detail_quest_notes.text.toString())
+
+                    viewModel.editQuestNotes(quest.id, noteObject)
                 }
             }
         }
