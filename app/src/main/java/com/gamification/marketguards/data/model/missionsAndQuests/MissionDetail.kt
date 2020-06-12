@@ -16,5 +16,6 @@ data class MissionDetail(
     val preparedQuests: MutableList<QuestPreview>,
     val finishedQuests: MutableList<QuestPreview>,
     val activeQuests: MutableList<QuestPreview>,
+    val questSkillDtos: MutableList<SkillPreview>,
     val titleImage: String
 )

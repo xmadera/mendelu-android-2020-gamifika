@@ -32,44 +32,12 @@
         style="@style/headline6"
         />
 
-    <TextView
-        android:id="@+id/questSkills1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/detail_quest_skills_sub"
-        android:layout_marginTop="@dimen/half_indentation"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:text="@string/skill"
-        android:background="@color/backgroundSecondaryLight"/>
-
-    <TextView
-        android:id="@+id/questSkills2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/questSkills1"
-        android:layout_marginTop="@dimen/half_indentation"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:text="@string/skill"
-        android:background="@color/backgroundSecondaryLight"/>
-
-    <TextView
-        android:id="@+id/questSkills3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/questSkills2"
-        android:layout_marginTop="@dimen/half_indentation"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:text="@string/skill"
-        android:background="@color/backgroundSecondaryLight"/>
+        <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/quest_detail_skills_recyclerview"
+        app:layout_constraintTop_toBottomOf="@+id/detail_quest_skills_sub"
+        app:layout_constraintBottom_toTopOf="@+id/detail_quest_notes_sub"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <TextView
         android:id="@+id/detail_quest_notes_sub"
@@ -77,11 +45,12 @@
         android:layout_height="wrap_content"
         android:text="@string/notes"
         android:layout_marginTop="@dimen/basic_indentation"
-        app:layout_constraintTop_toBottomOf="@id/questSkills3"
+        app:layout_constraintTop_toBottomOf="@id/quest_detail_skills_recyclerview"
         style="@style/headline6"
         />
 
     <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/detail_quest_notes"
         app:layout_constraintTop_toBottomOf="@id/detail_quest_notes_sub"
         android:layout_width="match_parent"
         android:padding="@dimen/basic_indentation"
@@ -90,4 +59,14 @@
         android:textColor="@color/colorPrimary"
         android:background="@color/backgroundSecondary"
         android:layout_height="100dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/detail_quest_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/detail_quest_notes"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/basic_indentation"
+        style="@style/button_primary"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

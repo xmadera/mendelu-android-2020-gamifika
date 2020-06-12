@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:id="@+id/missionTitle"
+        android:id="@+id/mission_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -14,5 +14,32 @@
         app:layout_constraintEnd_toStartOf="parent"
         android:textColor="@color/disabled"
         style="@style/text_primary"/>
+
+    <TextView
+        android:id="@+id/finished_quests"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/half_indentation"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mission_title"
+        style="@style/text_primary"/>
+
+    <TextView
+        android:id="@+id/total_quests"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/finished_quests"
+        style="@style/text_primary"/>
+
+    <ImageView
+        android:id="@+id/finished_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/half_indentation"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mission_title"
+        android:contentDescription="TODO" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

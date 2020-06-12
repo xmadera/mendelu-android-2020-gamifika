@@ -1,13 +1,12 @@
 package com.gamification.marketguards.data.network.communication
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.gamification.marketguards.data.database.repository.IMissionRepository
 import com.gamification.marketguards.data.model.missionsAndQuests.MissionDetail
 import com.gamification.marketguards.data.model.missionsAndQuests.MissionPreview
-import com.gamification.marketguards.data.network.SessionManagerInterface
+import com.gamification.marketguards.data.network.communication.service.SessionManagerInterface
 import com.gamification.marketguards.data.network.communication.service.ServiceGenerator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope

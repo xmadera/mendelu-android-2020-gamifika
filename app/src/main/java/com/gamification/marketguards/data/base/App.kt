@@ -3,8 +3,8 @@ package com.gamification.marketguards.data.base
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import com.gamification.marketguards.data.network.SessionManager
-import com.gamification.marketguards.data.network.SessionManagerInterface
+import com.gamification.marketguards.data.network.communication.service.SessionManager
+import com.gamification.marketguards.data.network.communication.service.SessionManagerInterface
 
 class App : Application() {
     override fun onCreate() {
@@ -23,9 +23,14 @@ class App : Application() {
             private set
 
         fun isLoggedIn(): Boolean {
-            return SessionManager(appContext).fetchAuthToken() != null
+            return SessionManager(
+                appContext
+            ).fetchAuthToken() != null
         }
 
-        fun getSessionManager(): SessionManagerInterface = SessionManager(appContext)
+        fun getSessionManager(): SessionManagerInterface =
+            SessionManager(
+                appContext
+            )
     }
 }

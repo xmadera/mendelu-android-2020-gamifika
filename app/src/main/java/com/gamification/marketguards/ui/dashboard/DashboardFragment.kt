@@ -3,11 +3,11 @@ package com.gamification.marketguards.ui.dashboard
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -43,11 +43,13 @@ class DashboardFragment: Fragment() {
         return newFragment
     }
 
-    private var questsList: MutableList<QuestPreview> = mutableListOf()
     private lateinit var mission: MissionDetail
-    private lateinit var layoutManager: LinearLayoutManager
-    private lateinit var questsAdapter: QuestsAdapter
     private var selectedMissionId: Int? = null
+
+    private lateinit var layoutManager: LinearLayoutManager
+    private var questsList: MutableList<QuestPreview> = mutableListOf()
+    private lateinit var questsAdapter: QuestsAdapter
+
 
     private val REQUEST_SELECT_MISSION = 100
 
@@ -71,49 +73,66 @@ class DashboardFragment: Fragment() {
             uiScope.launch {
                 mission = viewModel.findById(selectedMissionId!!)
 
-                missionTitle.text = mission.title
-                Log.d("missionTitle", selectedMissionId.toString())
-                Log.d("missionTitle", mission.toString())
-                missionDesc.text = mission.story
+                mission_title.text = mission.title
+                mission_desc.text = mission.story
 
-                questsList = mission.preparedQuests
+                questsList = (mission.preparedQuests + mission.activeQuests + mission.finishedQuests).toMutableList()
 
-                val recyclerView = view.findViewById<RecyclerView>(R.id.questsRecyclerView)
+                layoutManager = LinearLayoutManager(context!!)
+
+                val questsRecyclerView = view.findViewById<RecyclerView>(R.id.questsRecyclerView)
                 questsAdapter = QuestsAdapter()
-                layoutManager = LinearLayoutManager(activity)
-                recyclerView.layoutManager = layoutManager
-                recyclerView.adapter = questsAdapter
+                questsRecyclerView.layoutManager = layoutManager
+                questsRecyclerView.adapter = questsAdapter
             }
         }
-//            ?: {
-//
-//        }
-
         return view
     }
 
-    inner class QuestsAdapter : RecyclerView.Adapter<QuestsAdapter.MissionViewHolder>() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MissionViewHolder {
+    }
+
+    fun anyActiveQuests(quests: List<QuestPreview>): Boolean {
+        return quests.isNotEmpty()
+    }
+
+    inner class QuestsAdapter : RecyclerView.Adapter<QuestsAdapter.QuestViewHolder>() {
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestViewHolder {
             val view: View = LayoutInflater.from(parent.context)
                 .inflate(R.layout.row_quest_list, parent, false)
-            return MissionViewHolder(view)
+            return QuestViewHolder(view)
         }
 
-        override fun onBindViewHolder(holder: MissionViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: QuestViewHolder, position: Int) {
             val quest = questsList[position]
             holder.questTitle.text = quest.title
             holder.questDesc.text = quest.story
+            if (quest.finished != null) {
+                    holder.questIcon.setImageResource(R.drawable.ic_baseline_done)
+            } else if (quest.activated != null) {
+                holder.questIcon.setImageResource(R.drawable.ic_baseline_fast_forward)
+            } else {
+                holder.questIcon.setImageResource(R.drawable.ic_baseline_play_arrow)
+            }
             holder.itemView.setOnClickListener {
-                startActivity(QuestDetailActivity.createIntent(activity!!))
+                startActivity(
+                    QuestDetailActivity.createIntent(
+                        context!!,
+                        questsList[holder.adapterPosition].id.toLong()
+                    )
+                )
             }
         }
 
         override fun getItemCount() = questsList.size
 
-        inner class MissionViewHolder(view: View) : RecyclerView.ViewHolder(view){
-            val questTitle: TextView = view.findViewById(R.id.questTitle)
-            val questDesc: TextView = view.findViewById(R.id.questDesc)
+        inner class QuestViewHolder(view: View) : RecyclerView.ViewHolder(view){
+            val questTitle: TextView = view.findViewById(R.id.quest_title)
+            val questDesc: TextView = view.findViewById(R.id.quest_Desc)
+            val questIcon: ImageView = view.findViewById(R.id.quest_icon)
         }
     }
 

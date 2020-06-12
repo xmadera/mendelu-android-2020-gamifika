@@ -9,4 +9,13 @@
     <color name="light">#F1F8FF</color>
 
     <color name="disabled">#7D7D7F</color>
+
+    <color name="products">#ED6C14</color>
+    <color name="communication">#1C51C6</color>
+    <color name="organization">#CCCCCC</color>
+    <color name="prospecting">#723BEA</color>
+    <color name="business">#1DD882</color>
+    <color name="networking">#ED6C14</color>
+
+
 </resources>

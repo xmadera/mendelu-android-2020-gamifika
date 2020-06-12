@@ -3,8 +3,8 @@ package com.gamification.marketguards.ui.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.gamification.marketguards.data.base.App
-import com.gamification.marketguards.data.network.communication.datasources.LoginDataSource
-import com.gamification.marketguards.data.network.SessionManager
+import com.gamification.marketguards.data.network.LoginDataSource
+import com.gamification.marketguards.data.network.communication.service.SessionManager
 import com.gamification.marketguards.data.network.communication.LoginRESTApiRepositoryImpl
 import com.gamification.marketguards.viewmodels.LoginViewModel
 
@@ -20,7 +20,9 @@ class LoginViewModelFactory : ViewModelProvider.Factory {
             return LoginViewModel(
                 loginRepository = LoginRESTApiRepositoryImpl(
                     App.appContext,
-                    sessionManager = SessionManager(App.appContext),
+                    sessionManager = SessionManager(
+                        App.appContext
+                    ),
                     dataSource = LoginDataSource(
                         App.appContext,
                         App.getSessionManager()
