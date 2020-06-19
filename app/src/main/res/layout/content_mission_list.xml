@@ -8,9 +8,23 @@
     tools:context=".ui.main.MainActivity"
     tools:showIn="@layout/activity_missions">
 
+    <TextView
+        android:id="@+id/mission_list_all_quests"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/missionsRecyclerView"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        android:paddingTop="@dimen/basic_indentation"
+        android:text="All quests"
+        style="@style/subtitle1"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/missionsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/mission_list_all_quests"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.gamification.marketguards.data.network
+package com.gamification.marketguards.data.network.communication.service
 
 import android.content.Context
 import com.gamification.marketguards.R
@@ -10,14 +10,16 @@ interface SessionManagerInterface {
     fun deleteTokens()
 }
 
-class SessionManager(context: Context):
+class SessionManager(context: Context) :
     SessionManagerInterface {
-    private var preferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE)
+    private var preferences = context
+        .getSharedPreferences(
+            context.getString(R.string.app_name),
+            Context.MODE_PRIVATE
+        )
 
-    companion object {
-        const val AUTH_TOKEN = "auth_token"
-        const val REFRESH_TOKEN = "refresh_token"
-    }
+    val AUTH_TOKEN = "auth_token"
+    val REFRESH_TOKEN = "refresh_token"
 
     override fun saveTokens(authToken: String, refreshToken: String) {
         val editor = preferences.edit()

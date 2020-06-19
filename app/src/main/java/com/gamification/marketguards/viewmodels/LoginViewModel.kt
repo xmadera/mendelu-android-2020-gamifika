@@ -4,13 +4,11 @@ import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.gamification.marketguards.R
 import com.gamification.marketguards.data.model.auth.LoginResult
-import com.gamification.marketguards.data.database.repository.ILoginRepository
-import com.gamification.marketguards.data.network.communication.LoginRESTApiRepositoryImpl
+import com.gamification.marketguards.data.database.repository.LoginRepositoryInterface
 import com.gamification.marketguards.ui.login.LoginFormState
 
-class LoginViewModel(private val loginRepository: LoginRESTApiRepositoryImpl) : ViewModel() {
+class LoginViewModel(private val loginRepository: LoginRepositoryInterface) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
@@ -24,26 +22,16 @@ class LoginViewModel(private val loginRepository: LoginRESTApiRepositoryImpl) : 
         }
     }
 
-    fun login(login: String, password: String) {
-        loginRepository.login(login, password)
-    }
-
-    fun loginDataChanged(login: String, password: String) {
-        if (!isUserNameValid(login)) {
-            _loginForm.value = LoginFormState(usernameError = R.string.invalid_username)
-        } else if (!isPasswordValid(password)) {
-            _loginForm.value = LoginFormState(passwordError = R.string.invalid_password)
-        } else {
-            _loginForm.value = LoginFormState(isDataValid = true)
-        }
+    fun login(username: String, password: String) {
+        loginRepository.login(username, password)
     }
 
     // A placeholder username validation check
-    private fun isUserNameValid(login: String): Boolean {
-        return if (login.contains('@')) {
-            Patterns.EMAIL_ADDRESS.matcher(login).matches()
+    private fun isUserNameValid(username: String): Boolean {
+        return if (username.contains('@')) {
+            Patterns.EMAIL_ADDRESS.matcher(username).matches()
         } else {
-            login.isNotBlank()
+            username.isNotBlank()
         }
     }
 
@@ -51,5 +39,4 @@ class LoginViewModel(private val loginRepository: LoginRESTApiRepositoryImpl) : 
     private fun isPasswordValid(password: String): Boolean {
         return password.length > 5
     }
-
 }

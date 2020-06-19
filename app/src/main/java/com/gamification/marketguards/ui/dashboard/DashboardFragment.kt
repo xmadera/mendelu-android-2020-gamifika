@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -43,13 +44,16 @@ class DashboardFragment: Fragment() {
         return newFragment
     }
 
-    private var questsList: MutableList<QuestPreview> = mutableListOf()
     private lateinit var mission: MissionDetail
-    private lateinit var layoutManager: LinearLayoutManager
-    private lateinit var questsAdapter: QuestsAdapter
     private var selectedMissionId: Int? = null
 
+    private lateinit var layoutManager: LinearLayoutManager
+    private var questsList: MutableList<QuestPreview> = mutableListOf()
+    private lateinit var questsAdapter: QuestsAdapter
+
+
     private val REQUEST_SELECT_MISSION = 100
+    private val REQUEST_SELECT_QUEST = 200
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View? = inflater.inflate(R.layout.fragment_dashboard, container, false)
@@ -67,53 +71,79 @@ class DashboardFragment: Fragment() {
 
         selectedMissionId = arguments?.getInt(IntentConstants.MISSION_ID)
 
-        selectedMissionId?.let {
-            uiScope.launch {
-                mission = viewModel.findById(selectedMissionId!!)
-
-                missionTitle.text = mission.title
-                Log.d("missionTitle", selectedMissionId.toString())
-                Log.d("missionTitle", mission.toString())
-                missionDesc.text = mission.story
-
-                questsList = mission.preparedQuests
-
-                val recyclerView = view.findViewById<RecyclerView>(R.id.questsRecyclerView)
-                questsAdapter = QuestsAdapter()
-                layoutManager = LinearLayoutManager(activity)
-                recyclerView.layoutManager = layoutManager
-                recyclerView.adapter = questsAdapter
-            }
-        }
-//            ?: {
-//
-//        }
-
+        fillLayout()
         return view
     }
 
-    inner class QuestsAdapter : RecyclerView.Adapter<QuestsAdapter.MissionViewHolder>() {
+    private fun fillLayout() {
+        selectedMissionId?.let {
+            uiScope.launch {
+                if (selectedMissionId != 0) {
+                    mission = viewModel.findById(selectedMissionId!!)
+                    mission_title?.text = mission.title
+                    mission_desc?.text = mission.story
+                } else {
+                    mission = viewModel.getAllQuests()
+                    mission_title.text = "All quests"
+                    mission_desc.visibility = View.GONE
+                }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MissionViewHolder {
+            questsList = (mission.preparedQuests + mission.activeQuests + mission.finishedQuests).toMutableList()
+
+            layoutManager = LinearLayoutManager(context!!)
+
+            val questsRecyclerView = view?.findViewById<RecyclerView>(R.id.questsRecyclerView)
+            questsAdapter = QuestsAdapter()
+            questsRecyclerView?.layoutManager = layoutManager
+            questsRecyclerView?.adapter = questsAdapter
+            }
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
+    fun anyActiveQuests(quests: List<QuestPreview>): Boolean {
+        return quests.isNotEmpty()
+    }
+
+    inner class QuestsAdapter : RecyclerView.Adapter<QuestsAdapter.QuestViewHolder>() {
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestViewHolder {
             val view: View = LayoutInflater.from(parent.context)
                 .inflate(R.layout.row_quest_list, parent, false)
-            return MissionViewHolder(view)
+            return QuestViewHolder(view)
         }
 
-        override fun onBindViewHolder(holder: MissionViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: QuestViewHolder, position: Int) {
             val quest = questsList[position]
             holder.questTitle.text = quest.title
             holder.questDesc.text = quest.story
+            if (quest.finished != null) {
+                    holder.questIcon.setImageResource(R.drawable.ic_baseline_done)
+            } else if (quest.activated != null) {
+                holder.questIcon.setImageResource(R.drawable.ic_baseline_fast_forward)
+            } else {
+                holder.questIcon.setImageResource(R.drawable.ic_baseline_play_arrow)
+            }
             holder.itemView.setOnClickListener {
-                startActivity(QuestDetailActivity.createIntent(activity!!))
+                startActivityForResult(
+                    QuestDetailActivity.createIntent(
+                        context!!,
+                        questsList[holder.adapterPosition].id.toLong()
+                    ), REQUEST_SELECT_QUEST
+                )
             }
         }
 
         override fun getItemCount() = questsList.size
 
-        inner class MissionViewHolder(view: View) : RecyclerView.ViewHolder(view){
-            val questTitle: TextView = view.findViewById(R.id.questTitle)
-            val questDesc: TextView = view.findViewById(R.id.questDesc)
+        inner class QuestViewHolder(view: View) : RecyclerView.ViewHolder(view){
+            val questTitle: TextView = view.findViewById(R.id.quest_title)
+            val questDesc: TextView = view.findViewById(R.id.quest_Desc)
+            val questIcon: ImageView = view.findViewById(R.id.quest_icon)
         }
     }
 
@@ -123,6 +153,9 @@ class DashboardFragment: Fragment() {
             selectedMissionId = data!!.getIntExtra(IntentConstants.MISSION_ID, -1)
 
             activity!!.supportFragmentManager.beginTransaction().replace(R.id.fragment_container, DashboardFragment().newInstance(selectedMissionId)).commit()
+        }
+        if (requestCode == REQUEST_SELECT_QUEST && resultCode == Activity.RESULT_OK){
+            fillLayout()
         }
     }
 }

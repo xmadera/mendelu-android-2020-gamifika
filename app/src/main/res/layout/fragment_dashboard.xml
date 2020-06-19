@@ -16,7 +16,7 @@
         style="@style/button_primary"/>
 
     <TextView
-        android:id="@+id/missionTitle"
+        android:id="@+id/mission_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,20 +26,19 @@
         android:layout_marginTop="@dimen/basic_indentation"/>
 
     <TextView
-        android:id="@+id/missionDesc"
+        android:id="@+id/mission_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/missionTitle"
+        app:layout_constraintTop_toBottomOf="@id/mission_title"
         style="@style/text_primary"/>
 
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/missionDesc"
+        app:layout_constraintTop_toBottomOf="@+id/mission_desc"
         android:layout_marginTop="@dimen/basic_indentation">
     <include layout="@layout/content_quest_list"/>
 </FrameLayout>

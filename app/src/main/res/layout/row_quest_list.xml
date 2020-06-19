@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="140dp"
+    android:layout_height="wrap_content"
     android:clickable="true"
     android:background="@color/backgroundSecondary"
     android:layout_marginBottom="@dimen/basic_indentation"
@@ -11,41 +11,39 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/half_indentation">
+        android:padding="@dimen/basic_indentation">
 
     <TextView
-        android:id="@+id/questTitle"
+        android:id="@+id/quest_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="32dp"
         style="@style/headline6"/>
 
+        <ImageView
+            android:id="@+id/quest_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="TODO" />
+
         <TextView
-            android:id="@+id/questDesc"
+            android:id="@+id/quest_Desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/questTitle"
+            app:layout_constraintTop_toBottomOf="@id/quest_title"
             app:layout_constraintStart_toStartOf="parent"
             android:maxLines="2"
             android:ellipsize="end"
             style="@style/text_secondary"/>
 
-        <TextView
-            android:id="@+id/questSkills"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/questDesc"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="@dimen/half_indentation"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:text="@string/skill"
-            android:background="@color/backgroundSecondaryLight"/>
-
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/skillPreviewRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

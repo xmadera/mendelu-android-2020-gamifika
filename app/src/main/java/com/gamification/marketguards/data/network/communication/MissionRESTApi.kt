@@ -17,4 +17,7 @@ interface MissionRESTApi {
     @PATCH("missions/detail")
     suspend fun getMissionDetail(@Query("missionId") id : Int): MissionDetail
 
+    @PATCH("missions/detail")
+    suspend fun getAllQuests(): MissionDetail
+
 }

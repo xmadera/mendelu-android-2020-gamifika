@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -48,6 +49,8 @@ class MissionsActivity: BaseActivity() {
             finish()
         }
 
+
+
         viewModel = ViewModelProvider(this, DashboardViewModelFactory())
             .get(DashBoardViewModel::class.java)
 
@@ -55,6 +58,14 @@ class MissionsActivity: BaseActivity() {
         layoutManager = LinearLayoutManager(this)
         missionsRecyclerView.layoutManager = layoutManager
         missionsRecyclerView.adapter = missionsAdapter
+
+        mission_list_all_quests.setOnClickListener { val resultIntent = Intent().putExtra(
+            IntentConstants.MISSION_ID,
+            0
+        )
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
+        }
 
         viewModel.getAll().observe(this, object : Observer<MutableList<MissionPreview>> {
             override fun onChanged(t: MutableList<MissionPreview>?) {
@@ -80,7 +91,6 @@ class MissionsActivity: BaseActivity() {
                 }
             }
         })
-
     }
 
     inner class MissionsAdapter : RecyclerView.Adapter<MissionsAdapter.MissionViewHolder>() {
@@ -96,6 +106,13 @@ class MissionsActivity: BaseActivity() {
             val mission = missionsPreview[position]
             holder.missionTitle.text = mission.title
             if (anyQuests(holder.adapterPosition)) {
+                if (mission.finishedQuests < mission.totalQuests) {
+                    holder.finishedQuests.text = mission.finishedQuests.toString() + " / "
+                    holder.totalQuests.text = mission.totalQuests.toString()
+                } else {
+                    holder.finishedIcon.setImageResource(R.drawable.ic_baseline_done)
+                    holder.finishedIcon.visibility = View.VISIBLE
+                }
                 holder.missionTitle.setTextColor(resources.getColor(R.color.colorPrimary))
                 holder.itemView.setOnClickListener {
                     val resultIntent = Intent().putExtra(
@@ -105,6 +122,10 @@ class MissionsActivity: BaseActivity() {
                     setResult(Activity.RESULT_OK, resultIntent)
                     finish()
                 }
+            } else {
+                holder.finishedIcon.setImageResource(R.drawable.ic_baseline_lock)
+                holder.finishedIcon.setColorFilter(resources.getColor(R.color.disabled))
+                holder.finishedIcon.visibility = View.VISIBLE
             }
         }
 
@@ -115,7 +136,10 @@ class MissionsActivity: BaseActivity() {
         override fun getItemCount() = missionsPreview.size
 
         inner class MissionViewHolder(view: View) : RecyclerView.ViewHolder(view){
-            val missionTitle: TextView = view.findViewById(R.id.missionTitle)
+            val missionTitle: TextView = view.findViewById(R.id.mission_title)
+            val totalQuests: TextView = view.findViewById(R.id.total_quests)
+            val finishedQuests: TextView = view.findViewById(R.id.finished_quests)
+            val finishedIcon: ImageView = view.findViewById(R.id.finished_icon)
         }
     }
 }
