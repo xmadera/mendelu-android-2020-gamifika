@@ -1,4 +1,7 @@
 <resources>
+    <dimen name="min_indentation">4dp</dimen>
     <dimen name="half_indentation">8dp</dimen>
     <dimen name="basic_indentation">16dp</dimen>
+    <dimen name="double_indentation">32dp</dimen>
+    <dimen name="max_indentation">64dp</dimen>
 </resources>

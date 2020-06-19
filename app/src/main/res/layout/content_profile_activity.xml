@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+    android:id="@+id/profile_background"
+    android:src="@drawable/img_profile_background"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    android:contentDescription="TODO" />
+
+    <ImageView
+        android:src="@drawable/img_profile_avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/profile_background"
+        android:contentDescription="TODO" />
+
+    <TextView
+        android:id="@+id/profile_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingTop="@dimen/basic_indentation"
+        android:paddingBottom="@dimen/half_indentation"
+        app:layout_constraintTop_toBottomOf="@id/profile_background"
+        style="@style/subtitle1"/>
+
+    <TextView
+        android:id="@+id/profile_progressbar_values"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/profile_progressbar"
+        app:layout_constraintTop_toBottomOf="@id/profile_level"
+        android:paddingStart="@dimen/half_indentation"
+        style="@style/text_secondary"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/profile_progressbar"
+        app:layout_constraintTop_toBottomOf="@id/profile_level"
+        android:paddingEnd="@dimen/half_indentation"
+        android:text="XP"
+        style="@style/text_secondary"/>
+
+    <ProgressBar
+        android:id="@+id/profile_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingTop="@dimen/half_indentation"
+        android:minWidth="200dp"
+        app:layout_constraintTop_toBottomOf="@id/profile_level"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
+    <ImageView
+        android:id="@+id/profile_playtime_icon"
+        android:src="@drawable/ic_baseline_skill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/basic_indentation"
+        app:layout_constraintTop_toBottomOf="@+id/profile_progressbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingStart="@dimen/double_indentation"
+        android:paddingEnd="@dimen/double_indentation"
+        android:contentDescription="TODO" />
+
+    <TextView
+        android:id="@+id/profile_playtime_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/half_indentation"
+        app:layout_constraintTop_toBottomOf="@+id/profile_playtime_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingStart="@dimen/double_indentation"
+        android:paddingEnd="@dimen/double_indentation"
+        />
+
+    <ImageView
+        android:id="@+id/profile_money_icon"
+        android:src="@drawable/ic_baseline_skill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/basic_indentation"
+        app:layout_constraintTop_toBottomOf="@+id/profile_progressbar"
+        app:layout_constraintEnd_toStartOf="@+id/profile_playtime_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="TODO" />
+
+    <TextView
+        android:id="@+id/profile_money_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/half_indentation"
+        app:layout_constraintTop_toBottomOf="@+id/profile_playtime_icon"
+        app:layout_constraintEnd_toStartOf="@+id/profile_playtime_desc"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/profile_map_icon"
+        android:src="@drawable/ic_baseline_skill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/basic_indentation"
+        app:layout_constraintTop_toBottomOf="@+id/profile_progressbar"
+        app:layout_constraintStart_toEndOf="@+id/profile_playtime_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="TODO" />
+
+    <TextView
+        android:id="@+id/profile_map_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/half_indentation"
+        app:layout_constraintTop_toBottomOf="@+id/profile_playtime_icon"
+        app:layout_constraintStart_toEndOf="@+id/profile_playtime_desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
