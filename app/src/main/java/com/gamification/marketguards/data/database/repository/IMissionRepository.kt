@@ -7,4 +7,5 @@ import com.gamification.marketguards.data.model.missionsAndQuests.MissionPreview
 interface IMissionRepository {
     fun getAll(): LiveData<MutableList<MissionPreview>>
     suspend fun findById(id : Int): MissionDetail
+    suspend fun getAllQuests(): MissionDetail
 }

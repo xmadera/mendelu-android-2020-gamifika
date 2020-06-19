@@ -3,6 +3,7 @@ package com.gamification.marketguards.ui.dashboard
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,19 +78,24 @@ class DashboardFragment: Fragment() {
     private fun fillLayout() {
         selectedMissionId?.let {
             uiScope.launch {
-                mission = viewModel.findById(selectedMissionId!!)
+                if (selectedMissionId != 0) {
+                    mission = viewModel.findById(selectedMissionId!!)
+                    mission_title?.text = mission.title
+                    mission_desc?.text = mission.story
+                } else {
+                    mission = viewModel.getAllQuests()
+                    mission_title.text = "All quests"
+                    mission_desc.visibility = View.GONE
+                }
 
-                mission_title?.text = mission.title
-                mission_desc?.text = mission.story
+            questsList = (mission.preparedQuests + mission.activeQuests + mission.finishedQuests).toMutableList()
 
-                questsList = (mission.preparedQuests + mission.activeQuests + mission.finishedQuests).toMutableList()
+            layoutManager = LinearLayoutManager(context!!)
 
-                layoutManager = LinearLayoutManager(context!!)
-
-                val questsRecyclerView = view?.findViewById<RecyclerView>(R.id.questsRecyclerView)
-                questsAdapter = QuestsAdapter()
-                questsRecyclerView?.layoutManager = layoutManager
-                questsRecyclerView?.adapter = questsAdapter
+            val questsRecyclerView = view?.findViewById<RecyclerView>(R.id.questsRecyclerView)
+            questsAdapter = QuestsAdapter()
+            questsRecyclerView?.layoutManager = layoutManager
+            questsRecyclerView?.adapter = questsAdapter
             }
         }
     }

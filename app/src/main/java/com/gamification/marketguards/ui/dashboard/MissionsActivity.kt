@@ -49,6 +49,8 @@ class MissionsActivity: BaseActivity() {
             finish()
         }
 
+
+
         viewModel = ViewModelProvider(this, DashboardViewModelFactory())
             .get(DashBoardViewModel::class.java)
 
@@ -56,6 +58,14 @@ class MissionsActivity: BaseActivity() {
         layoutManager = LinearLayoutManager(this)
         missionsRecyclerView.layoutManager = layoutManager
         missionsRecyclerView.adapter = missionsAdapter
+
+        mission_list_all_quests.setOnClickListener { val resultIntent = Intent().putExtra(
+            IntentConstants.MISSION_ID,
+            0
+        )
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
+        }
 
         viewModel.getAll().observe(this, object : Observer<MutableList<MissionPreview>> {
             override fun onChanged(t: MutableList<MissionPreview>?) {

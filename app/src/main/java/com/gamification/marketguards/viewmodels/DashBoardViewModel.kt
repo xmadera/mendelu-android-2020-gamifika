@@ -18,6 +18,10 @@ open class DashBoardViewModel(private val missionRepository: MissionRESTApiRepos
         return missionRepository.findById(id)
     }
 
+    suspend fun getAllQuests() : MissionDetail {
+        return missionRepository.getAllQuests()
+    }
+
     override fun onCleared() {
         super.onCleared()
     }

@@ -36,4 +36,7 @@ class MissionRESTApiRepositoryImpl(
         return missionsApi.getMissionDetail(id)
     }
 
+    override suspend fun getAllQuests(): MissionDetail {
+        return missionsApi.getAllQuests()
+    }
 }
