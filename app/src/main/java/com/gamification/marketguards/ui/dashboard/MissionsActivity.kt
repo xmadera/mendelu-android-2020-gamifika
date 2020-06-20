@@ -49,8 +49,6 @@ class MissionsActivity: BaseActivity() {
             finish()
         }
 
-
-
         viewModel = ViewModelProvider(this, DashboardViewModelFactory())
             .get(DashBoardViewModel::class.java)
 
@@ -110,7 +108,7 @@ class MissionsActivity: BaseActivity() {
                     holder.finishedQuests.text = mission.finishedQuests.toString() + " / "
                     holder.totalQuests.text = mission.totalQuests.toString()
                 } else {
-                    holder.finishedIcon.setImageResource(R.drawable.ic_baseline_done)
+                    holder.finishedIcon.setImageResource(R.drawable.ic_ok)
                     holder.finishedIcon.visibility = View.VISIBLE
                 }
                 holder.missionTitle.setTextColor(resources.getColor(R.color.colorPrimary))
@@ -123,7 +121,7 @@ class MissionsActivity: BaseActivity() {
                     finish()
                 }
             } else {
-                holder.finishedIcon.setImageResource(R.drawable.ic_baseline_lock)
+                holder.finishedIcon.setImageResource(R.drawable.ic_locked)
                 holder.finishedIcon.setColorFilter(resources.getColor(R.color.disabled))
                 holder.finishedIcon.visibility = View.VISIBLE
             }

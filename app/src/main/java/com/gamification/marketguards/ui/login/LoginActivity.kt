@@ -31,7 +31,7 @@ class LoginActivity : BaseActivity() {
         viewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
 
-        login_login.setText("tsmerda2@gmail.com")
+        login_login.setText("xmadera@mendelu.cz")
         login_password.setText("gamifika")
 
         viewModel.loginFormState.observe(this@LoginActivity, Observer {

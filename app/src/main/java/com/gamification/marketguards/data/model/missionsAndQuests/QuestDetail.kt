@@ -1,9 +1,6 @@
 package com.gamification.marketguards.data.model.missionsAndQuests
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Ignore
-import androidx.room.PrimaryKey
 
 @Entity(tableName = "quest_detail")
 data class QuestDetail(
@@ -20,7 +17,7 @@ data class QuestDetail(
     val id: Int,
     val missionTitle: String,
     val note: String?,
-    val questSkills: List<SkillPreview>,
+    val questSkills: List<QuestSkillPreview>,
     val seen: Boolean,
     val story: String,
     val storyFinish: String?,

@@ -2,7 +2,7 @@ package com.gamification.marketguards.data.database.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.gamification.marketguards.data.model.auth.LoginResult
-import com.gamification.marketguards.data.network.LoginDataSourceInterface
+import com.gamification.marketguards.data.network.communication.datasources.LoginDataSourceInterface
 import com.gamification.marketguards.data.network.communication.service.SessionManagerInterface
 
 /**

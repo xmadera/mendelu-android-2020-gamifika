@@ -16,7 +16,7 @@ import com.gamification.marketguards.R
 import com.gamification.marketguards.data.base.BaseActivity
 import com.gamification.marketguards.data.constants.IntentConstants
 import com.gamification.marketguards.data.model.missionsAndQuests.QuestDetail
-import com.gamification.marketguards.data.model.missionsAndQuests.SkillPreview
+import com.gamification.marketguards.data.model.missionsAndQuests.QuestSkillPreview
 import com.gamification.marketguards.viewmodels.QuestDetailViewModel
 import com.google.android.material.card.MaterialCardView
 import com.google.gson.JsonObject
@@ -24,8 +24,6 @@ import kotlinx.android.synthetic.main.activity_quest_detail.*
 import kotlinx.android.synthetic.main.content_quest_detail.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.json.JSONObject
-import java.util.*
 
 class QuestDetailActivity : BaseActivity() {
 
@@ -43,9 +41,9 @@ class QuestDetailActivity : BaseActivity() {
     private var quest_id: Long = -1
     private lateinit var quest: QuestDetail
 
-    private var skillsPreview: List<SkillPreview> = mutableListOf()
+    private var skillsPreviewQuest: List<QuestSkillPreview> = mutableListOf()
     private lateinit var layoutManager: LinearLayoutManager
-    private lateinit var skillsAdapter: SkillsAdapter
+    private lateinit var skillsAdapter: QuestSkillsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,16 +65,16 @@ class QuestDetailActivity : BaseActivity() {
         getQuest()
     }
 
-    inner class SkillsAdapter : RecyclerView.Adapter<SkillsAdapter.SkillViewHolder>() {
+    inner class QuestSkillsAdapter : RecyclerView.Adapter<QuestSkillsAdapter.QuestSkillViewHolder>() {
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkillViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestSkillViewHolder {
             val view: View = LayoutInflater.from(parent.context)
                 .inflate(R.layout.row_skill_list, parent, false)
-            return SkillViewHolder(view)
+            return QuestSkillViewHolder(view)
         }
 
-        override fun onBindViewHolder(holder: SkillViewHolder, position: Int) {
-            val skill = skillsPreview[position]
+        override fun onBindViewHolder(holder: QuestSkillViewHolder, position: Int) {
+            val skill = skillsPreviewQuest[position]
             holder.skillTitle.text = skill.experiences.toString() + " +" + skill.bonusExperiences.toString()
             when (skill.code) {
                 "communication" -> holder.skillWrapper.setBackgroundColor(resources.getColor(R.color.communication))
@@ -88,9 +86,9 @@ class QuestDetailActivity : BaseActivity() {
             }
         }
 
-        override fun getItemCount() = skillsPreview.size
+        override fun getItemCount() = skillsPreviewQuest.size
 
-        inner class SkillViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        inner class QuestSkillViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val skillTitle: TextView = view.findViewById(R.id.skill_title)
             val skillWrapper: MaterialCardView = view.findViewById(R.id.skill_wrapper)
         }
@@ -99,12 +97,11 @@ class QuestDetailActivity : BaseActivity() {
     private fun getQuest(){
         launch {
             quest = viewModel.findById(quest_id.toInt())
-            skillsPreview = quest.questSkills
-//            skillsPreview.forEach { Log.d("skill", it.code) }
+            skillsPreviewQuest = quest.questSkills
         }.invokeOnCompletion {
             runOnUiThread {
                 fillLayout()
-                skillsAdapter = SkillsAdapter()
+                skillsAdapter = QuestSkillsAdapter()
                 layoutManager = LinearLayoutManager(this)
                 quest_detail_skills_recyclerview.layoutManager = layoutManager
                 quest_detail_skills_recyclerview.adapter = skillsAdapter

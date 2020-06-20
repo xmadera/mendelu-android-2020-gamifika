@@ -20,6 +20,7 @@ import com.gamification.marketguards.data.model.missionsAndQuests.MissionDetail
 import com.gamification.marketguards.data.model.missionsAndQuests.QuestPreview
 import com.gamification.marketguards.ui.main.MainActivity
 import com.gamification.marketguards.viewmodels.DashBoardViewModel
+import kotlinx.android.synthetic.main.content_quest_detail.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -80,22 +81,26 @@ class DashboardFragment: Fragment() {
             uiScope.launch {
                 if (selectedMissionId != 0) {
                     mission = viewModel.findById(selectedMissionId!!)
+                } else {
+                    mission = viewModel.getAllQuests()
+                }
+            } .invokeOnCompletion {
+                if (selectedMissionId != 0) {
                     mission_title?.text = mission.title
                     mission_desc?.text = mission.story
                 } else {
-                    mission = viewModel.getAllQuests()
                     mission_title.text = "All quests"
                     mission_desc.visibility = View.GONE
                 }
 
-            questsList = (mission.preparedQuests + mission.activeQuests + mission.finishedQuests).toMutableList()
+                questsList = (mission.preparedQuests + mission.activeQuests + mission.finishedQuests).toMutableList()
 
-            layoutManager = LinearLayoutManager(context!!)
+                layoutManager = LinearLayoutManager(context!!)
 
-            val questsRecyclerView = view?.findViewById<RecyclerView>(R.id.questsRecyclerView)
-            questsAdapter = QuestsAdapter()
-            questsRecyclerView?.layoutManager = layoutManager
-            questsRecyclerView?.adapter = questsAdapter
+                val questsRecyclerView = view?.findViewById<RecyclerView>(R.id.questsRecyclerView)
+                questsAdapter = QuestsAdapter()
+                questsRecyclerView?.layoutManager = layoutManager
+                questsRecyclerView?.adapter = questsAdapter
             }
         }
     }
@@ -122,11 +127,11 @@ class DashboardFragment: Fragment() {
             holder.questTitle.text = quest.title
             holder.questDesc.text = quest.story
             if (quest.finished != null) {
-                    holder.questIcon.setImageResource(R.drawable.ic_baseline_done)
+                    holder.questIcon.setImageResource(R.drawable.ic_ok)
             } else if (quest.activated != null) {
-                holder.questIcon.setImageResource(R.drawable.ic_baseline_fast_forward)
+                holder.questIcon.setImageResource(R.drawable.ic_running)
             } else {
-                holder.questIcon.setImageResource(R.drawable.ic_baseline_play_arrow)
+                holder.questIcon.setImageResource(R.drawable.ic_time)
             }
             holder.itemView.setOnClickListener {
                 startActivityForResult(

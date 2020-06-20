@@ -5,11 +5,10 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "skill_preview")
-data class SkillPreview(
+@Entity(tableName = "quest_subskill_preview")
+data class QuestSkillSubskillPreview(
     val bonusExperiences: Int,
     val code: String,
     val experiences: Int,
-    val id: Int,
-    val questSubSkills: MutableList<SkillSubskillPreview>
+    val id: Int
 )

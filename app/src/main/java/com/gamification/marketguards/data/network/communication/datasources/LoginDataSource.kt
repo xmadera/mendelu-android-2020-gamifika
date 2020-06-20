@@ -1,4 +1,4 @@
-package com.gamification.marketguards.data.network
+package com.gamification.marketguards.data.network.communication.datasources
 
 import android.content.Context
 import android.util.Log
@@ -29,7 +29,8 @@ interface LoginDataSourceInterface {
     fun login(username: String, password: String)
 }
 
-class LoginDataSource(context: Context, sessionManager: SessionManagerInterface): LoginDataSourceInterface {
+class LoginDataSource(context: Context, sessionManager: SessionManagerInterface):
+    LoginDataSourceInterface {
 
     private val _loginResponse = MutableLiveData<LoginServerResult>()
     private val authService = ServiceGenerator.getInstance(
