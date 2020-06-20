@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.gamification.marketguards.data.base.App
 import com.gamification.marketguards.data.network.communication.PlayerRESTApiRepositoryImpl
+import com.gamification.marketguards.data.network.communication.SkillRESTApiRepositoryImpl
 import com.gamification.marketguards.viewmodels.ProfileViewModel
 
 /**
@@ -17,6 +18,9 @@ class ProfileViewModelFactory : ViewModelProvider.Factory {
         if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
             return ProfileViewModel(
                 playerRepository = PlayerRESTApiRepositoryImpl(
+                    App.appContext,
+                    App.getSessionManager()
+                ), skillRepository = SkillRESTApiRepositoryImpl(
                     App.appContext,
                     App.getSessionManager()
                 )

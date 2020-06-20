@@ -1,8 +1,10 @@
 package com.gamification.marketguards.data.network.communication
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.auth0.android.jwt.JWT
 import com.gamification.marketguards.data.database.repository.IMissionRepository
 import com.gamification.marketguards.data.database.repository.IPlayerRepository
 import com.gamification.marketguards.data.model.missionsAndQuests.MissionDetail
@@ -19,6 +21,8 @@ class PlayerRESTApiRepositoryImpl(
     sessionManager: SessionManagerInterface
 ): IPlayerRepository,  CoroutineScope by MainScope() {
 
+    private val session = sessionManager
+
     private val playerApi: PlayerRESTApi = ServiceGenerator.getInstance(context, sessionManager)
         .create(PlayerRESTApi::class.java)
 
@@ -26,4 +30,7 @@ class PlayerRESTApiRepositoryImpl(
         return playerApi.getGameStatus()
     }
 
+    fun getTokenInfo() : JWT {
+        return JWT(session.fetchAuthToken()!!.removeRange(0,7))
+    }
 }

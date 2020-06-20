@@ -127,11 +127,11 @@ class DashboardFragment: Fragment() {
             holder.questTitle.text = quest.title
             holder.questDesc.text = quest.story
             if (quest.finished != null) {
-                    holder.questIcon.setImageResource(R.drawable.ic_baseline_done)
+                    holder.questIcon.setImageResource(R.drawable.ic_ok)
             } else if (quest.activated != null) {
-                holder.questIcon.setImageResource(R.drawable.ic_baseline_fast_forward)
+                holder.questIcon.setImageResource(R.drawable.ic_running)
             } else {
-                holder.questIcon.setImageResource(R.drawable.ic_baseline_play_arrow)
+                holder.questIcon.setImageResource(R.drawable.ic_time)
             }
             holder.itemView.setOnClickListener {
                 startActivityForResult(

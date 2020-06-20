@@ -5,12 +5,12 @@
 
     <item
         android:id="@+id/nav_dashboard"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_dashboard"
         android:title="@string/dashboard" />
 
     <item
         android:id="@+id/nav_story"
-        android:icon="@drawable/ic_library_books"
+        android:icon="@drawable/ic_my_story"
         android:title="@string/story" />
 
     <item
@@ -20,12 +20,12 @@
 
     <item
         android:id="@+id/nav_library"
-        android:icon="@drawable/ic_library_books"
+        android:icon="@drawable/ic_library"
         android:title="@string/library" />
 
     <item
         android:id="@+id/nav_store"
-        android:icon="@drawable/ic_shopping_cart"
+        android:icon="@drawable/ic_market"
         android:title="@string/shop" />
 
 </menu>

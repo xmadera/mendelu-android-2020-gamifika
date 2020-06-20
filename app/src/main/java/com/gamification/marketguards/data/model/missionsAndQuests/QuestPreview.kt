@@ -1,8 +1,6 @@
 package com.gamification.marketguards.data.model.missionsAndQuests
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
 //@Entity(tableName = "quests", foreignKeys = arrayOf(
 //    ForeignKey(entity = Mission::class,
@@ -22,7 +20,7 @@ data class QuestPreview(
     val finished: String?,
     val id: Int,
     val missionTitle: String,
-    val questSkillDtos: MutableList<SkillPreview>,
+    val questQuestSkillDtos: MutableList<QuestSkillPreview>,
     val seen: Boolean,
     val story: String,
     val timeToActivate: Int?,

@@ -1,7 +1,8 @@
 package com.gamification.marketguards.data.network.communication.service
 
 import android.content.Context
-import com.gamification.marketguards.R
+import com.gamification.marketguards.data.sharedpreferences.SharedPreferencesManager
+
 
 interface SessionManagerInterface {
     fun saveTokens(authToken: String, refreshToken: String)
@@ -13,33 +14,21 @@ interface SessionManagerInterface {
 class SessionManager(context: Context) :
     SessionManagerInterface {
     private var preferences = context
-        .getSharedPreferences(
-            context.getString(R.string.app_name),
-            Context.MODE_PRIVATE
-        )
-
-    val AUTH_TOKEN = "auth_token"
-    val REFRESH_TOKEN = "refresh_token"
 
     override fun saveTokens(authToken: String, refreshToken: String) {
-        val editor = preferences.edit()
-        editor.putString(AUTH_TOKEN, authToken)
-        editor.putString(REFRESH_TOKEN, refreshToken)
-        editor.apply()
+        SharedPreferencesManager.saveAuthToken(preferences, authToken)
+        SharedPreferencesManager.saveRefreshToken(preferences, refreshToken)
     }
 
     override fun fetchAuthToken(): String? {
-        return preferences.getString(AUTH_TOKEN, null)
+        return SharedPreferencesManager.getAuthToken(preferences)
     }
 
     override fun fetchRefreshToken(): String? {
-        return preferences.getString(REFRESH_TOKEN, null)
+        return SharedPreferencesManager.getRefreshToken(preferences)
     }
 
     override fun deleteTokens() {
-        val editor = preferences.edit()
-        editor.remove(AUTH_TOKEN)
-        editor.remove(REFRESH_TOKEN)
-        editor.apply()
+        SharedPreferencesManager.deleteTokens(preferences)
     }
 }
