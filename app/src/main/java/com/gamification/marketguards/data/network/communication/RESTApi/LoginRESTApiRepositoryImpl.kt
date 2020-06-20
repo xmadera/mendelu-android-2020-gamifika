@@ -1,10 +1,10 @@
-package com.gamification.marketguards.data.network.communication
+package com.gamification.marketguards.data.network.communication.RESTApi
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
+import com.gamification.marketguards.data.database.repository.LoginRepositoryInterface
 import com.gamification.marketguards.data.model.auth.LoginResponse
 import com.gamification.marketguards.data.model.auth.LoginResult
-import com.gamification.marketguards.data.database.repository.LoginRepositoryInterface
 import com.gamification.marketguards.data.network.communication.datasources.LoginDataSourceInterface
 import com.gamification.marketguards.data.network.communication.service.SessionManagerInterface
 
@@ -12,7 +12,7 @@ class LoginRESTApiRepositoryImpl(
     val context: Context,
     override val dataSource: LoginDataSourceInterface,
     override val sessionManager: SessionManagerInterface
-): LoginRepositoryInterface {
+) : LoginRepositoryInterface {
 
     private val _loggedIn = MutableLiveData<LoginResult>()
     override val successfullyLoggedIn = _loggedIn

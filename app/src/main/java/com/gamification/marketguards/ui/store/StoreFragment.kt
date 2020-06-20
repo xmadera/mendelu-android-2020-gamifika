@@ -18,7 +18,11 @@ class StoreFragment : Fragment() {
     private lateinit var storePages: Array<String>
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view: View? = inflater.inflate(R.layout.fragment_store, container, false)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.store)
 

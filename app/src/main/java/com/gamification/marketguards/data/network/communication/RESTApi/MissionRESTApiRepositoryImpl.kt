@@ -1,4 +1,4 @@
-package com.gamification.marketguards.data.network.communication
+package com.gamification.marketguards.data.network.communication.RESTApi
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import com.gamification.marketguards.data.database.repository.IMissionRepository
 import com.gamification.marketguards.data.model.missionsAndQuests.MissionDetail
 import com.gamification.marketguards.data.model.missionsAndQuests.MissionPreview
-import com.gamification.marketguards.data.network.communication.service.SessionManagerInterface
 import com.gamification.marketguards.data.network.communication.service.ServiceGenerator
+import com.gamification.marketguards.data.network.communication.service.SessionManagerInterface
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 class MissionRESTApiRepositoryImpl(
     context: Context,
     sessionManager: SessionManagerInterface
-): IMissionRepository,  CoroutineScope by MainScope() {
+) : IMissionRepository, CoroutineScope by MainScope() {
 
     private val missionsApi: MissionRESTApi = ServiceGenerator.getInstance(context, sessionManager)
         .create(MissionRESTApi::class.java)

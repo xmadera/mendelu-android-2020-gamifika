@@ -29,13 +29,13 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layout)
         setSupportActionBar(toolbar)
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setOnNavigationItemSelectedListener(listener)
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, DashboardFragment().newInstance(0)).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, DashboardFragment().newInstance(0)).commit()
     }
 
     private val listener = BottomNavigationView.OnNavigationItemSelectedListener {
@@ -55,7 +55,7 @@ class MainActivity : BaseActivity() {
                 selectedFragment = StoreFragment()
             }
             else -> {
-                selectedFragment = DashboardFragment().newInstance(0)
+                selectedFragment = DashboardFragment().newInstance(null)
             }
         }
         supportFragmentManager.beginTransaction()

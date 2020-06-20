@@ -4,6 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.view.KeyEvent
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -20,13 +23,13 @@ class LoginActivity : BaseActivity() {
             return Intent(context, LoginActivity::class.java)
         }
     }
+
     override val layout: Int = R.layout.activity_login
 
     private lateinit var viewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layout)
 
         viewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
@@ -49,15 +52,19 @@ class LoginActivity : BaseActivity() {
 
         viewModel.loginResult.observe(this@LoginActivity, Observer {
             val loginResult = it ?: return@Observer
+            login_loading.visibility = View.VISIBLE
 
-//            loading.visibility = View.GONE
-            if (loginResult.error != null) {
-                showLoginFailed(loginResult.error)
-            }
-            if (loginResult.success != null && loginResult.success == true) {
-                rootToDashboard()
-            }
-            setResult(Activity.RESULT_OK)
+            Handler().postDelayed({
+
+                login_loading.visibility = View.GONE
+                if (loginResult.error != null) {
+                    showLoginFailed(loginResult.error)
+                }
+                if (loginResult.success != null && loginResult.success == true) {
+                    rootToDashboard()
+                }
+                setResult(Activity.RESULT_OK)
+            }, 1000)
         })
 
         login_button.setOnClickListener {
@@ -65,6 +72,18 @@ class LoginActivity : BaseActivity() {
         }
 
         viewModel.onCreate()
+    }
+
+    override fun onBackPressed() {
+        finishAffinity()
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        when (keyCode) {
+            KeyEvent.KEYCODE_BACK ->
+                finishAffinity()
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
     private fun rootToDashboard() {

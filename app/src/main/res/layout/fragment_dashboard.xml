@@ -13,7 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:text="@string/dashboard_button_text"
-        style="@style/button_primary"/>
+        style="@style/button_primary" />
 
     <TextView
         android:id="@+id/mission_title"
@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_select_mission"
         style="@style/headline4"
-        android:layout_marginTop="@dimen/basic_indentation"/>
+        android:layout_marginTop="@dimen/basic_indentation" />
 
     <TextView
         android:id="@+id/mission_desc"
@@ -32,7 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mission_title"
-        style="@style/text_primary"/>
+        style="@style/text_primary" />
 
     <FrameLayout
         android:id="@+id/fragment_container"
@@ -40,8 +40,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/mission_desc"
         android:layout_marginTop="@dimen/basic_indentation">
-    <include layout="@layout/content_quest_list"/>
-</FrameLayout>
+
+        <include layout="@layout/content_quest_list" />
+    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,9 +8,13 @@ import androidx.fragment.app.Fragment
 import com.gamification.marketguards.R
 import com.gamification.marketguards.ui.main.MainActivity
 
-class StoryFragment: Fragment() {
+class StoryFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view: View? = inflater.inflate(R.layout.fragment_story, container, false)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.story)
 

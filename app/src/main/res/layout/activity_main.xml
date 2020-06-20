@@ -29,10 +29,10 @@
         app:layout_constraintTop_toBottomOf="@id/barLayout"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation">
 
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -43,7 +43,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_navigation"
         android:background="?android:attr/navigationBarColor"
-        app:itemIconTint="@drawable/navigation_color_selector"
-        />
+        app:itemIconTint="@drawable/navigation_color_selector" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,7 +29,7 @@ interface LoginDataSourceInterface {
     fun login(username: String, password: String)
 }
 
-class LoginDataSource(context: Context, sessionManager: SessionManagerInterface):
+class LoginDataSource(context: Context, sessionManager: SessionManagerInterface) :
     LoginDataSourceInterface {
 
     private val _loginResponse = MutableLiveData<LoginServerResult>()
@@ -45,7 +45,8 @@ class LoginDataSource(context: Context, sessionManager: SessionManagerInterface)
             authService.login(LoginRequest(username, password.sha256Hash()))
                 .enqueue(object : Callback<LoginResponse> {
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                        _loginResponse.value = LoginServerResult(null, IOException(t.localizedMessage))
+                        _loginResponse.value =
+                            LoginServerResult(null, IOException(t.localizedMessage))
                     }
 
                     override fun onResponse(
@@ -61,7 +62,7 @@ class LoginDataSource(context: Context, sessionManager: SessionManagerInterface)
                                 ),
                                 null
                             )
-                        } else if (response.code() == 400 ){
+                        } else if (response.code() == 400) {
                             _loginResponse.value = LoginServerResult(null, InvalidCredentials())
                         } else {
                             _loginResponse.value = LoginServerResult(null, GenericException())

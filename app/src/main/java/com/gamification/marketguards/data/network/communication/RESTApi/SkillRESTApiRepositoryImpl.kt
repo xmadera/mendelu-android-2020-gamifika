@@ -1,4 +1,4 @@
-package com.gamification.marketguards.data.network.communication
+package com.gamification.marketguards.data.network.communication.RESTApi
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class SkillRESTApiRepositoryImpl(
     context: Context,
     sessionManager: SessionManagerInterface
-): ISkillRepository,  CoroutineScope by MainScope() {
+) : ISkillRepository, CoroutineScope by MainScope() {
 
     private val questApi: SkillRESTApi = ServiceGenerator.getInstance(context, sessionManager)
         .create(SkillRESTApi::class.java)

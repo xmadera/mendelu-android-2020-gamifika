@@ -3,9 +3,9 @@ package com.gamification.marketguards.ui.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.gamification.marketguards.data.base.App
+import com.gamification.marketguards.data.network.communication.RESTApi.LoginRESTApiRepositoryImpl
 import com.gamification.marketguards.data.network.communication.datasources.LoginDataSource
 import com.gamification.marketguards.data.network.communication.service.SessionManager
-import com.gamification.marketguards.data.network.communication.LoginRESTApiRepositoryImpl
 import com.gamification.marketguards.viewmodels.LoginViewModel
 
 /**

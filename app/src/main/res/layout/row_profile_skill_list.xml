@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@+id/skill_icon"
-        style="@style/subtitle1"/>
+        style="@style/subtitle1" />
 
     <TextView
         android:id="@+id/skill_level"
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/skill_title"
         app:layout_constraintStart_toEndOf="@+id/skill_icon"
-        style="@style/text_secondary"/>
+        style="@style/text_secondary" />
 
     <ProgressBar
         android:id="@+id/skill_progressbar"
@@ -40,6 +40,6 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/half_indentation"
         app:layout_constraintTop_toBottomOf="@id/skill_level"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

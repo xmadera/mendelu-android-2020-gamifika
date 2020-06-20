@@ -22,7 +22,7 @@ import com.gamification.marketguards.viewmodels.DashBoardViewModel
 import kotlinx.android.synthetic.main.activity_missions.*
 import kotlinx.android.synthetic.main.content_mission_list.*
 
-class MissionsActivity: BaseActivity() {
+class MissionsActivity : BaseActivity() {
 
     private lateinit var viewModel: DashBoardViewModel
 
@@ -40,12 +40,12 @@ class MissionsActivity: BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layout)
         setSupportActionBar(toolbar)
         supportActionBar?.title = getString(R.string.missions)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         toolbar.setNavigationOnClickListener {
+            setResult(Activity.RESULT_CANCELED)
             finish()
         }
 
@@ -57,10 +57,11 @@ class MissionsActivity: BaseActivity() {
         missionsRecyclerView.layoutManager = layoutManager
         missionsRecyclerView.adapter = missionsAdapter
 
-        mission_list_all_quests.setOnClickListener { val resultIntent = Intent().putExtra(
-            IntentConstants.MISSION_ID,
-            0
-        )
+        mission_list_all_quests.setOnClickListener {
+            val resultIntent = Intent().putExtra(
+                IntentConstants.MISSION_ID,
+                0
+            )
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
         }
@@ -68,13 +69,19 @@ class MissionsActivity: BaseActivity() {
         viewModel.getAll().observe(this, object : Observer<MutableList<MissionPreview>> {
             override fun onChanged(t: MutableList<MissionPreview>?) {
                 t?.let {
-                    val diffUtil = DiffUtil.calculateDiff(object : DiffUtil.Callback(){
+                    val diffUtil = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
 
-                        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                        override fun areItemsTheSame(
+                            oldItemPosition: Int,
+                            newItemPosition: Int
+                        ): Boolean {
                             return missionsPreview[oldItemPosition].id == t[newItemPosition].id
                         }
 
-                        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                        override fun areContentsTheSame(
+                            oldItemPosition: Int,
+                            newItemPosition: Int
+                        ): Boolean {
                             return missionsPreview[oldItemPosition] == t[newItemPosition]
                         }
 
@@ -133,7 +140,7 @@ class MissionsActivity: BaseActivity() {
 
         override fun getItemCount() = missionsPreview.size
 
-        inner class MissionViewHolder(view: View) : RecyclerView.ViewHolder(view){
+        inner class MissionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val missionTitle: TextView = view.findViewById(R.id.mission_title)
             val totalQuests: TextView = view.findViewById(R.id.total_quests)
             val finishedQuests: TextView = view.findViewById(R.id.finished_quests)

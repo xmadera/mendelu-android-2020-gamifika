@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.gamification.marketguards.R
 import com.gamification.marketguards.data.constants.IntentConstants
 
-class ShopFragment: Fragment() {
+class ShopFragment : Fragment() {
 
     fun newInstance(sub_tab_name: String): ShopFragment {
         val newFragment = ShopFragment()
@@ -19,7 +19,11 @@ class ShopFragment: Fragment() {
         return newFragment
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view: View? = inflater.inflate(R.layout.fragment_shop, container, false)
 
         val text: TextView = view!!.findViewById(R.id.shopText)

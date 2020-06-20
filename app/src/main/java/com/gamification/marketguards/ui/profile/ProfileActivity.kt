@@ -4,12 +4,10 @@ package com.gamification.marketguards.ui.profile
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -24,13 +22,10 @@ import com.gamification.marketguards.data.model.skills.SkillPreview
 import com.gamification.marketguards.data.sharedpreferences.SharedPreferencesManager
 import com.gamification.marketguards.ui.login.LoginActivity
 import com.gamification.marketguards.viewmodels.ProfileViewModel
-import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.content_mission_list.*
 import kotlinx.android.synthetic.main.content_profile_activity.*
 import kotlinx.android.synthetic.main.content_skills_list.*
 import kotlinx.coroutines.launch
-import org.json.JSONArray
 
 class ProfileActivity : BaseActivity() {
 
@@ -52,7 +47,6 @@ class ProfileActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layout)
         setSupportActionBar(toolbar)
         supportActionBar?.title = getString(R.string.profile)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -71,7 +65,7 @@ class ProfileActivity : BaseActivity() {
 
         launch {
             gameStatus = viewModel.getGameStatus()
-        } .invokeOnCompletion {
+        }.invokeOnCompletion {
             runOnUiThread {
                 profile_progressbar.max = gameStatus.experiencesRangeTo
                 profile_progressbar.progress = gameStatus.experiences
@@ -89,39 +83,39 @@ class ProfileActivity : BaseActivity() {
 
         launch {
             jwt = viewModel.getTokenInfo()!!
-        } .invokeOnCompletion {
+        }.invokeOnCompletion {
             //  TODO: Info from JWT token
         }
-            viewModel.getSkills().observe(this, object : Observer<MutableList<SkillPreview>> {
-                override fun onChanged(t: MutableList<SkillPreview>?) {
-                    t?.let {
-                        val diffUtil = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
+        viewModel.getSkills().observe(this, object : Observer<MutableList<SkillPreview>> {
+            override fun onChanged(t: MutableList<SkillPreview>?) {
+                t?.let {
+                    val diffUtil = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
 
-                            override fun areItemsTheSame(
-                                oldItemPosition: Int,
-                                newItemPosition: Int
-                            ): Boolean {
-                                return skillsPreview[oldItemPosition].id == t[newItemPosition].id
-                            }
+                        override fun areItemsTheSame(
+                            oldItemPosition: Int,
+                            newItemPosition: Int
+                        ): Boolean {
+                            return skillsPreview[oldItemPosition].id == t[newItemPosition].id
+                        }
 
-                            override fun areContentsTheSame(
-                                oldItemPosition: Int,
-                                newItemPosition: Int
-                            ): Boolean {
-                                return skillsPreview[oldItemPosition] == t[newItemPosition]
-                            }
+                        override fun areContentsTheSame(
+                            oldItemPosition: Int,
+                            newItemPosition: Int
+                        ): Boolean {
+                            return skillsPreview[oldItemPosition] == t[newItemPosition]
+                        }
 
-                            override fun getOldListSize() = skillsPreview.size
+                        override fun getOldListSize() = skillsPreview.size
 
-                            override fun getNewListSize() = t.size
+                        override fun getNewListSize() = t.size
 
-                        })
-                        diffUtil.dispatchUpdatesTo(skillsAdapter)
-                        skillsPreview.clear()
-                        skillsPreview.addAll(t)
-                    }
+                    })
+                    diffUtil.dispatchUpdatesTo(skillsAdapter)
+                    skillsPreview.clear()
+                    skillsPreview.addAll(t)
                 }
-            })
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -135,12 +129,12 @@ class ProfileActivity : BaseActivity() {
                 val builder = AlertDialog.Builder(this)
                 builder.setMessage("Are you sure want to log out?")
 
-                builder.setPositiveButton("YES"){dialog, which ->
+                builder.setPositiveButton("YES") { dialog, which ->
                     SharedPreferencesManager.deleteTokens(this)
                     startActivity(LoginActivity.createIntent(this))
                 }
 
-                builder.setNegativeButton("No"){dialog,which ->
+                builder.setNegativeButton("No") { dialog, which ->
                 }
 
                 val dialog: AlertDialog = builder.create()
@@ -163,7 +157,8 @@ class ProfileActivity : BaseActivity() {
         override fun onBindViewHolder(holder: SkillsViewHolder, position: Int) {
             val skill = skillsPreview[position]
             holder.skillTitle.text = skill.title
-            holder.skillLevel.text = "Level ${skill.level} | ${skill.experiences}/${skill.experiencesToNextLevel}"
+            holder.skillLevel.text =
+                "Level ${skill.level} | ${skill.experiences}/${skill.experiencesToNextLevel}"
             holder.skillProgressbar.progress = skill.experiences
             holder.skillProgressbar.max = skill.experiencesToNextLevel
 
@@ -182,9 +177,10 @@ class ProfileActivity : BaseActivity() {
                 holder.skillLevel.setTextColor(resources.getColor(R.color.disabled))
             }
         }
+
         override fun getItemCount() = skillsPreview.size
 
-        inner class SkillsViewHolder(view: View) : RecyclerView.ViewHolder(view){
+        inner class SkillsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val skillTitle: TextView = view.findViewById(R.id.skill_title)
             val skillLevel: TextView = view.findViewById(R.id.skill_level)
             val skillIcon: ImageView = view.findViewById(R.id.skill_icon)

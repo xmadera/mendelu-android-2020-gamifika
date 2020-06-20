@@ -3,8 +3,8 @@ package com.gamification.marketguards.ui.profile
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.gamification.marketguards.data.base.App
-import com.gamification.marketguards.data.network.communication.PlayerRESTApiRepositoryImpl
-import com.gamification.marketguards.data.network.communication.SkillRESTApiRepositoryImpl
+import com.gamification.marketguards.data.network.communication.RESTApi.PlayerRESTApiRepositoryImpl
+import com.gamification.marketguards.data.network.communication.RESTApi.SkillRESTApiRepositoryImpl
 import com.gamification.marketguards.viewmodels.ProfileViewModel
 
 /**

@@ -2,7 +2,10 @@ package com.gamification.marketguards.data.network.communication.service
 
 import android.content.Context
 import com.gamification.marketguards.data.model.auth.TokenRefreshRequest
-import okhttp3.*
+import okhttp3.Authenticator
+import okhttp3.Request
+import okhttp3.Response
+import okhttp3.Route
 
 class TokenRefreshAuthenticator(
     val context: Context,

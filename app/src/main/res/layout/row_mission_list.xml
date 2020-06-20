@@ -13,7 +13,7 @@
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
         android:textColor="@color/disabled"
-        style="@style/text_primary"/>
+        style="@style/text_primary" />
 
     <TextView
         android:id="@+id/finished_quests"
@@ -22,7 +22,7 @@
         android:paddingStart="@dimen/half_indentation"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@+id/mission_title"
-        style="@style/text_primary"/>
+        style="@style/text_primary" />
 
     <TextView
         android:id="@+id/total_quests"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@+id/finished_quests"
-        style="@style/text_primary"/>
+        style="@style/text_primary" />
 
     <ImageView
         android:id="@+id/finished_icon"

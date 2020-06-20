@@ -17,6 +17,7 @@ import com.gamification.marketguards.data.base.BaseActivity
 import com.gamification.marketguards.data.constants.IntentConstants
 import com.gamification.marketguards.data.model.missionsAndQuests.QuestDetail
 import com.gamification.marketguards.data.model.missionsAndQuests.QuestSkillPreview
+import com.gamification.marketguards.data.sharedpreferences.SharedPreferencesManager
 import com.gamification.marketguards.viewmodels.QuestDetailViewModel
 import com.google.android.material.card.MaterialCardView
 import com.google.gson.JsonObject
@@ -36,6 +37,7 @@ class QuestDetailActivity : BaseActivity() {
             return intent
         }
     }
+
     override val layout: Int = R.layout.activity_quest_detail
 
     private var quest_id: Long = -1
@@ -45,9 +47,10 @@ class QuestDetailActivity : BaseActivity() {
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var skillsAdapter: QuestSkillsAdapter
 
+    private var changes = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layout)
         setSupportActionBar(toolbar)
         supportActionBar?.title = getString(R.string.quest)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -58,14 +61,23 @@ class QuestDetailActivity : BaseActivity() {
         quest_id = intent.getLongExtra(IntentConstants.QUEST_ID, -1)
 
         toolbar.setNavigationOnClickListener {
-            setResult(Activity.RESULT_OK)
+            if (changes) {
+                val resultIntent = Intent().putExtra(
+                    IntentConstants.MISSION_ID,
+                    SharedPreferencesManager.getCurrentMissionID(this)
+                )
+                setResult(Activity.RESULT_OK, resultIntent)
+            } else {
+                setResult(Activity.RESULT_CANCELED)
+            }
             finish()
         }
 
         getQuest()
     }
 
-    inner class QuestSkillsAdapter : RecyclerView.Adapter<QuestSkillsAdapter.QuestSkillViewHolder>() {
+    inner class QuestSkillsAdapter :
+        RecyclerView.Adapter<QuestSkillsAdapter.QuestSkillViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestSkillViewHolder {
             val view: View = LayoutInflater.from(parent.context)
@@ -75,7 +87,8 @@ class QuestDetailActivity : BaseActivity() {
 
         override fun onBindViewHolder(holder: QuestSkillViewHolder, position: Int) {
             val skill = skillsPreviewQuest[position]
-            holder.skillTitle.text = skill.experiences.toString() + " +" + skill.bonusExperiences.toString()
+            holder.skillTitle.text =
+                skill.experiences.toString() + " +" + skill.bonusExperiences.toString()
             when (skill.code) {
                 "communication" -> holder.skillWrapper.setBackgroundColor(resources.getColor(R.color.communication))
                 "products" -> holder.skillWrapper.setBackgroundColor(resources.getColor(R.color.products))
@@ -94,7 +107,7 @@ class QuestDetailActivity : BaseActivity() {
         }
     }
 
-    private fun getQuest(){
+    private fun getQuest() {
         launch {
             quest = viewModel.findById(quest_id.toInt())
             skillsPreviewQuest = quest.questSkills
@@ -109,7 +122,7 @@ class QuestDetailActivity : BaseActivity() {
         }
     }
 
-    private fun fillLayout(){
+    private fun fillLayout() {
         detail_quest_title.text = quest.title
         detail_quest_desc.text = quest.story
 
@@ -118,6 +131,7 @@ class QuestDetailActivity : BaseActivity() {
                 detail_quest_button.visibility = View.VISIBLE
                 detail_quest_button.text = "Finish Quest"
                 detail_quest_button.setOnClickListener {
+                    changes = true
                     launch {
                         viewModel.finishQuest(quest.id)
                     }.invokeOnCompletion {
@@ -128,6 +142,7 @@ class QuestDetailActivity : BaseActivity() {
                 detail_quest_button.visibility = View.VISIBLE
                 detail_quest_button.text = "Start Quest"
                 detail_quest_button.setOnClickListener {
+                    changes = true
                     launch {
                         viewModel.startQuest(quest.id)
                     }.invokeOnCompletion {
@@ -145,7 +160,7 @@ class QuestDetailActivity : BaseActivity() {
                 launch {
                     delay(1000)
                     val noteObject = JsonObject()
-                    noteObject.addProperty("note",detail_quest_notes.text.toString())
+                    noteObject.addProperty("note", detail_quest_notes.text.toString())
 
                     viewModel.editQuestNotes(quest.id, noteObject)
                 }

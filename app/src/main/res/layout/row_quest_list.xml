@@ -13,14 +13,14 @@
         android:layout_height="match_parent"
         android:padding="@dimen/basic_indentation">
 
-    <TextView
-        android:id="@+id/quest_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="32dp"
-        style="@style/headline6"/>
+        <TextView
+            android:id="@+id/quest_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="32dp"
+            style="@style/headline6" />
 
         <ImageView
             android:id="@+id/quest_icon"
@@ -38,12 +38,12 @@
             app:layout_constraintStart_toStartOf="parent"
             android:maxLines="2"
             android:ellipsize="end"
-            style="@style/text_secondary"/>
+            style="@style/text_secondary" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/skillPreviewRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

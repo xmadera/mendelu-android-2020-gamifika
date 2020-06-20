@@ -3,7 +3,6 @@ package com.gamification.marketguards.ui.dashboard
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +14,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gamification.marketguards.R
+import com.gamification.marketguards.data.base.App
 import com.gamification.marketguards.data.constants.IntentConstants
 import com.gamification.marketguards.data.model.missionsAndQuests.MissionDetail
 import com.gamification.marketguards.data.model.missionsAndQuests.QuestPreview
+import com.gamification.marketguards.data.sharedpreferences.SharedPreferencesManager
 import com.gamification.marketguards.ui.main.MainActivity
 import com.gamification.marketguards.viewmodels.DashBoardViewModel
-import kotlinx.android.synthetic.main.content_quest_detail.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +28,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 
-class DashboardFragment: Fragment() {
+class DashboardFragment : Fragment() {
 
     private lateinit var viewModel: DashBoardViewModel
 
@@ -56,7 +56,11 @@ class DashboardFragment: Fragment() {
     private val REQUEST_SELECT_MISSION = 100
     private val REQUEST_SELECT_QUEST = 200
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view: View? = inflater.inflate(R.layout.fragment_dashboard, container, false)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.dashboard)
 
@@ -67,7 +71,10 @@ class DashboardFragment: Fragment() {
         val selectMissionButton = view!!.findViewById<Button>(R.id.button_select_mission)
 
         selectMissionButton.setOnClickListener {
-            startActivityForResult(MissionsActivity.createIntent(activity!!), REQUEST_SELECT_MISSION)
+            startActivityForResult(
+                MissionsActivity.createIntent(activity!!),
+                REQUEST_SELECT_MISSION
+            )
         }
 
         selectedMissionId = arguments?.getInt(IntentConstants.MISSION_ID)
@@ -78,40 +85,36 @@ class DashboardFragment: Fragment() {
 
     private fun fillLayout() {
         selectedMissionId?.let {
+            SharedPreferencesManager.saveCurrentMissionID(App.appContext, selectedMissionId!!)
             uiScope.launch {
-                if (selectedMissionId != 0) {
+                if (selectedMissionId!! > 0) {
                     mission = viewModel.findById(selectedMissionId!!)
                 } else {
                     mission = viewModel.getAllQuests()
                 }
-            } .invokeOnCompletion {
-                if (selectedMissionId != 0) {
-                    mission_title?.text = mission.title
-                    mission_desc?.text = mission.story
-                } else {
-                    mission_title.text = "All quests"
-                    mission_desc.visibility = View.GONE
+            }.invokeOnCompletion {
+                selectedMissionId?.let {
+                    if (selectedMissionId!! > 0) {
+                        mission_title?.text = mission.title
+                        mission_desc.visibility = View.VISIBLE
+                        mission_desc?.text = mission.story
+                    } else {
+                        mission_title.text = "All quests"
+                        mission_desc.visibility = View.GONE
+                    }
+                    questsList =
+                        (mission.preparedQuests + mission.activeQuests + mission.finishedQuests).toMutableList()
+
+                    layoutManager = LinearLayoutManager(context!!)
+
+                    val questsRecyclerView =
+                        view?.findViewById<RecyclerView>(R.id.questsRecyclerView)
+                    questsAdapter = QuestsAdapter()
+                    questsRecyclerView?.layoutManager = layoutManager
+                    questsRecyclerView?.adapter = questsAdapter
                 }
-
-                questsList = (mission.preparedQuests + mission.activeQuests + mission.finishedQuests).toMutableList()
-
-                layoutManager = LinearLayoutManager(context!!)
-
-                val questsRecyclerView = view?.findViewById<RecyclerView>(R.id.questsRecyclerView)
-                questsAdapter = QuestsAdapter()
-                questsRecyclerView?.layoutManager = layoutManager
-                questsRecyclerView?.adapter = questsAdapter
             }
         }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
-    fun anyActiveQuests(quests: List<QuestPreview>): Boolean {
-        return quests.isNotEmpty()
     }
 
     inner class QuestsAdapter : RecyclerView.Adapter<QuestsAdapter.QuestViewHolder>() {
@@ -127,7 +130,7 @@ class DashboardFragment: Fragment() {
             holder.questTitle.text = quest.title
             holder.questDesc.text = quest.story
             if (quest.finished != null) {
-                    holder.questIcon.setImageResource(R.drawable.ic_ok)
+                holder.questIcon.setImageResource(R.drawable.ic_ok)
             } else if (quest.activated != null) {
                 holder.questIcon.setImageResource(R.drawable.ic_running)
             } else {
@@ -145,7 +148,7 @@ class DashboardFragment: Fragment() {
 
         override fun getItemCount() = questsList.size
 
-        inner class QuestViewHolder(view: View) : RecyclerView.ViewHolder(view){
+        inner class QuestViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val questTitle: TextView = view.findViewById(R.id.quest_title)
             val questDesc: TextView = view.findViewById(R.id.quest_Desc)
             val questIcon: ImageView = view.findViewById(R.id.quest_icon)
@@ -154,12 +157,8 @@ class DashboardFragment: Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_SELECT_MISSION && resultCode == Activity.RESULT_OK){
-            selectedMissionId = data!!.getIntExtra(IntentConstants.MISSION_ID, -1)
-
-            activity!!.supportFragmentManager.beginTransaction().replace(R.id.fragment_container, DashboardFragment().newInstance(selectedMissionId)).commit()
-        }
-        if (requestCode == REQUEST_SELECT_QUEST && resultCode == Activity.RESULT_OK){
+        if ((requestCode == REQUEST_SELECT_QUEST || requestCode == REQUEST_SELECT_MISSION) && resultCode == Activity.RESULT_OK) {
+            selectedMissionId = data?.getIntExtra(IntentConstants.MISSION_ID, -1)
             fillLayout()
         }
     }

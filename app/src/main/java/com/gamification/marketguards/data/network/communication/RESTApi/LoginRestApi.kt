@@ -1,4 +1,4 @@
-package com.gamification.marketguards.data.network.communication
+package com.gamification.marketguards.data.network.communication.RESTApi
 
 import com.gamification.marketguards.data.model.auth.LoginRequest
 import com.gamification.marketguards.data.model.auth.LoginResponse

@@ -3,7 +3,7 @@ package com.gamification.marketguards.ui.dashboard
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.gamification.marketguards.data.base.App
-import com.gamification.marketguards.data.network.communication.MissionRESTApiRepositoryImpl
+import com.gamification.marketguards.data.network.communication.RESTApi.MissionRESTApiRepositoryImpl
 import com.gamification.marketguards.viewmodels.DashBoardViewModel
 
 /**

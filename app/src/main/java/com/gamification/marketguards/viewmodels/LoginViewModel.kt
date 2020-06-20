@@ -4,8 +4,8 @@ import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.gamification.marketguards.data.model.auth.LoginResult
 import com.gamification.marketguards.data.database.repository.LoginRepositoryInterface
+import com.gamification.marketguards.data.model.auth.LoginResult
 import com.gamification.marketguards.ui.login.LoginFormState
 
 class LoginViewModel(private val loginRepository: LoginRepositoryInterface) : ViewModel() {

@@ -12,11 +12,15 @@ import java.util.concurrent.TimeUnit
 class ServiceGenerator {
 
     companion object {
-        @Volatile private var INSTANCE: ServiceGenerator? = null
+        @Volatile
+        private var INSTANCE: ServiceGenerator? = null
         private var context: Context? = null
         private var sessionManager: SessionManagerInterface? = null
 
-        fun getInstance(context: Context, sessionManager: SessionManagerInterface): ServiceGenerator {
+        fun getInstance(
+            context: Context,
+            sessionManager: SessionManagerInterface
+        ): ServiceGenerator {
             if (Companion.context == null) {
                 Companion.context = context
             }
@@ -27,13 +31,13 @@ class ServiceGenerator {
 
             return INSTANCE
                 ?: synchronized(this) {
-                INSTANCE
-                    ?: ServiceGenerator()
-            }
+                    INSTANCE
+                        ?: ServiceGenerator()
+                }
         }
     }
 
-    fun <S> create(serviceClass:  Class<S>): S {
+    fun <S> create(serviceClass: Class<S>): S {
         val requestInterceptor = Interceptor { chain ->
             val token = sessionManager?.fetchAuthToken()
 
