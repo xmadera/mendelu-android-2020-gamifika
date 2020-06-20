@@ -52,9 +52,11 @@ class ProfileActivity : BaseActivity() {
                 profile_progressbar.progress = gameStatus.experiences
                 profile_progressbar_values.text = "${gameStatus.experiencesRangeFrom}/${gameStatus.experiencesRangeTo}"
                 profile_level.text = "Level ${gameStatus.level}"
-                profile_playtime_desc.text = "Week 1"
-                profile_money_desc.text = "1000$"
-                profile_map_desc.text = "10/14"
+                profile_addressing_desc.text = "Addressing\n12"
+                profile_analysis_desc.text = "Analysis\n12"
+//                profile_consulting_desc.text = "Consulting\n12"
+//                profile_services_desc.text = "Services\n12"
+                profile_contacts_desc.text = "contacts\n12"
             }
         }
 

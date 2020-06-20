@@ -61,72 +61,168 @@
         app:layout_constraintTop_toBottomOf="@id/profile_level"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
 
-    <ImageView
-        android:id="@+id/profile_playtime_icon"
-        android:src="@drawable/ic_baseline_skill"
+    <RelativeLayout
+        android:id="@+id/profile_contacts_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/basic_indentation"
-        app:layout_constraintTop_toBottomOf="@+id/profile_progressbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:paddingStart="@dimen/double_indentation"
         android:paddingEnd="@dimen/double_indentation"
+        app:layout_constraintTop_toBottomOf="@+id/profile_progressbar"
+        android:paddingTop="@dimen/basic_indentation">
+
+    <ImageView
+        android:id="@+id/profile_contacts_icon"
+        android:src="@drawable/ic_baseline_skill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:contentDescription="TODO" />
 
     <TextView
-        android:id="@+id/profile_playtime_desc"
+        android:id="@+id/profile_contacts_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/half_indentation"
-        app:layout_constraintTop_toBottomOf="@+id/profile_playtime_icon"
-        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center"
+        android:paddingTop="@dimen/basic_indentation"
+        android:layout_below="@+id/profile_contacts_icon"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+    android:id="@+id/profile_addressing_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/profile_contacts_layout"
+    android:paddingStart="@dimen/double_indentation"
+    android:paddingEnd="@dimen/double_indentation"
+    app:layout_constraintTop_toBottomOf="@+id/profile_progressbar"
+    android:paddingTop="@dimen/basic_indentation">
+
+    <ImageView
+        android:id="@+id/profile_addressing_icon"
+        android:src="@drawable/ic_baseline_skill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:contentDescription="TODO" />
+
+    <TextView
+        android:id="@+id/profile_addressing_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="@dimen/basic_indentation"
+        android:layout_below="@+id/profile_addressing_icon"/>
+</RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/profile_analysis_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profile_contacts_layout"
         android:paddingStart="@dimen/double_indentation"
         android:paddingEnd="@dimen/double_indentation"
-        />
-
-    <ImageView
-        android:id="@+id/profile_money_icon"
-        android:src="@drawable/ic_baseline_skill"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/basic_indentation"
         app:layout_constraintTop_toBottomOf="@+id/profile_progressbar"
-        app:layout_constraintEnd_toStartOf="@+id/profile_playtime_icon"
-        app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="TODO" />
+        android:paddingTop="@dimen/basic_indentation">
 
-    <TextView
-        android:id="@+id/profile_money_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/half_indentation"
-        app:layout_constraintTop_toBottomOf="@+id/profile_playtime_icon"
-        app:layout_constraintEnd_toStartOf="@+id/profile_playtime_desc"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        <ImageView
+            android:id="@+id/profile_analysis_icon"
+            android:src="@drawable/ic_baseline_skill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:contentDescription="TODO" />
 
-    <ImageView
-        android:id="@+id/profile_map_icon"
-        android:src="@drawable/ic_baseline_skill"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/basic_indentation"
-        app:layout_constraintTop_toBottomOf="@+id/profile_progressbar"
-        app:layout_constraintStart_toEndOf="@+id/profile_playtime_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="TODO" />
+        <TextView
+            android:id="@+id/profile_analysis_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="@dimen/basic_indentation"
+            android:layout_below="@+id/profile_analysis_icon"/>
+    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/profile_map_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/half_indentation"
-        app:layout_constraintTop_toBottomOf="@+id/profile_playtime_icon"
-        app:layout_constraintStart_toEndOf="@+id/profile_playtime_desc"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+
+<!--    <ImageView-->
+<!--        android:id="@+id/profile_analysis_icon"-->
+<!--        android:src="@drawable/ic_baseline_skill"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:paddingTop="@dimen/basic_indentation"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/profile_progressbar"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/profile_contacts_icon"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:paddingStart="@dimen/double_indentation"-->
+<!--        android:paddingEnd="@dimen/double_indentation"-->
+<!--        android:contentDescription="TODO" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/profile_analysis_desc"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:paddingTop="@dimen/half_indentation"-->
+<!--        android:gravity="center"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/profile_analysis_icon"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/profile_contacts_desc"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:paddingStart="@dimen/double_indentation"-->
+<!--        android:paddingEnd="@dimen/double_indentation"-->
+<!--        />-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/profile_consulting_icon"-->
+<!--        android:src="@drawable/ic_baseline_skill"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:paddingTop="@dimen/basic_indentation"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/profile_analysis_desc"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/profile_services_icon"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:paddingStart="@dimen/double_indentation"-->
+<!--        android:paddingEnd="@dimen/double_indentation"-->
+<!--        android:contentDescription="TODO" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/profile_consulting_desc"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:paddingTop="@dimen/half_indentation"-->
+<!--        android:gravity="center"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/profile_consulting_icon"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/profile_services_desc"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:paddingStart="@dimen/double_indentation"-->
+<!--        android:paddingEnd="@dimen/double_indentation"-->
+<!--        />-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/profile_services_icon"-->
+<!--        android:src="@drawable/ic_baseline_skill"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:paddingTop="@dimen/basic_indentation"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/profile_contacts_desc"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/profile_consulting_icon"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:paddingStart="@dimen/double_indentation"-->
+<!--        android:paddingEnd="@dimen/double_indentation"-->
+<!--        android:contentDescription="TODO" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/profile_services_desc"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:paddingTop="@dimen/half_indentation"-->
+<!--        android:gravity="center"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/profile_services_icon"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/profile_consulting_desc"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:paddingStart="@dimen/double_indentation"-->
+<!--        android:paddingEnd="@dimen/double_indentation"-->
+<!--        />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
