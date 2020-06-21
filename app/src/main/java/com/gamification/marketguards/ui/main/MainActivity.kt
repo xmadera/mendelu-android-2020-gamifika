@@ -17,7 +17,6 @@ import com.gamification.marketguards.ui.store.StoreFragment
 import com.gamification.marketguards.ui.story.StoryFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
 
 class MainActivity : BaseActivity() {
 
@@ -27,7 +26,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private val SHOWCASE_ID = "Showcase100"
+//    private val SHOWCASE_ID = "Showcase100"
 
     override val layout: Int = R.layout.activity_main
 
@@ -37,14 +36,14 @@ class MainActivity : BaseActivity() {
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setOnNavigationItemSelectedListener(listener)
-
-        MaterialShowcaseView.Builder(this)
-            .setTarget(bottomNav)
-            .setDismissText(getString(R.string.showcase_dismiss))
-            .setContentText(getString(R.string.showcase_200_text))
-            .setDelay(500)
-            .singleUse(SHOWCASE_ID)
-            .show()
+        // TODO: needs to happen in one sequence with 200
+//        MaterialShowcaseView.Builder(this)
+//            .setTarget(bottomNav)
+//            .setDismissText(getString(R.string.showcase_dismiss))
+//            .setContentText(getString(R.string.showcase_100_text))
+//            .setDelay(500)
+//            .singleUse(SHOWCASE_ID)
+//            .show()
 
         supportFragmentManager.beginTransaction()
             .replace(

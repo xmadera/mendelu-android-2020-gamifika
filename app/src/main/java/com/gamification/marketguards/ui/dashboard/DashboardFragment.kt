@@ -19,7 +19,7 @@ import com.gamification.marketguards.data.constants.IntentConstants
 import com.gamification.marketguards.data.model.missionsAndQuests.MissionDetail
 import com.gamification.marketguards.data.model.missionsAndQuests.QuestPreview
 import com.gamification.marketguards.data.sharedpreferences.SharedPreferencesManager
-import com.gamification.marketguards.ui.dashboard.missions.MissionsActivity
+import com.gamification.marketguards.ui.dashboard.missions.MissionsPreviewActivity
 import com.gamification.marketguards.ui.dashboard.questdetail.QuestDetailActivity
 import com.gamification.marketguards.ui.main.MainActivity
 import com.gamification.marketguards.viewmodels.DashBoardViewModel
@@ -69,7 +69,7 @@ class DashboardFragment : BaseFragment() {
 
         selectMissionButton.setOnClickListener {
             startActivityForResult(
-                MissionsActivity.createIntent(activity!!),
+                MissionsPreviewActivity.createIntent(activity!!),
                 REQUEST_SELECT_MISSION
             )
         }
@@ -77,7 +77,7 @@ class DashboardFragment : BaseFragment() {
         MaterialShowcaseView.Builder(activity)
             .setTarget(selectMissionButton)
             .setDismissText(getString(R.string.showcase_dismiss))
-            .setContentText(getString(R.string.showcase_100_text))
+            .setContentText(getString(R.string.showcase_200_text))
             .setDelay(500)
             .singleUse(SHOWCASE_ID)
             .show()

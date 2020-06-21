@@ -2,7 +2,7 @@ package com.gamification.marketguards.viewmodels
 
 import androidx.lifecycle.ViewModel
 import com.gamification.marketguards.data.model.missionsAndQuests.QuestDetail
-import com.gamification.marketguards.data.network.communication.RESTApi.QuestRESTApiRepositoryImpl
+import com.gamification.marketguards.data.network.communication.restapi.QuestRESTApiRepositoryImpl
 import com.google.gson.JsonObject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
@@ -24,10 +24,6 @@ open class QuestDetailViewModel(private val questRepository: QuestRESTApiReposit
 
     suspend fun editQuestNotes(id: Int, note: JsonObject) {
         questRepository.editQuestNotes(id, note)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
     }
 
 }

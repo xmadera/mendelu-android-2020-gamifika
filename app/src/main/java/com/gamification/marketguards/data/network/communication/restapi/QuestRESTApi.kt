@@ -1,4 +1,4 @@
-package com.gamification.marketguards.data.network.communication.RESTApi
+package com.gamification.marketguards.data.network.communication.restapi
 
 import com.gamification.marketguards.data.model.missionsAndQuests.QuestDetail
 import com.google.gson.JsonObject

@@ -1,4 +1,4 @@
-package com.gamification.marketguards.data.network.communication.service
+package com.gamification.marketguards.data.network.communication.service.session
 
 import com.gamification.marketguards.data.model.auth.LoginResponse
 import com.gamification.marketguards.data.model.auth.TokenRefreshRequest

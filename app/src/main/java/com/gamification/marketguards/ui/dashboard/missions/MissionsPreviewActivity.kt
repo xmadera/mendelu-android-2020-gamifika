@@ -9,27 +9,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gamification.marketguards.R
+import com.gamification.marketguards.data.base.App
 import com.gamification.marketguards.data.base.BaseActivity
 import com.gamification.marketguards.data.constants.IntentConstants
 import com.gamification.marketguards.data.model.missionsAndQuests.MissionPreview
-import com.gamification.marketguards.ui.dashboard.DashboardViewModelFactory
-import com.gamification.marketguards.viewmodels.DashBoardViewModel
+import com.gamification.marketguards.viewmodels.MissionsPreviewViewModel
 import kotlinx.android.synthetic.main.activity_missions.*
 import kotlinx.android.synthetic.main.content_mission_list.*
 
-class MissionsActivity : BaseActivity() {
+class MissionsPreviewActivity : BaseActivity() {
 
-    private lateinit var viewModel: DashBoardViewModel
+    private lateinit var viewModel: MissionsPreviewViewModel
 
     companion object {
         fun createIntent(context: Context): Intent {
-            return Intent(context, MissionsActivity::class.java)
+            return Intent(context, MissionsPreviewActivity::class.java)
         }
     }
 
@@ -53,9 +54,9 @@ class MissionsActivity : BaseActivity() {
 
         viewModel = ViewModelProvider(
             this,
-            DashboardViewModelFactory()
+            MissionsPreviewViewModelFactory()
         )
-            .get(DashBoardViewModel::class.java)
+            .get(MissionsPreviewViewModel::class.java)
 
         missionsAdapter = MissionsAdapter()
         layoutManager = LinearLayoutManager(this)
@@ -115,15 +116,22 @@ class MissionsActivity : BaseActivity() {
         override fun onBindViewHolder(holder: MissionViewHolder, position: Int) {
             val mission = missionsPreview[position]
             holder.missionTitle.text = mission.title
+            val context = App.appContext
             if (anyQuests(holder.adapterPosition)) {
-                if (mission.finishedQuests < mission.totalQuests) {
-                    holder.finishedQuests.text = mission.finishedQuests.toString() + "/"
+                if (mission.finishedQuests!! < mission.totalQuests!!) {
+                    val finishedQuestsText = mission.finishedQuests.toString() + "/"
+                    holder.finishedQuests.text = finishedQuestsText
                     holder.totalQuests.text = mission.totalQuests.toString()
                 } else {
                     holder.finishedIcon.setImageResource(R.drawable.ic_ok)
                     holder.finishedIcon.visibility = View.VISIBLE
                 }
-                holder.missionTitle.setTextColor(resources.getColor(R.color.colorPrimary))
+                holder.missionTitle.setTextColor(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.colorPrimary
+                    )
+                )
                 holder.itemView.setOnClickListener {
                     val resultIntent = Intent().putExtra(
                         IntentConstants.MISSION_ID,
@@ -134,13 +142,22 @@ class MissionsActivity : BaseActivity() {
                 }
             } else {
                 holder.finishedIcon.setImageResource(R.drawable.ic_locked)
-                holder.finishedIcon.setColorFilter(resources.getColor(R.color.disabled))
+                holder.finishedIcon.setColorFilter(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.disabled
+                    )
+                )
                 holder.finishedIcon.visibility = View.VISIBLE
             }
         }
 
         private fun anyQuests(position: Int): Boolean {
-            return missionsPreview[position].totalQuests > 0
+            return if (missionsPreview[position].totalQuests != null) {
+                missionsPreview[position].totalQuests!! > 0
+            } else {
+                false
+            }
         }
 
         override fun getItemCount() = missionsPreview.size

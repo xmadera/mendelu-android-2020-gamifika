@@ -53,14 +53,14 @@
     <string name="dashboard_button_text">Vybrat misi</string>
     <string name="dashboard">Základna</string>
     <string name="all_quests">Všechny questy</string>
-    <string name="menu_profile_log_out">Log out</string>
     <string-array name="StoreSubTabs">
         <item>Obchod</item>
         <item>Inventář</item>
     </string-array>
     <string name="showcase_dismiss">Chápu</string>
-    <string name="showcase_200_text">Díky spodní navigační liště se můžeš rychle přepínat mezi jednotlivými moduly</string>
-    <string name="showcase_100_text">Vyber si misi</string>
+    <string name="showcase_100_text">Díky spodní navigační liště se můžeš rychle přepínat mezi jednotlivými moduly</string>
+    <string name="showcase_200_text">Vyber si misi</string>
     <string name="showcase_300_text">Začni tento quest</string>
     <string name="showcase_400_text">Dej nám vědět co si o tomto questu myslíš</string>
+    <string name="settings">Nastavení</string>
 </resources>

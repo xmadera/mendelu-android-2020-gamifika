@@ -10,9 +10,9 @@ import com.gamification.marketguards.data.exceptions.NoConnectionException
 import com.gamification.marketguards.data.model.auth.LoginRequest
 import com.gamification.marketguards.data.model.auth.LoginResponse
 import com.gamification.marketguards.data.model.auth.LoginServerResult
-import com.gamification.marketguards.data.network.communication.service.AuthService
+import com.gamification.marketguards.data.network.communication.restapi.LoginRestApi
 import com.gamification.marketguards.data.network.communication.service.ServiceGenerator
-import com.gamification.marketguards.data.network.communication.service.SessionManagerInterface
+import com.gamification.marketguards.data.network.communication.service.session.SessionManagerInterface
 import com.gamification.marketguards.data.network.utility.sha256Hash
 import retrofit2.Call
 import retrofit2.Callback
@@ -36,7 +36,7 @@ class LoginDataSource(context: Context, sessionManager: SessionManagerInterface)
     private val authService = ServiceGenerator.getInstance(
         context,
         sessionManager
-    ).create(AuthService::class.java)
+    ).create(LoginRestApi::class.java)
 
     override val loginResult: LiveData<LoginServerResult> = _loginResponse
 

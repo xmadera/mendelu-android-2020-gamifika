@@ -1,8 +1,6 @@
 package com.gamification.marketguards.data.model.missionsAndQuests
 
-import androidx.room.Entity
-
-@Entity(tableName = "quest_detail")
+//@Entity(tableName = "quest_detail")
 data class QuestDetail(
     val activated: String?,
     val averageTime: Int,

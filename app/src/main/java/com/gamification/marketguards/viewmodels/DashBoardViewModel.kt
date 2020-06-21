@@ -1,25 +1,20 @@
 package com.gamification.marketguards.viewmodels
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.gamification.marketguards.data.model.missionsAndQuests.MissionDetail
-import com.gamification.marketguards.data.model.missionsAndQuests.MissionPreview
-import com.gamification.marketguards.data.network.communication.RESTApi.MissionRESTApiRepositoryImpl
+import com.gamification.marketguards.data.network.communication.restapi.MissionDetailRESTApiRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 
-open class DashBoardViewModel(private val missionRepository: MissionRESTApiRepositoryImpl) :
+open class DashBoardViewModel(private val missionPreviewRepository: MissionDetailRESTApiRepositoryImpl) :
     ViewModel(), CoroutineScope by MainScope() {
 
-    fun getAll(): LiveData<MutableList<MissionPreview>> {
-        return missionRepository.getAll()
-    }
 
     suspend fun findById(id: Int): MissionDetail {
-        return missionRepository.findById(id)
+        return missionPreviewRepository.findById(id)
     }
 
     suspend fun getAllQuests(): MissionDetail {
-        return missionRepository.getAllQuests()
+        return missionPreviewRepository.getAllQuests()
     }
 }

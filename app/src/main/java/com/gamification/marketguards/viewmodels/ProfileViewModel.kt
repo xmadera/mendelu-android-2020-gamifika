@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import com.auth0.android.jwt.JWT
 import com.gamification.marketguards.data.model.player.GameStatus
 import com.gamification.marketguards.data.model.skills.SkillPreview
-import com.gamification.marketguards.data.network.communication.RESTApi.PlayerRESTApiRepositoryImpl
-import com.gamification.marketguards.data.network.communication.RESTApi.SkillRESTApiRepositoryImpl
+import com.gamification.marketguards.data.network.communication.restapi.PlayerRESTApiRepositoryImpl
+import com.gamification.marketguards.data.network.communication.restapi.SkillRESTApiRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 

@@ -89,13 +89,13 @@
     <string name="no">No</string>
     <string name="notes">Notes</string>
     <string name="done">Done</string>
-    <string name="showcase_200_text">You can quickly switch between modules thanks to bottom navigation!</string>
+    <string name="showcase_100_text">You can quickly switch between modules thanks to bottom navigation!</string>
     <string name="showcase_dismiss">GOT IT</string>
-    <string name="showcase_100_text">Pick a mission</string>
+    <string name="showcase_200_text">Pick a mission</string>
     <string name="showcase_300_text">Start this quest</string>
     <string name="showcase_400_text">Let us know what you think about this quest!</string>
-    <string name="menu_settings">settings</string>
     <string name="settings">Settings</string>
+    <string name="app_version">App version</string>
 
     <string-array name="StoreSubTabs">
         <item>Shop</item>

@@ -1,4 +1,4 @@
-package com.gamification.marketguards.data.network.communication.RESTApi
+package com.gamification.marketguards.data.network.communication.restapi
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,7 @@ import com.gamification.marketguards.data.database.repository.LoginRepositoryInt
 import com.gamification.marketguards.data.model.auth.LoginResponse
 import com.gamification.marketguards.data.model.auth.LoginResult
 import com.gamification.marketguards.data.network.communication.datasources.LoginDataSourceInterface
-import com.gamification.marketguards.data.network.communication.service.SessionManagerInterface
+import com.gamification.marketguards.data.network.communication.service.session.SessionManagerInterface
 
 class LoginRESTApiRepositoryImpl(
     val context: Context,

@@ -10,13 +10,10 @@ import com.gamification.marketguards.R
 import com.gamification.marketguards.data.base.BaseActivity
 import com.gamification.marketguards.data.sharedpreferences.SharedPreferencesManager
 import com.gamification.marketguards.ui.login.LoginActivity
-import com.gamification.marketguards.viewmodels.DashBoardViewModel
 import kotlinx.android.synthetic.main.activity_missions.toolbar
 import kotlinx.android.synthetic.main.activity_settings.*
 
 class SettingsActivity : BaseActivity() {
-
-    private lateinit var viewModel: DashBoardViewModel
 
     companion object {
         fun createIntent(context: Context): Intent {
@@ -41,19 +38,20 @@ class SettingsActivity : BaseActivity() {
             val builder = AlertDialog.Builder(this)
             builder.setMessage(getString(R.string.profile_logout_message))
 
-            builder.setPositiveButton(getString(R.string.yes)) { dialog, which ->
+            builder.setPositiveButton(getString(R.string.yes)) { _, _ ->
                 SharedPreferencesManager.deleteTokens(this)
                 startActivity(LoginActivity.createIntent(this))
             }
 
-            builder.setNegativeButton(getString(R.string.no)) { dialog, which ->
+            builder.setNegativeButton(getString(R.string.no)) { _, _ ->
             }
 
             val dialog: AlertDialog = builder.create()
             dialog.show()
         }
 
-        settings_app_version.text = "App version" + ": " + "${BuildConfig.VERSION_NAME}"
+        val versionName = getString(R.string.app_version) + ": " + BuildConfig.VERSION_NAME
+        settings_app_version.text = versionName
 
     }
 }

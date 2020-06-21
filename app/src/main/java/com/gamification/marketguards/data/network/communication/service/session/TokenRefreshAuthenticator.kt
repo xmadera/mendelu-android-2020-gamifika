@@ -1,7 +1,8 @@
-package com.gamification.marketguards.data.network.communication.service
+package com.gamification.marketguards.data.network.communication.service.session
 
 import android.content.Context
 import com.gamification.marketguards.data.model.auth.TokenRefreshRequest
+import com.gamification.marketguards.data.network.communication.service.ServiceGenerator
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
@@ -15,8 +16,10 @@ class TokenRefreshAuthenticator(
 
     override fun authenticate(route: Route?, response: Response): Request? {
         val refreshToken = sessionManager.fetchRefreshToken() ?: ""
-        val service = ServiceGenerator
-            .getInstance(context, sessionManager)
+        val service = ServiceGenerator.getInstance(
+            context,
+            sessionManager
+        )
             .createForRefreshToken(TokenRefreshService::class.java, refreshToken)
 
         val refreshTokenResponse =

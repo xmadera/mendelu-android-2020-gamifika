@@ -2,6 +2,8 @@ package com.gamification.marketguards.data.network.communication.service
 
 
 import android.content.Context
+import com.gamification.marketguards.data.network.communication.service.session.SessionManagerInterface
+import com.gamification.marketguards.data.network.communication.service.session.TokenRefreshAuthenticator
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -57,7 +59,12 @@ class ServiceGenerator {
                     context!!
                 )
             )
-            .authenticator(TokenRefreshAuthenticator(context!!, sessionManager!!))
+            .authenticator(
+                TokenRefreshAuthenticator(
+                    context!!,
+                    sessionManager!!
+                )
+            )
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .build()
@@ -89,7 +96,12 @@ class ServiceGenerator {
                     context!!
                 )
             )
-            .authenticator(TokenRefreshAuthenticator(context!!, sessionManager!!))
+            .authenticator(
+                TokenRefreshAuthenticator(
+                    context!!,
+                    sessionManager!!
+                )
+            )
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .build()

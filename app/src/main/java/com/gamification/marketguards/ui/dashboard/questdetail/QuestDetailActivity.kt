@@ -7,12 +7,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gamification.marketguards.R
+import com.gamification.marketguards.data.base.App
 import com.gamification.marketguards.data.base.BaseActivity
 import com.gamification.marketguards.data.constants.IntentConstants
 import com.gamification.marketguards.data.model.missionsAndQuests.QuestDetail
@@ -96,33 +99,52 @@ class QuestDetailActivity : BaseActivity() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestSkillViewHolder {
             val view: View = LayoutInflater.from(parent.context)
-                .inflate(R.layout.row_skill_list, parent, false)
+                .inflate(R.layout.row_quest_skill_list, parent, false)
             return QuestSkillViewHolder(view)
         }
 
         override fun onBindViewHolder(holder: QuestSkillViewHolder, position: Int) {
             val skill = skillsPreviewQuest[position]
-            holder.skillTitle.text =
-                skill.experiences.toString() + "+ " + skill.bonusExperiences.toString()
+            val skillTitle = skill.experiences.toString() + "+ " + skill.bonusExperiences.toString()
+            holder.skillTitle.text = skillTitle
+            val context = App.appContext
             when (skill.code) {
-                getString(R.string.skill_code_communication) -> holder.skillWrapper.setBackgroundColor(
-                    resources.getColor(R.color.communication)
-                )
-                getString(R.string.skill_code_products) -> holder.skillWrapper.setBackgroundColor(
-                    resources.getColor(R.color.products)
-                )
-                getString(R.string.skill_code_organization) -> holder.skillWrapper.setBackgroundColor(
-                    resources.getColor(R.color.organization)
-                )
-                getString(R.string.skill_code_prospecting) -> holder.skillWrapper.setBackgroundColor(
-                    resources.getColor(R.color.prospecting)
-                )
-                getString(R.string.skill_code_business) -> holder.skillWrapper.setBackgroundColor(
-                    resources.getColor(R.color.business)
-                )
-                getString(R.string.skill_code_networking) -> holder.skillWrapper.setBackgroundColor(
-                    resources.getColor(R.color.networking)
-                )
+                getString(R.string.skill_code_communication) -> {
+                    holder.skillWrapper.setBackgroundColor(
+                        ContextCompat.getColor(context, R.color.communication)
+                    )
+                    holder.skillIcon.setImageResource(R.drawable.ic_communication)
+                }
+                getString(R.string.skill_code_products) -> {
+                    holder.skillWrapper.setBackgroundColor(
+                        ContextCompat.getColor(context, R.color.products)
+                    )
+                    holder.skillIcon.setImageResource(R.drawable.ic_product)
+                }
+                getString(R.string.skill_code_organization) -> {
+                    holder.skillWrapper.setBackgroundColor(
+                        ContextCompat.getColor(context, R.color.organization)
+                    )
+                    holder.skillIcon.setImageResource(R.drawable.ic_organization)
+                }
+                getString(R.string.skill_code_prospecting) -> {
+                    holder.skillWrapper.setBackgroundColor(
+                        ContextCompat.getColor(context, R.color.prospecting)
+                    )
+                    holder.skillIcon.setImageResource(R.drawable.ic_prospecting)
+                }
+                getString(R.string.skill_code_business) -> {
+                    holder.skillWrapper.setBackgroundColor(
+                        ContextCompat.getColor(context, R.color.business)
+                    )
+                    holder.skillIcon.setImageResource(R.drawable.ic_business)
+                }
+                getString(R.string.skill_code_networking) -> {
+                    holder.skillWrapper.setBackgroundColor(
+                        ContextCompat.getColor(context, R.color.networking)
+                    )
+                    holder.skillIcon.setImageResource(R.drawable.ic_networking)
+                }
             }
         }
 
@@ -131,6 +153,7 @@ class QuestDetailActivity : BaseActivity() {
         inner class QuestSkillViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val skillTitle: TextView = view.findViewById(R.id.skill_title)
             val skillWrapper: MaterialCardView = view.findViewById(R.id.skill_wrapper)
+            val skillIcon: ImageView = view.findViewById(R.id.skill_icon)
         }
     }
 
@@ -152,6 +175,8 @@ class QuestDetailActivity : BaseActivity() {
     private fun fillLayout() {
         detail_quest_title.text = quest.title
         detail_quest_desc.text = quest.story
+        val xpTitle = "+ ${quest.experiences}"
+        xp_title.text = xpTitle
 
         if (quest.finished == null) {
             if (quest.activated != null) {

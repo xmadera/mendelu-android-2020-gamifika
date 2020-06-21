@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.gamification.marketguards.R
 import com.gamification.marketguards.data.base.App
-import com.gamification.marketguards.data.network.communication.RESTApi.MissionRESTApiRepositoryImpl
+import com.gamification.marketguards.data.network.communication.restapi.MissionDetailRESTApiRepositoryImpl
 import com.gamification.marketguards.viewmodels.DashBoardViewModel
 
 /**
@@ -17,7 +17,7 @@ class DashboardViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(DashBoardViewModel::class.java)) {
             return DashBoardViewModel(
-                missionRepository = MissionRESTApiRepositoryImpl(
+                missionPreviewRepository = MissionDetailRESTApiRepositoryImpl(
                     App.appContext,
                     App.getSessionManager()
                 )

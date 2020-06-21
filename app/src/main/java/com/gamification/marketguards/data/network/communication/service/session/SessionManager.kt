@@ -1,4 +1,4 @@
-package com.gamification.marketguards.data.network.communication.service
+package com.gamification.marketguards.data.network.communication.service.session
 
 import android.content.Context
 import com.gamification.marketguards.data.sharedpreferences.SharedPreferencesManager

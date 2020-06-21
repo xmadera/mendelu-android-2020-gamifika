@@ -8,6 +8,7 @@ import android.view.*
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.auth0.android.jwt.JWT
 import com.gamification.marketguards.R
+import com.gamification.marketguards.data.base.App
 import com.gamification.marketguards.data.base.BaseActivity
 import com.gamification.marketguards.data.model.player.GameStatus
 import com.gamification.marketguards.data.model.skills.SkillPreview
@@ -65,23 +67,7 @@ class ProfileActivity : BaseActivity() {
             gameStatus = viewModel.getGameStatus()
         }.invokeOnCompletion {
             runOnUiThread {
-                profile_progressbar.max = gameStatus.experiencesRangeTo
-                profile_progressbar.progress = gameStatus.experiences
-                profile_money.text = gameStatus.currency.toString()
-                profile_xp.text = "${gameStatus.experiences}/${gameStatus.experiencesRangeTo}"
-                profile_login.text = "Jan"
-                profile_level.text =
-                    getString(R.string.profile_sources_level) + " ${gameStatus.level}"
-                profile_addressing_desc.text =
-                    getString(R.string.profile_sources_addressing) + "\n${gameStatus.addressing}"
-                profile_analysis_desc.text =
-                    getString(R.string.profile_sources_analysis) + "\n${gameStatus.analysis}"
-                profile_consulting_desc.text =
-                    getString(R.string.profile_sources_consulting) + "\n${gameStatus.consulting}"
-                profile_services_desc.text =
-                    getString(R.string.profile_sources_services) + "\n${gameStatus.services}"
-                profile_contacts_desc.text =
-                    getString(R.string.profile_sources_contacts) + "\n${gameStatus.contacts}"
+                fillLayout()
             }
         }
 
@@ -137,6 +123,32 @@ class ProfileActivity : BaseActivity() {
         }
     }
 
+    private fun fillLayout() {
+        profile_progressbar.max = gameStatus.experiencesRangeTo
+        profile_progressbar.progress = gameStatus.experiences
+        profile_money.text = gameStatus.currency.toString()
+        val xpText = "${gameStatus.experiences}/${gameStatus.experiencesRangeTo}"
+        profile_xp.text = xpText
+        profile_login.text = "Jan"
+        val levelText = getString(R.string.profile_sources_level) + " ${gameStatus.level}"
+        profile_level.text = levelText
+        val addressingText =
+            getString(R.string.profile_sources_addressing) + "\n${gameStatus.addressing}"
+        profile_addressing_desc.text = addressingText
+        val analysisText =
+            getString(R.string.profile_sources_analysis) + "\n${gameStatus.analysis}"
+        profile_analysis_desc.text = analysisText
+        val consultingText =
+            getString(R.string.profile_sources_consulting) + "\n${gameStatus.consulting}"
+        profile_consulting_desc.text = consultingText
+        val servicesText =
+            getString(R.string.profile_sources_services) + "\n${gameStatus.services}"
+        profile_services_desc.text = servicesText
+        val contactsText =
+            getString(R.string.profile_sources_contacts) + "\n${gameStatus.contacts}"
+        profile_contacts_desc.text = contactsText
+    }
+
     inner class SkillsAdapter : RecyclerView.Adapter<SkillsAdapter.SkillsViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkillsViewHolder {
@@ -149,11 +161,12 @@ class ProfileActivity : BaseActivity() {
         override fun onBindViewHolder(holder: SkillsViewHolder, position: Int) {
             val skill = skillsPreview[position]
             holder.skillTitle.text = skill.title
-            holder.skillLevel.text =
+            val skillLevelText =
                 getString(R.string.profile_sources_level) + "${skill.level} | ${skill.experiences}/${skill.experiencesToNextLevel}"
+            holder.skillLevel.text = skillLevelText
             holder.skillProgressbar.progress = skill.experiences
             holder.skillProgressbar.max = skill.experiencesToNextLevel
-
+            val context = App.appContext
             if (skill.experiences > 0) {
                 when (skill.code) {
                     getString(R.string.skill_code_communication) -> holder.skillIcon.setImageResource(
@@ -171,8 +184,8 @@ class ProfileActivity : BaseActivity() {
                 }
             } else {
                 holder.skillIcon.setImageResource(R.drawable.ic_skill_disabled)
-                holder.skillTitle.setTextColor(resources.getColor(R.color.disabled))
-                holder.skillLevel.setTextColor(resources.getColor(R.color.disabled))
+                holder.skillTitle.setTextColor(ContextCompat.getColor(context, R.color.disabled))
+                holder.skillLevel.setTextColor(ContextCompat.getColor(context, R.color.disabled))
             }
         }
 

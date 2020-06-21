@@ -1,4 +1,4 @@
-package com.gamification.marketguards.data.network.communication.RESTApi
+package com.gamification.marketguards.data.network.communication.restapi
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.gamification.marketguards.data.database.repository.ISkillRepository
 import com.gamification.marketguards.data.model.skills.SkillPreview
 import com.gamification.marketguards.data.network.communication.service.ServiceGenerator
-import com.gamification.marketguards.data.network.communication.service.SessionManagerInterface
+import com.gamification.marketguards.data.network.communication.service.session.SessionManagerInterface
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
