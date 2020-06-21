@@ -63,4 +63,5 @@
     <string name="showcase_300_text">Začni tento quest</string>
     <string name="showcase_400_text">Dej nám vědět co si o tomto questu myslíš</string>
     <string name="settings">Nastavení</string>
+    <string name="app_version">Verze aplikace</string>
 </resources>
