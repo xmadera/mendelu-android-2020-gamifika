@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -33,9 +32,6 @@ class LoginActivity : BaseActivity() {
 
         viewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
-
-        login_login.setText("xmadera@mendelu.cz")
-        login_password.setText("gamifika")
 
         viewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
@@ -76,14 +72,6 @@ class LoginActivity : BaseActivity() {
 
     override fun onBackPressed() {
         finishAffinity()
-    }
-
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        when (keyCode) {
-            KeyEvent.KEYCODE_BACK ->
-                finishAffinity()
-        }
-        return super.onKeyDown(keyCode, event)
     }
 
     private fun rootToDashboard() {
