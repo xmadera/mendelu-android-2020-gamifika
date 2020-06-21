@@ -9,6 +9,9 @@
         <item name="tabBackground">@color/backgroundSecondaryLight</item>
         <item name="android:textColor">@color/light</item>
         <item name="android:textColorHint">@color/backgroundSecondaryLight</item>
+        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
+        <item name="android:alertDialogTheme">@style/AlertDialogTheme</item>
+
 
         <item name="android:fontFamily">@font/chakrapetch_regular</item>
         <item name="fontFamily">@font/chakrapetch_regular</item>
@@ -49,6 +52,21 @@
 
     <style name="button_primary" parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">@color/light</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="android:buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
 </resources>

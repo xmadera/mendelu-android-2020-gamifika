@@ -8,7 +8,6 @@ import android.view.*
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
@@ -19,8 +18,7 @@ import com.gamification.marketguards.R
 import com.gamification.marketguards.data.base.BaseActivity
 import com.gamification.marketguards.data.model.player.GameStatus
 import com.gamification.marketguards.data.model.skills.SkillPreview
-import com.gamification.marketguards.data.sharedpreferences.SharedPreferencesManager
-import com.gamification.marketguards.ui.login.LoginActivity
+import com.gamification.marketguards.ui.settings.SettingsActivity
 import com.gamification.marketguards.viewmodels.ProfileViewModel
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.content_profile_activity.*
@@ -72,12 +70,18 @@ class ProfileActivity : BaseActivity() {
                 profile_money.text = gameStatus.currency.toString()
                 profile_xp.text = "${gameStatus.experiences}/${gameStatus.experiencesRangeTo}"
                 profile_login.text = "Jan"
-                profile_level.text = "Level ${gameStatus.level}"
-                profile_addressing_desc.text = "Addressing\n${gameStatus.addressing}"
-                profile_analysis_desc.text = "Analysis\n${gameStatus.analysis}"
-                profile_consulting_desc.text = "Consulting\n${gameStatus.consulting}"
-                profile_services_desc.text = "Services\n${gameStatus.services}"
-                profile_contacts_desc.text = "Contacts\n${gameStatus.contacts}"
+                profile_level.text =
+                    getString(R.string.profile_sources_level) + " ${gameStatus.level}"
+                profile_addressing_desc.text =
+                    getString(R.string.profile_sources_addressing) + "\n${gameStatus.addressing}"
+                profile_analysis_desc.text =
+                    getString(R.string.profile_sources_analysis) + "\n${gameStatus.analysis}"
+                profile_consulting_desc.text =
+                    getString(R.string.profile_sources_consulting) + "\n${gameStatus.consulting}"
+                profile_services_desc.text =
+                    getString(R.string.profile_sources_services) + "\n${gameStatus.services}"
+                profile_contacts_desc.text =
+                    getString(R.string.profile_sources_contacts) + "\n${gameStatus.contacts}"
             }
         }
 
@@ -125,20 +129,8 @@ class ProfileActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.profile_logout -> {
-                val builder = AlertDialog.Builder(this)
-                builder.setMessage("Are you sure want to log out?")
-
-                builder.setPositiveButton("YES") { dialog, which ->
-                    SharedPreferencesManager.deleteTokens(this)
-                    startActivity(LoginActivity.createIntent(this))
-                }
-
-                builder.setNegativeButton("No") { dialog, which ->
-                }
-
-                val dialog: AlertDialog = builder.create()
-                dialog.show()
+            R.id.profile_settings -> {
+                startActivity(SettingsActivity.createIntent(this))
                 return true
             }
             else -> super.onOptionsItemSelected(item)
@@ -158,18 +150,24 @@ class ProfileActivity : BaseActivity() {
             val skill = skillsPreview[position]
             holder.skillTitle.text = skill.title
             holder.skillLevel.text =
-                "Level ${skill.level} | ${skill.experiences}/${skill.experiencesToNextLevel}"
+                getString(R.string.profile_sources_level) + "${skill.level} | ${skill.experiences}/${skill.experiencesToNextLevel}"
             holder.skillProgressbar.progress = skill.experiences
             holder.skillProgressbar.max = skill.experiencesToNextLevel
 
             if (skill.experiences > 0) {
                 when (skill.code) {
-                    "communication" -> holder.skillIcon.setImageResource(R.drawable.ic_communication)
-                    "products" -> holder.skillIcon.setImageResource(R.drawable.ic_product)
-                    "organization" -> holder.skillIcon.setImageResource(R.drawable.ic_organization)
-                    "prospecting" -> holder.skillIcon.setImageResource(R.drawable.ic_prospecting)
-                    "business" -> holder.skillIcon.setImageResource(R.drawable.ic_business)
-                    "networking" -> holder.skillIcon.setImageResource(R.drawable.ic_networking)
+                    getString(R.string.skill_code_communication) -> holder.skillIcon.setImageResource(
+                        R.drawable.ic_communication
+                    )
+                    getString(R.string.skill_code_products) -> holder.skillIcon.setImageResource(R.drawable.ic_product)
+                    getString(R.string.skill_code_organization) -> holder.skillIcon.setImageResource(
+                        R.drawable.ic_organization
+                    )
+                    getString(R.string.skill_code_prospecting) -> holder.skillIcon.setImageResource(
+                        R.drawable.ic_prospecting
+                    )
+                    getString(R.string.skill_code_business) -> holder.skillIcon.setImageResource(R.drawable.ic_business)
+                    getString(R.string.skill_code_networking) -> holder.skillIcon.setImageResource(R.drawable.ic_networking)
                 }
             } else {
                 holder.skillIcon.setImageResource(R.drawable.ic_skill_disabled)

@@ -10,7 +10,76 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/img_desc_background_image" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profile_main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#9000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/profile_avatar">
+
+        <ImageView
+            android:id="@+id/profile_level_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_level"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/icon_desc_level_icon" />
+
+        <TextView
+            android:id="@+id/profile_level"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profile_level_icon"
+            style="@style/subtitle1" />
+
+        <ImageView
+            android:id="@+id/profile_xp_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_xp"
+            app:layout_constraintEnd_toStartOf="@+id/profile_level_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="@dimen/double_indentation"
+            android:contentDescription="@string/icon_desc_xp_icon" />
+
+        <TextView
+            android:id="@+id/profile_xp"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profile_xp_icon"
+            style="@style/subtitle1" />
+
+        <ImageView
+            android:id="@+id/profile_money_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_money"
+            app:layout_constraintStart_toEndOf="@+id/profile_level_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="@dimen/double_indentation"
+            android:contentDescription="@string/icon_desc_money_icon" />
+
+        <TextView
+            android:id="@+id/profile_money"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profile_money_icon"
+            style="@style/subtitle1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/profile_avatar"
@@ -20,7 +89,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/profile_background"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/img_desc_profile_avatar" />
 
     <TextView
         android:id="@+id/profile_login"
@@ -43,65 +112,6 @@
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/basic_indentation">
 
-            <ImageView
-                android:id="@+id/profile_level_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_level"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="TODO" />
-
-            <TextView
-                android:id="@+id/profile_level"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:gravity="center"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/profile_level_icon"
-                style="@style/subtitle1" />
-
-            <ImageView
-                android:id="@+id/profile_xp_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_xp"
-                app:layout_constraintEnd_toStartOf="@+id/profile_level_icon"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginEnd="@dimen/double_indentation"
-                android:contentDescription="TODO" />
-
-            <TextView
-                android:id="@+id/profile_xp"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:gravity="center"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/profile_xp_icon"
-                style="@style/subtitle1" />
-
-            <ImageView
-                android:id="@+id/profile_money_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_money"
-                app:layout_constraintStart_toEndOf="@+id/profile_level_icon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="@dimen/double_indentation"
-                android:contentDescription="TODO" />
-
-            <TextView
-                android:id="@+id/profile_money"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:gravity="center"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/profile_money_icon"
-                style="@style/subtitle1" />
-
             <ProgressBar
                 android:id="@+id/profile_progressbar"
                 android:layout_width="match_parent"
@@ -109,7 +119,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:padding="@dimen/half_indentation"
-                app:layout_constraintTop_toBottomOf="@id/profile_level"
+                app:layout_constraintTop_toTopOf="parent"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal" />
 
             <RelativeLayout
@@ -129,7 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:paddingBottom="@dimen/basic_indentation"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/icon_desc_contacts_icon" />
 
                 <TextView
                     android:id="@+id/profile_contacts_desc"
@@ -157,7 +167,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/basic_indentation"
                     android:layout_centerInParent="true"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/icon_desc_addressing_icon" />
 
                 <TextView
                     android:id="@+id/profile_addressing_desc"
@@ -185,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/basic_indentation"
                     android:layout_centerInParent="true"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/icon_desc_analysis_icon" />
 
                 <TextView
                     android:id="@+id/profile_analysis_desc"
@@ -213,7 +223,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/basic_indentation"
                     android:layout_centerInParent="true"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/icon_desc_consulting_icon" />
 
                 <TextView
                     android:id="@+id/profile_consulting_desc"
@@ -241,7 +251,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/basic_indentation"
                     android:layout_centerInParent="true"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/icon_desc_service_icon" />
 
                 <TextView
                     android:id="@+id/profile_services_desc"

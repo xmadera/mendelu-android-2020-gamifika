@@ -1,5 +1,9 @@
 <resources>
+    <!-- App -->
     <string name="app_name">Market Guards</string>
+    <string name="market_guards_logo">Market guards logo</string>
+
+    <!-- Modules -->
     <string name="shop">Shop</string>
     <string name="library">Library</string>
     <string name="map">Map</string>
@@ -7,34 +11,91 @@
     <string name="dashboard">Dashboard</string>
     <string name="store">Store</string>
     <string name="missions">Missions</string>
-    <string name="quest">Quest</string>
+    <string name="quest" translatable="false">Quest</string>
     <string name="profile">Profile</string>
-    <string name="login_login_hint">Login</string>
-    <string name="login_password_hint">Password</string>
-    <string name="login_button_text">Log in</string>
-    <string name="market_guards_logo">Market guards logo</string>
-    <string name="skills">Skills</string>
-    <string name="skill">skill</string>
-    <string name="notes">Notes</string>
-    <string name="dashboard_button_text">Select Mission</string>
-    <string name="done">Done</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
+    <string name="login_login_hint" translatable="false">Login</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_button_text">Log in</string>
+    <string name="prompt_email" translatable="false">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="log_out">Log out</string>
+
+
+    <!-- warnings, exceptions, errors -->
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="invalid_credentials">Invalid credentials</string>
     <string name="login_failed">Login failed</string>
-    <string name="my_story">My story</string>
-    <string name="login">Log in</string>
-    <string name="location">Locaiton</string>
-    <string name="track_location_description">Track location to detect clients near me</string>
-    <string name="log_out">Log out</string>
+    <string name="exception_no_internet">No internet</string>
+    <string name="exception_generic_error">generic error</string>
+    <string name="exception_invalid_credentials">Invalid credentials</string>
+    <string name="view_model_unknown_class" translatable="false">Unknown ViewModel class</string>
     <string name="warning">Warning</string>
+
+
+    <!-- skills -->
+    <string name="skills">Skills</string>
+    <string name="skill" translatable="false">skill</string>
+
+    <string name="skill_code_communication" translatable="false">communication</string>
+    <string name="skill_code_products" translatable="false">products</string>
+    <string name="skill_code_organization" translatable="false">organization</string>
+    <string name="skill_code_prospecting" translatable="false">prospecting</string>
+    <string name="skill_code_business" translatable="false">business</string>
+    <string name="skill_code_networking" translatable="false">networking</string>
+
+    <!-- quests and missions -->
+    <string name="intent_constants_mission_id" translatable="false">mission_id</string>
+    <string name="dashboard_button_text">Select Mission</string>
+
+    <string name="intent_constants_quest_id" translatable="false">quest_id</string>
+    <string name="quest_detail_button_finish_quest">Finish Quest</string>
+    <string name="quest_detail_button_start_quest">Start Quest</string>
+    <string name="all_quests">All quests</string>
+
+    <!-- profile -->
+    <string name="profile_sources_level" translatable="false">Level</string>
+    <string name="profile_sources_addressing">Addressing</string>
+    <string name="profile_sources_analysis">Analysis</string>
+    <string name="profile_sources_consulting">Consulting</string>
+    <string name="profile_sources_services">Services</string>
+    <string name="profile_sources_contacts">Contacts</string>
+    <string name="profile_logout_message">Are you sure want to log out?</string>
+
+
+    <!-- img,icon -->
+    <string name="icon_desc_for_finished_quests">Icon for finished quests</string>
+    <string name="img_desc_background_image">Background Image</string>
+    <string name="icon_desc_level_icon">level icon</string>
+    <string name="icon_desc_xp_icon">xp icon</string>
+    <string name="icon_desc_money_icon">money icon</string>
+    <string name="img_desc_profile_avatar">profile avatar</string>
+    <string name="icon_desc_service_icon">service icon</string>
+    <string name="icon_desc_consulting_icon">consulting icon</string>
+    <string name="icon_desc_analysis_icon">analysis icon</string>
+    <string name="icon_desc_addressing_icon">addressing icon</string>
+    <string name="icon_desc_contacts_icon">contacts icon</string>
+    <string name="icon_desc_quest_icon">quest icon</string>
+    <string name="img_desc_company_logo">company logo</string>
+    <string name="icon_desc_skill_icon">skill icon</string>
+
+    <!-- others -->
+    <string name="welcome">"Welcome !"</string>
+    <string name="my_story">My story</string>
+    <string name="intent_constants_sub_tab_name" translatable="false">sub_tab_name</string>
+    <string name="yes">YES</string>
+    <string name="no">No</string>
+    <string name="notes">Notes</string>
+    <string name="done">Done</string>
+    <string name="showcase_200_text">You can quickly switch between modules thanks to bottom navigation!</string>
+    <string name="showcase_dismiss">GOT IT</string>
+    <string name="showcase_100_text">Pick a mission</string>
+    <string name="showcase_300_text">Start this quest</string>
+    <string name="showcase_400_text">Let us know what you think about this quest!</string>
+    <string name="menu_settings">settings</string>
+    <string name="settings">Settings</string>
 
     <string-array name="StoreSubTabs">
         <item>Shop</item>

@@ -16,7 +16,7 @@
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
         android:paddingTop="@dimen/basic_indentation"
-        android:text="All quests"
+        android:text="@string/all_quests"
         style="@style/subtitle1" />
 
     <androidx.recyclerview.widget.RecyclerView

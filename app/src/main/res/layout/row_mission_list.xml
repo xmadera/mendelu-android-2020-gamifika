@@ -40,6 +40,6 @@
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@+id/mission_title"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/icon_desc_for_finished_quests" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

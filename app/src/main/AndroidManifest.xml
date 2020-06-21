@@ -17,11 +17,15 @@
         android:name=".data.base.App">
 
         <activity
-            android:name=".ui.dashboard.QuestDetailActivity"
+            android:name=".ui.dashboard.questdetail.QuestDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.dashboard.MissionsActivity"
+            android:name=".ui.settings.SettingsActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.dashboard.missions.MissionsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

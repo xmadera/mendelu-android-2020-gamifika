@@ -2,6 +2,7 @@ package com.gamification.marketguards.ui.dashboard
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.gamification.marketguards.R
 import com.gamification.marketguards.data.base.App
 import com.gamification.marketguards.data.network.communication.RESTApi.MissionRESTApiRepositoryImpl
 import com.gamification.marketguards.viewmodels.DashBoardViewModel
@@ -22,6 +23,6 @@ class DashboardViewModelFactory : ViewModelProvider.Factory {
                 )
             ) as T
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
+        throw IllegalArgumentException(App.appContext.getString(R.string.view_model_unknown_class))
     }
 }

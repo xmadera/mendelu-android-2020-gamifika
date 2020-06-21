@@ -1,4 +1,4 @@
-package com.gamification.marketguards.ui.dashboard
+package com.gamification.marketguards.ui.dashboard.questdetail
 
 import android.app.Activity
 import android.content.Context
@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.activity_quest_detail.*
 import kotlinx.android.synthetic.main.content_quest_detail.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
 
 class QuestDetailActivity : BaseActivity() {
 
@@ -32,13 +33,16 @@ class QuestDetailActivity : BaseActivity() {
 
     companion object {
         fun createIntent(context: Context, id: Long): Intent {
-            val intent: Intent = Intent(context, QuestDetailActivity::class.java)
+            val intent = Intent(context, QuestDetailActivity::class.java)
             intent.putExtra(IntentConstants.QUEST_ID, id)
             return intent
         }
     }
 
     override val layout: Int = R.layout.activity_quest_detail
+
+    private val SHOWCASE_ID = "Showcase300"
+    private val SHOWCASE_ID2 = "Showcase400"
 
     private var quest_id: Long = -1
     private lateinit var quest: QuestDetail
@@ -55,10 +59,21 @@ class QuestDetailActivity : BaseActivity() {
         supportActionBar?.title = getString(R.string.quest)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        viewModel = ViewModelProvider(this, QuestDetailViewModelFactory())
+        viewModel = ViewModelProvider(
+            this,
+            QuestDetailViewModelFactory()
+        )
             .get(QuestDetailViewModel::class.java)
 
         quest_id = intent.getLongExtra(IntentConstants.QUEST_ID, -1)
+
+        MaterialShowcaseView.Builder(this)
+            .setTarget(detail_quest_button)
+            .setDismissText(getString(R.string.showcase_dismiss))
+            .setContentText(getString(R.string.showcase_300_text))
+            .setDelay(500)
+            .singleUse(SHOWCASE_ID)
+            .show()
 
         toolbar.setNavigationOnClickListener {
             if (changes) {
@@ -88,14 +103,26 @@ class QuestDetailActivity : BaseActivity() {
         override fun onBindViewHolder(holder: QuestSkillViewHolder, position: Int) {
             val skill = skillsPreviewQuest[position]
             holder.skillTitle.text =
-                skill.experiences.toString() + " +" + skill.bonusExperiences.toString()
+                skill.experiences.toString() + "+ " + skill.bonusExperiences.toString()
             when (skill.code) {
-                "communication" -> holder.skillWrapper.setBackgroundColor(resources.getColor(R.color.communication))
-                "products" -> holder.skillWrapper.setBackgroundColor(resources.getColor(R.color.products))
-                "organization" -> holder.skillWrapper.setBackgroundColor(resources.getColor(R.color.organization))
-                "prospecting" -> holder.skillWrapper.setBackgroundColor(resources.getColor(R.color.prospecting))
-                "business" -> holder.skillWrapper.setBackgroundColor(resources.getColor(R.color.business))
-                "networking" -> holder.skillWrapper.setBackgroundColor(resources.getColor(R.color.networking))
+                getString(R.string.skill_code_communication) -> holder.skillWrapper.setBackgroundColor(
+                    resources.getColor(R.color.communication)
+                )
+                getString(R.string.skill_code_products) -> holder.skillWrapper.setBackgroundColor(
+                    resources.getColor(R.color.products)
+                )
+                getString(R.string.skill_code_organization) -> holder.skillWrapper.setBackgroundColor(
+                    resources.getColor(R.color.organization)
+                )
+                getString(R.string.skill_code_prospecting) -> holder.skillWrapper.setBackgroundColor(
+                    resources.getColor(R.color.prospecting)
+                )
+                getString(R.string.skill_code_business) -> holder.skillWrapper.setBackgroundColor(
+                    resources.getColor(R.color.business)
+                )
+                getString(R.string.skill_code_networking) -> holder.skillWrapper.setBackgroundColor(
+                    resources.getColor(R.color.networking)
+                )
             }
         }
 
@@ -129,7 +156,7 @@ class QuestDetailActivity : BaseActivity() {
         if (quest.finished == null) {
             if (quest.activated != null) {
                 detail_quest_button.visibility = View.VISIBLE
-                detail_quest_button.text = "Finish Quest"
+                detail_quest_button.text = getString(R.string.quest_detail_button_finish_quest)
                 detail_quest_button.setOnClickListener {
                     changes = true
                     launch {
@@ -137,10 +164,17 @@ class QuestDetailActivity : BaseActivity() {
                     }.invokeOnCompletion {
                         getQuest()
                     }
+                    MaterialShowcaseView.Builder(this)
+                        .setTarget(detail_quest_notes)
+                        .setDismissText(getString(R.string.showcase_dismiss))
+                        .setContentText(getString(R.string.showcase_400_text))
+                        .setDelay(500)
+                        .singleUse(SHOWCASE_ID2)
+                        .show()
                 }
             } else {
                 detail_quest_button.visibility = View.VISIBLE
-                detail_quest_button.text = "Start Quest"
+                detail_quest_button.text = getString(R.string.quest_detail_button_start_quest)
                 detail_quest_button.setOnClickListener {
                     changes = true
                     launch {

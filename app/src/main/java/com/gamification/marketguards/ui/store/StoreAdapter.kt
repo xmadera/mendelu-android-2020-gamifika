@@ -16,7 +16,7 @@ class StoreAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fr
     }
 
     override fun createFragment(position: Int): Fragment {
-        return fragmentsList.get(position)
+        return fragmentsList[position]
     }
 
 }

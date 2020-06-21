@@ -1,4 +1,4 @@
-package com.gamification.marketguards.ui.dashboard
+package com.gamification.marketguards.ui.dashboard.missions
 
 import android.app.Activity
 import android.content.Context
@@ -18,6 +18,7 @@ import com.gamification.marketguards.R
 import com.gamification.marketguards.data.base.BaseActivity
 import com.gamification.marketguards.data.constants.IntentConstants
 import com.gamification.marketguards.data.model.missionsAndQuests.MissionPreview
+import com.gamification.marketguards.ui.dashboard.DashboardViewModelFactory
 import com.gamification.marketguards.viewmodels.DashBoardViewModel
 import kotlinx.android.synthetic.main.activity_missions.*
 import kotlinx.android.synthetic.main.content_mission_list.*
@@ -49,7 +50,11 @@ class MissionsActivity : BaseActivity() {
             finish()
         }
 
-        viewModel = ViewModelProvider(this, DashboardViewModelFactory())
+
+        viewModel = ViewModelProvider(
+            this,
+            DashboardViewModelFactory()
+        )
             .get(DashBoardViewModel::class.java)
 
         missionsAdapter = MissionsAdapter()
@@ -112,7 +117,7 @@ class MissionsActivity : BaseActivity() {
             holder.missionTitle.text = mission.title
             if (anyQuests(holder.adapterPosition)) {
                 if (mission.finishedQuests < mission.totalQuests) {
-                    holder.finishedQuests.text = mission.finishedQuests.toString() + " / "
+                    holder.finishedQuests.text = mission.finishedQuests.toString() + "/"
                     holder.totalQuests.text = mission.totalQuests.toString()
                 } else {
                     holder.finishedIcon.setImageResource(R.drawable.ic_ok)

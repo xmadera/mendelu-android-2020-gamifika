@@ -8,6 +8,7 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.gamification.marketguards.R
 import com.gamification.marketguards.data.base.BaseActivity
+import com.gamification.marketguards.data.sharedpreferences.SharedPreferencesManager
 import com.gamification.marketguards.ui.dashboard.DashboardFragment
 import com.gamification.marketguards.ui.library.LibraryFragment
 import com.gamification.marketguards.ui.map.MapFragment
@@ -16,6 +17,7 @@ import com.gamification.marketguards.ui.store.StoreFragment
 import com.gamification.marketguards.ui.story.StoryFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
 
 class MainActivity : BaseActivity() {
 
@@ -24,6 +26,8 @@ class MainActivity : BaseActivity() {
             return Intent(context, MainActivity::class.java)
         }
     }
+
+    private val SHOWCASE_ID = "Showcase100"
 
     override val layout: Int = R.layout.activity_main
 
@@ -34,12 +38,23 @@ class MainActivity : BaseActivity() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setOnNavigationItemSelectedListener(listener)
 
+        MaterialShowcaseView.Builder(this)
+            .setTarget(bottomNav)
+            .setDismissText(getString(R.string.showcase_dismiss))
+            .setContentText(getString(R.string.showcase_200_text))
+            .setDelay(500)
+            .singleUse(SHOWCASE_ID)
+            .show()
+
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, DashboardFragment().newInstance(0)).commit()
+            .replace(
+                R.id.fragment_container,
+                DashboardFragment().newInstance(SharedPreferencesManager.getCurrentMissionID(this))
+            ).commit()
     }
 
     private val listener = BottomNavigationView.OnNavigationItemSelectedListener {
-        var selectedFragment: Fragment
+        val selectedFragment: Fragment
 
         when (it.itemId) {
             R.id.nav_story -> {
@@ -55,7 +70,9 @@ class MainActivity : BaseActivity() {
                 selectedFragment = StoreFragment()
             }
             else -> {
-                selectedFragment = DashboardFragment().newInstance(null)
+                selectedFragment = DashboardFragment().newInstance(
+                    SharedPreferencesManager.getCurrentMissionID(this)
+                )
             }
         }
         supportFragmentManager.beginTransaction()
