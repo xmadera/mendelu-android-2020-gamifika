@@ -2,10 +2,11 @@ package com.gamification.marketguards.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.gamification.marketguards.R
 import com.gamification.marketguards.data.base.App
 import com.gamification.marketguards.data.network.communication.datasources.LoginDataSource
-import com.gamification.marketguards.data.network.communication.service.SessionManager
-import com.gamification.marketguards.data.network.communication.LoginRESTApiRepositoryImpl
+import com.gamification.marketguards.data.network.communication.restapi.LoginRESTApiRepositoryImpl
+import com.gamification.marketguards.data.network.communication.service.session.SessionManager
 import com.gamification.marketguards.viewmodels.LoginViewModel
 
 /**
@@ -30,6 +31,6 @@ class LoginViewModelFactory : ViewModelProvider.Factory {
                 )
             ) as T
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
+        throw IllegalArgumentException(App.appContext.getString(R.string.view_model_unknown_class))
     }
 }

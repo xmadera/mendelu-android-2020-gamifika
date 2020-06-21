@@ -10,9 +10,9 @@ import com.gamification.marketguards.data.exceptions.NoConnectionException
 import com.gamification.marketguards.data.model.auth.LoginRequest
 import com.gamification.marketguards.data.model.auth.LoginResponse
 import com.gamification.marketguards.data.model.auth.LoginServerResult
-import com.gamification.marketguards.data.network.communication.service.AuthService
+import com.gamification.marketguards.data.network.communication.restapi.LoginRestApi
 import com.gamification.marketguards.data.network.communication.service.ServiceGenerator
-import com.gamification.marketguards.data.network.communication.service.SessionManagerInterface
+import com.gamification.marketguards.data.network.communication.service.session.SessionManagerInterface
 import com.gamification.marketguards.data.network.utility.sha256Hash
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,14 +29,14 @@ interface LoginDataSourceInterface {
     fun login(username: String, password: String)
 }
 
-class LoginDataSource(context: Context, sessionManager: SessionManagerInterface):
+class LoginDataSource(context: Context, sessionManager: SessionManagerInterface) :
     LoginDataSourceInterface {
 
     private val _loginResponse = MutableLiveData<LoginServerResult>()
     private val authService = ServiceGenerator.getInstance(
         context,
         sessionManager
-    ).create(AuthService::class.java)
+    ).create(LoginRestApi::class.java)
 
     override val loginResult: LiveData<LoginServerResult> = _loginResponse
 
@@ -45,7 +45,8 @@ class LoginDataSource(context: Context, sessionManager: SessionManagerInterface)
             authService.login(LoginRequest(username, password.sha256Hash()))
                 .enqueue(object : Callback<LoginResponse> {
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                        _loginResponse.value = LoginServerResult(null, IOException(t.localizedMessage))
+                        _loginResponse.value =
+                            LoginServerResult(null, IOException(t.localizedMessage))
                     }
 
                     override fun onResponse(
@@ -61,7 +62,7 @@ class LoginDataSource(context: Context, sessionManager: SessionManagerInterface)
                                 ),
                                 null
                             )
-                        } else if (response.code() == 400 ){
+                        } else if (response.code() == 400) {
                             _loginResponse.value = LoginServerResult(null, InvalidCredentials())
                         } else {
                             _loginResponse.value = LoginServerResult(null, GenericException())

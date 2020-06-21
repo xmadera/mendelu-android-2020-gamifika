@@ -1,6 +1,6 @@
 <resources>
 
-     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
 
         <item name="android:windowBackground">@color/backgroundPrimary</item>
@@ -8,11 +8,14 @@
         <item name="android:statusBarColor">@color/backgroundPrimary</item>
         <item name="tabBackground">@color/backgroundSecondaryLight</item>
         <item name="android:textColor">@color/light</item>
-         <item name="android:textColorHint">@color/backgroundSecondaryLight</item>
+        <item name="android:textColorHint">@color/backgroundSecondaryLight</item>
+        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
+        <item name="android:alertDialogTheme">@style/AlertDialogTheme</item>
 
-         <item name="android:fontFamily">@font/chakrapetch_regular</item>
-         <item name="fontFamily">@font/chakrapetch_regular</item>
-     </style>
+
+        <item name="android:fontFamily">@font/chakrapetch_regular</item>
+        <item name="fontFamily">@font/chakrapetch_regular</item>
+    </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
@@ -24,6 +27,7 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="text_primary" parent="TextAppearance.MaterialComponents.Body1">
@@ -48,6 +52,21 @@
 
     <style name="button_primary" parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">@color/light</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="android:buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
 </resources>

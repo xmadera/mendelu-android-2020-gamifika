@@ -4,22 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.gamification.marketguards.R
+import com.gamification.marketguards.data.base.BaseFragment
 import com.gamification.marketguards.ui.main.MainActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.content_store.*
 import kotlinx.android.synthetic.main.fragment_store.*
 
-class StoreFragment : Fragment() {
+class StoreFragment : BaseFragment() {
 
+    override val layout: Int = R.layout.fragment_store
 
     private lateinit var adapter: StoreAdapter
     private lateinit var storePages: Array<String>
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View? = inflater.inflate(R.layout.fragment_store, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view: View? = inflater.inflate(layout, container, false)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.store)
 
         storePages = resources.getStringArray(R.array.StoreSubTabs)

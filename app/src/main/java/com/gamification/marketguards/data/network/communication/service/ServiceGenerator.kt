@@ -2,6 +2,8 @@ package com.gamification.marketguards.data.network.communication.service
 
 
 import android.content.Context
+import com.gamification.marketguards.data.network.communication.service.session.SessionManagerInterface
+import com.gamification.marketguards.data.network.communication.service.session.TokenRefreshAuthenticator
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -12,11 +14,15 @@ import java.util.concurrent.TimeUnit
 class ServiceGenerator {
 
     companion object {
-        @Volatile private var INSTANCE: ServiceGenerator? = null
+        @Volatile
+        private var INSTANCE: ServiceGenerator? = null
         private var context: Context? = null
         private var sessionManager: SessionManagerInterface? = null
 
-        fun getInstance(context: Context, sessionManager: SessionManagerInterface): ServiceGenerator {
+        fun getInstance(
+            context: Context,
+            sessionManager: SessionManagerInterface
+        ): ServiceGenerator {
             if (Companion.context == null) {
                 Companion.context = context
             }
@@ -27,13 +33,13 @@ class ServiceGenerator {
 
             return INSTANCE
                 ?: synchronized(this) {
-                INSTANCE
-                    ?: ServiceGenerator()
-            }
+                    INSTANCE
+                        ?: ServiceGenerator()
+                }
         }
     }
 
-    fun <S> create(serviceClass:  Class<S>): S {
+    fun <S> create(serviceClass: Class<S>): S {
         val requestInterceptor = Interceptor { chain ->
             val token = sessionManager?.fetchAuthToken()
 
@@ -53,7 +59,12 @@ class ServiceGenerator {
                     context!!
                 )
             )
-            .authenticator(TokenRefreshAuthenticator(context!!, sessionManager!!))
+            .authenticator(
+                TokenRefreshAuthenticator(
+                    context!!,
+                    sessionManager!!
+                )
+            )
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .build()
@@ -85,7 +96,12 @@ class ServiceGenerator {
                     context!!
                 )
             )
-            .authenticator(TokenRefreshAuthenticator(context!!, sessionManager!!))
+            .authenticator(
+                TokenRefreshAuthenticator(
+                    context!!,
+                    sessionManager!!
+                )
+            )
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .build()

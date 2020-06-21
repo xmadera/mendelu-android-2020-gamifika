@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Market Guards</string>
+    <string name="no">NE</string>
+    <string name="yes">ANO</string>
+    <string name="welcome">Vítejte !</string>
+    <string name="warning">Varování</string>
+    <string name="story">Příběh</string>
+    <string name="store">Obchod</string>
+    <string name="shop">Obchod</string>
+    <string name="quest_detail_button_start_quest">Zační Quest</string>
+    <string name="quest_detail_button_finish_quest">Dokonči Quest</string>
+    <string name="prompt_password">Heslo</string>
+    <string name="profile_sources_services">Servisy</string>
+    <string name="profile_sources_contacts">Kontakty</string>
+    <string name="profile_sources_consulting">Poradenství</string>
+    <string name="profile_sources_analysis">Analýza</string>
+    <string name="profile_sources_addressing">Oslovení</string>
+    <string name="profile_logout_message">Jste si jistí, že se chcete odhlásit?</string>
+    <string name="profile">Profil</string>
+    <string name="done">Hotovo</string>
+    <string name="notes">Poznámky</string>
+    <string name="my_story">Muj příběh</string>
+    <string name="missions">Mise</string>
+    <string name="market_guards_logo">Logo Strážců trhu</string>
+    <string name="map">Mapa</string>
+    <string name="login_password_hint">Heslo</string>
+    <string name="login_failed">Příhlášení neúspěšné</string>
+    <string name="login_button_text">Příhlásit se</string>
+    <string name="log_out">Odhlásit se</string>
+    <string name="library">Knihovna</string>
+    <string name="invalid_username">Neplatný login</string>
+    <string name="invalid_password">Neplatné heslo</string>
+    <string name="invalid_credentials">Neplatné přihlašovací údaje</string>
+    <string name="img_desc_profile_avatar">hráčův avatar</string>
+    <string name="img_desc_company_logo">logo firmy</string>
+    <string name="img_desc_background_image">pozadí profilu</string>
+    <string name="icon_desc_xp_icon">ikona zkušeností</string>
+    <string name="icon_desc_skill_icon">ikona dovedností</string>
+    <string name="skills">Dovednosti</string>
+    <string name="icon_desc_service_icon">ikona servisů</string>
+    <string name="icon_desc_quest_icon">ikona questů</string>
+    <string name="icon_desc_money_icon">ikona peněz</string>
+    <string name="icon_desc_level_icon">ikona úrovně hráče</string>
+    <string name="icon_desc_for_finished_quests">ikona ukončených questů</string>
+    <string name="icon_desc_contacts_icon">ikona kontaktů</string>
+    <string name="icon_desc_consulting_icon">ikona poradenství</string>
+    <string name="icon_desc_analysis_icon">ikona analýzi</string>
+    <string name="icon_desc_addressing_icon">ikona oslovení</string>
+    <string name="exception_no_internet">Bez internetu</string>
+    <string name="exception_invalid_credentials">Neplatné údaje</string>
+    <string name="exception_generic_error">Obecná chyba</string>
+    <string name="dashboard_button_text">Vybrat misi</string>
+    <string name="dashboard">Základna</string>
+    <string name="all_quests">Všechny questy</string>
+    <string-array name="StoreSubTabs">
+        <item>Obchod</item>
+        <item>Inventář</item>
+    </string-array>
+    <string name="showcase_dismiss">Chápu</string>
+    <string name="showcase_100_text">Díky spodní navigační liště se můžeš rychle přepínat mezi jednotlivými moduly</string>
+    <string name="showcase_200_text">Vyber si misi</string>
+    <string name="showcase_300_text">Začni tento quest</string>
+    <string name="showcase_400_text">Dej nám vědět co si o tomto questu myslíš</string>
+    <string name="settings">Nastavení</string>
+    <string name="app_version">Verze aplikace</string>
+</resources>

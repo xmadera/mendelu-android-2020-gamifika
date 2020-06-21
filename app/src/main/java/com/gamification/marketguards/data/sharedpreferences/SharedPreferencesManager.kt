@@ -11,9 +11,13 @@ class SharedPreferencesManager {
         private const val firstRun = "first_run"
         private const val authToken = "auth_token"
         private const val refreshToken = "refresh_token"
+        private const val currentMissionId = "current_mission_id"
 
         private fun getSharedPreferences(context: Context): SharedPreferences {
-            return context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE)
+            return context.getSharedPreferences(
+                context.getString(R.string.app_name),
+                Context.MODE_PRIVATE
+            )
         }
 
         @SuppressLint("ApplySharedPref")
@@ -60,6 +64,18 @@ class SharedPreferencesManager {
             editor.remove(authToken)
             editor.remove(refreshToken)
             editor.apply()
+        }
+
+        fun saveCurrentMissionID(context: Context, id: Int) {
+            val editor = getSharedPreferences(context).edit()
+            editor.putInt(currentMissionId, id)
+            editor.apply()
+        }
+
+        fun getCurrentMissionID(context: Context): Int {
+            val sharedPreferences = getSharedPreferences(context)
+            return sharedPreferences
+                .getInt(currentMissionId, 0)
         }
     }
 }

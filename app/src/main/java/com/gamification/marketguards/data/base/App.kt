@@ -3,8 +3,8 @@ package com.gamification.marketguards.data.base
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import com.gamification.marketguards.data.network.communication.service.SessionManager
-import com.gamification.marketguards.data.network.communication.service.SessionManagerInterface
+import com.gamification.marketguards.data.network.communication.service.session.SessionManager
+import com.gamification.marketguards.data.network.communication.service.session.SessionManagerInterface
 
 class App : Application() {
     override fun onCreate() {

@@ -8,6 +8,7 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.gamification.marketguards.R
 import com.gamification.marketguards.data.base.BaseActivity
+import com.gamification.marketguards.data.sharedpreferences.SharedPreferencesManager
 import com.gamification.marketguards.ui.dashboard.DashboardFragment
 import com.gamification.marketguards.ui.library.LibraryFragment
 import com.gamification.marketguards.ui.map.MapFragment
@@ -25,21 +26,34 @@ class MainActivity : BaseActivity() {
         }
     }
 
+//    private val SHOWCASE_ID = "Showcase100"
+
     override val layout: Int = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layout)
         setSupportActionBar(toolbar)
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setOnNavigationItemSelectedListener(listener)
+        // TODO: needs to happen in one sequence with 200
+//        MaterialShowcaseView.Builder(this)
+//            .setTarget(bottomNav)
+//            .setDismissText(getString(R.string.showcase_dismiss))
+//            .setContentText(getString(R.string.showcase_100_text))
+//            .setDelay(500)
+//            .singleUse(SHOWCASE_ID)
+//            .show()
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, DashboardFragment().newInstance(0)).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(
+                R.id.fragment_container,
+                DashboardFragment().newInstance(SharedPreferencesManager.getCurrentMissionID(this))
+            ).commit()
     }
 
     private val listener = BottomNavigationView.OnNavigationItemSelectedListener {
-        var selectedFragment: Fragment
+        val selectedFragment: Fragment
 
         when (it.itemId) {
             R.id.nav_story -> {
@@ -55,7 +69,9 @@ class MainActivity : BaseActivity() {
                 selectedFragment = StoreFragment()
             }
             else -> {
-                selectedFragment = DashboardFragment().newInstance(0)
+                selectedFragment = DashboardFragment().newInstance(
+                    SharedPreferencesManager.getCurrentMissionID(this)
+                )
             }
         }
         supportFragmentManager.beginTransaction()

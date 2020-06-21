@@ -2,9 +2,10 @@ package com.gamification.marketguards.ui.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.gamification.marketguards.R
 import com.gamification.marketguards.data.base.App
-import com.gamification.marketguards.data.network.communication.PlayerRESTApiRepositoryImpl
-import com.gamification.marketguards.data.network.communication.SkillRESTApiRepositoryImpl
+import com.gamification.marketguards.data.network.communication.restapi.PlayerRESTApiRepositoryImpl
+import com.gamification.marketguards.data.network.communication.restapi.SkillRESTApiRepositoryImpl
 import com.gamification.marketguards.viewmodels.ProfileViewModel
 
 /**
@@ -26,6 +27,6 @@ class ProfileViewModelFactory : ViewModelProvider.Factory {
                 )
             ) as T
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
+        throw IllegalArgumentException(App.appContext.getString(R.string.view_model_unknown_class))
     }
 }
